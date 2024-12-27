@@ -1,0 +1,13 @@
+{
+    "name": "CupChart",
+    "alias": "cup-chart",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\CupSocketServer\\Providers\\SocketServerServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

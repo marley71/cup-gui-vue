@@ -1,5 +1,5 @@
 {
-    "name": "marley71/cup-socket-server",
+    "name": "marley71/cup-socket-server-module",
     "type": "laravel-module",
     "description": "Pacchetto socket server per comandi web per interfaccia vue",
     "keywords": ["laravel", "cupparis"],
@@ -22,6 +22,13 @@
     "config": {
         "allow-plugins": {
             "joshbrw/laravel-module-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\SocketServerServiceProvider\\Providers\\SocketServiceProvider"
+            ]
         }
     }
 }
