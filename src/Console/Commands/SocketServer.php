@@ -1,4 +1,4 @@
-<?php namespace Modules\CupSocketServer\Console\Commands;
+<?php namespace Marley71\CupSocketServer\Console\Commands;
 
 use \Illuminate\Console\Command;
 

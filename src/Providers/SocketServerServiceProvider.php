@@ -1,8 +1,8 @@
-<?php namespace Modules\CupSocketServer\Providers;
+<?php namespace Marley71\CupSocketServer\Providers;
 
 
 use Illuminate\Support\ServiceProvider;
-use Modules\CupSocketServer\Console\Commands\SocketServer;
+use Marley71\CupSocketServer\Console\Commands\SocketServer;
 
 class SocketServerServiceProvider extends ServiceProvider {
     protected $commands = [
