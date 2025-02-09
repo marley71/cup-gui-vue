@@ -9,12 +9,12 @@ use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
 
 
-class SocketServer extends Command {
-    protected $signature = 'cup:wss-server';
+class InstallGui extends Command {
+    protected $signature = 'cup:install-gui';
 
-    protected $name = 'wss';
+    protected $name = 'InstallGui';
 
-    protected $description = 'Lancia websocket server per i comandi da gui';
+    protected $description = 'Scarica i moduli per eseguire l\'interfaccia web';
 
     protected $wb = null;
 
@@ -60,7 +60,7 @@ class SocketServer extends Command {
     }
 
     protected function copyEnv() {
-        $env = config('cup-gui-vue.env.local');
+        $env = config('websocket.env.local');
         $content = "";
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
@@ -69,7 +69,7 @@ class SocketServer extends Command {
         //echo $fileEnv . "\n";
         file_put_contents($fileEnv,$content);
 
-        $env = config('cup-gui-vue.env.production');
+        $env = config('websocket.env.production');
         $content = "";
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";

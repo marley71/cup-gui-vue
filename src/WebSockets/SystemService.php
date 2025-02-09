@@ -29,7 +29,7 @@ class SystemService extends ServiceInterface
             ],
             [
                 'command' => 'save-config',
-                'description' => 'Salvataggio configurazione template',
+                'description' => 'Salvataggio impostazioni template',
                 'params' => [
                     'config' => 'json',
                 ],

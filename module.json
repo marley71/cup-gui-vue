@@ -5,7 +5,7 @@
     "keywords": [],
     "order": 0,
     "providers": [
-        "Modules\\CupSocketServer\\src\\Providers\\SocketServerServiceProvider"
+        "Modules\\CupSocketServer\\src\\Providers\\CupGuiVueProvider"
     ],
     "aliases": {},
     "files": [],

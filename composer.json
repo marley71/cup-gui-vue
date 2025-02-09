@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Marley71\\CupSocketServer\\Providers\\SocketServerServiceProvider"
+                "Marley71\\CupSocketServer\\Providers\\CupGuiVueProvider"
             ]
         }
     },
