@@ -1,5 +1,5 @@
 {
-    "name": "marley71/cup-socket-server-module",
+    "name": "marley71/cup-gui-vue",
     "description": "Pacchetto socket server per comandi web per interfaccia vue",
     "keywords": ["laravel", "cupparis"],
     "license": "MIT",

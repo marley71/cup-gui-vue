@@ -1,6 +1,6 @@
 {
-    "name": "CupSocketServer",
-    "alias": "cup-socket-server",
+    "name": "CupGuiVue",
+    "alias": "cup-gui-vue",
     "description": "",
     "keywords": [],
     "order": 0,
