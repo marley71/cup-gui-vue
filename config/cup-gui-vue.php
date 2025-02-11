@@ -14,6 +14,7 @@ return [
             "VITE_WEBSOCKET_SERVER"=>env('APP_URL','localhost') . ':' . env('WEB_SOCKET_PORT'),
             "VITE_WEB_SOCKET_SERVICES"=>"system",   // servizi da utilizzare un sottoinsieme dei services definiti sopra
             "VITE_MODE"=> "dev",
+            "VITE_RESOURCES_PATH" => env('VUEAPP_RESOURCES_PATH',resource_path('vue-application')), // path dove ci saranno le risorse dell'applicazione
             "APP_TARGET"=> env('APP_URL'),
             "APP_URL" => env('APP_URL','localhost'),
             "APP_HOST"=> env('VUEAPP_HOST','0.0.0.0'), // url in ascolto del server npm vite
@@ -28,6 +29,8 @@ return [
             "VITE_API_MENU"=>"/api/app-menu",
             "VITE_MODE"=>"prod",
             "VITE_APP_DEV_MENU"=>0,
+            "VITE_RESOURCES_PATH" => env('VUEAPP_RESOURCES_PATH',resource_path('vue-application')), // path dove ci saranno le risorse dell'applicazione
+
         ]
     ]
 
