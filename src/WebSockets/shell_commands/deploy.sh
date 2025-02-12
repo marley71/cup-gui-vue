@@ -3,7 +3,7 @@
 ### variabili da settare come env nel comando
 #LARAVEL_DIR = directory applicazione laravel
 #CRUD_DIR = directory main dell'interfaccia esempio resources/roma-vue-4.0.0
-
+echo "LARAVEL_DIR $LARAVEL_DIR";
 if [ -z "$1" ]
 then
       echo "publish application"
@@ -16,7 +16,7 @@ else
             echo "translate"
             cd $LARAVEL_DIR
             php artisan translations
-            mv public/js/*-translations.json "$CRUD_DIR/src/crud"
+            mv public/js/*-translations.json "$APPLICATION_PATH/assets/"
             ;;
          templates)
             echo "generating template"

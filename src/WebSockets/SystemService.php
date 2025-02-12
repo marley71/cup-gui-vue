@@ -10,6 +10,7 @@ class SystemService extends ServiceInterface
     public function __construct()
     {
         parent::__construct();
+        $this->envVars = [];
         $this->prefix = 'system';
         $this->commands = [
             [
@@ -53,7 +54,8 @@ class SystemService extends ServiceInterface
                 case 'templates':
                     $shell_command = dirname(__FILE__) . '/shell_commands/deploy.sh';
                     $shell_param = $data['action'];
-                    $result = Process::forever()->env($this->envVars)
+                    echo "command " . $shell_command .  " shell param " . $shell_param;
+                    $result = Process::forever()->env(self::getEnvVars())
                         ->run('bash ' . "$shell_command $shell_param", function (string $type, string $output) use ($conn) {
                             //echo $output;
                             $response = [
@@ -89,6 +91,12 @@ class SystemService extends ServiceInterface
             throw $e;
         }
 
+    }
+
+    public static function getEnvVars() {
+        return array_merge(parent::getEnvVars(),[
+            'APPLICATION_PATH' => base_path(env('APPLICATION_PATH','resources/roma-4.0.0'))
+        ]);
     }
 }
 
