@@ -31,6 +31,7 @@ class SocketServer extends Command {
         $this->comment("start gui...");
         $this->startGui();
         $this->comment('started');
+        $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
         $this->comment("start websocket...");
         $server = IoServer::factory(
             new HttpServer(
@@ -40,7 +41,7 @@ class SocketServer extends Command {
             ),
             env('WEB_SOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
         );
-        $this->comment('connect to ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
+        $this->comment('Websocket awaiting connection on ' . env('APP_URL','localhost') . ':' . env('WEB_SOCKET_PORT'));
         $server->run();
     }
 
