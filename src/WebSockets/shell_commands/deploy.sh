@@ -21,8 +21,11 @@ else
          templates)
             echo "generating template"
             cd $CRUD_DIR
+            echo "call sass application dir $CRUD_DIR"
             sass --update public/layout:public/layout
             sass --update public/theme:public/theme
+            sass --update "$APPLICATION_PATH/public/layout:public/layout/"
+            sass --update "$APPLICATION_PATH/public/theme:public/theme/"
             ;;
         publish)
             echo "publish application"
