@@ -33,12 +33,11 @@ class SocketServer extends Command {
         $this->comment('started');
         $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
         $this->comment("start websocket...");
-        $server = IoServer::factory(
-            new HttpServer(
-                new WsServer(
-                    new WebSocketServer()
-                )
-            ),
+        $httpServer = new HttpServer(
+            new WsServer(
+                new WebSocketServer()
+            ));
+        $server = IoServer::factory($httpServer,
             env('WEB_SOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
         );
         $this->comment('Websocket awaiting connection on ' . env('APP_URL','localhost') . ':' . env('WEB_SOCKET_PORT'));
@@ -55,6 +54,8 @@ class SocketServer extends Command {
                 ->start('bash ' . "$shell_command", function (string $type, string $output) {
                     if ($type != 'out') {
                         throw new \Exception($output);
+                    } else {
+                        echo $output;
                     }
                 });
         }
