@@ -33,6 +33,10 @@ return [
             "VITE_APP_DEV_MENU"=>0,
             "VITE_RESOURCES_PATH" => base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application')), // path dove ci saranno le risorse dell'applicazione
         ]
-    ]
+    ],
+    "app_folder" =>  base_path(env('VUEAPP_FOLDER','resources')),
+    "application_path" => base_path(env('VUEAPP_FOLDER','resources') . '/vue-application'),
+    "roma_path" => base_path(env('VUEAPP_FOLDER','resources') . '/roma-vue-4.0.0'),
+    "cupparis_primevue_path" => base_path(env('VUEAPP_FOLDER','resources') . '/cupparis-primevue')
 
 ];
