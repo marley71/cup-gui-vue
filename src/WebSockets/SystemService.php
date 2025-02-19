@@ -88,7 +88,7 @@ class SystemService extends ServiceInterface
                     $config = Arr::get(Arr::get($data,'params',[]),'config',[]);
                     Log::info('config ');
                     Log::info(print_r($config,true));
-                    $guiFolder = base_path(env('APPLICATION_PATH','resources/vue-application'));
+                    $guiFolder = base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application'));
                     file_put_contents($guiFolder.'/config/template-config.json',json_encode($config,JSON_PRETTY_PRINT));
                     break;
                 case 'info':
@@ -106,7 +106,7 @@ class SystemService extends ServiceInterface
 
     public static function getEnvVars() {
         return array_merge(parent::getEnvVars(),[
-            'APPLICATION_PATH' => base_path(env('APPLICATION_PATH','resources/roma-4.0.0'))
+            'APPLICATION_PATH' => base_path(env('VUEAPP_APPLICATION_PATH','resources/roma-vue-4.0.0'))
         ]);
     }
 }

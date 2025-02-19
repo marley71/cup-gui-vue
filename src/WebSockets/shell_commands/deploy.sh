@@ -13,9 +13,10 @@ else
       #echo "\$1 command"
       case $1 in
          translate)
-            echo "translate"
+            echo "translate "
             cd $LARAVEL_DIR
             php artisan translations
+            echo "put translations in $APPLICATION_PATH/assets/"
             mv public/js/*-translations.json "$APPLICATION_PATH/assets/"
             ;;
          templates)
@@ -31,7 +32,7 @@ else
 #            sass --update "$APPLICATION_PATH/public/theme:public/theme/"
             ;;
         publish)
-            echo "publish application"
+            echo "publish application in $CRUD_DIR"
             cd $CRUD_DIR
             sh publish.sh
             ;;

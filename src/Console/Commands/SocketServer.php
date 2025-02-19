@@ -38,9 +38,9 @@ class SocketServer extends Command {
                 new WebSocketServer()
             ));
         $server = IoServer::factory($httpServer,
-            env('WEB_SOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
+            env('VUEAPP_WEBSOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
         );
-        $this->comment('Websocket awaiting connection on ' . env('APP_URL','localhost') . ':' . env('WEB_SOCKET_PORT'));
+        $this->comment('Websocket awaiting connection on ws://' . env('VUEAPP_DOMAIN','localhost') . ':' . env('VUEAPP_WEBSOCKET_PORT'));
         $server->run();
     }
 
@@ -67,7 +67,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/.env.local') ;
+        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/roma-vue-4.0.0/.env.local') ;
         //echo $fileEnv . "\n";
         file_put_contents($fileEnv,$content);
 
@@ -76,7 +76,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/.env.production') ;
+        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/roma-vue-4.0.0/.env.production') ;
         file_put_contents($fileEnv,$content);
     }
 }

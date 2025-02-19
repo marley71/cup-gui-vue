@@ -29,7 +29,7 @@ class WebSocketServer implements MessageComponentInterface
             'msg' => 'connected',
             'error' => 0,
         ];
-        $conn->send(json_encode($response,true));
+        $conn->send(json_encode($response));
     }
 
     public function onMessage(ConnectionInterface $from, $msg): void

@@ -14,34 +14,23 @@ class InstallGui extends Command {
 
     protected $name = 'InstallGui';
 
-    protected $description = 'Scarica i moduli per eseguire l\'interfaccia web';
-
-    protected $wb = null;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->wb = new WebSocketServer();
-    }
+    protected $description = 'Scarica i moduli per eseguire l\'interfaccia web e configura i link iniziali';
 
     public function handle() {
-        $this->comment('coping env...');
-        $this->copyEnv();
-        $this->comment('copied');
-        $this->comment("start gui...");
-        $this->startGui();
-        $this->comment('started');
-        $this->comment("start websocket...");
-        $server = IoServer::factory(
-            new HttpServer(
-                new WsServer(
-                    new WebSocketServer()
-                )
-            ),
-            env('WEB_SOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
-        );
-        $this->comment('connect to ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
-        $server->run();
+        $domain = env('VUEAPP_DOMAIN','localhost');
+        echo "
+        - git clone git@github.com:marley71/cupparis-primevue.git
+        - branch " . config('cup-gui-vue.cupparis-primevue-branch') . "
+        - git clone git@gitlab.cupparis.it:gui/roma-vue-4.0.0.git
+        - branch " . config('cup-gui-vue.roma-vue-branch') . "
+        - ln -s " . env('APPLICATION_PATH') . "/public
+        - ln -s " . env('APPLICATION_PATH') . "/packages.json";
+        if (!$this->confirm("Il comando eseguirà le azioni sopraindicate. Continuare?")) {
+            $this->comment('Comando abortito');
+            return ;
+        }
+        return ;
+
     }
 
     protected function startGui() {
