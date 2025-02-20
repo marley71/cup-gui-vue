@@ -67,7 +67,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/roma-vue-4.0.0/.env.local') ;
+        $fileEnv = config('cup-gui-vue.roma_path')  . '/.env.local';
         //echo $fileEnv . "\n";
         file_put_contents($fileEnv,$content);
 
@@ -76,7 +76,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/roma-vue-4.0.0/.env.production') ;
+        $fileEnv = config('cup-gui-vue.roma_path')  . '/.env.production';
         file_put_contents($fileEnv,$content);
     }
 }
