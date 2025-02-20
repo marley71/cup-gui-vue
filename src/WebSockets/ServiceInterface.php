@@ -65,7 +65,7 @@ abstract class ServiceInterface
     public static function getEnvVars() {
         return [
             'LARAVEL_DIR' => base_path(),
-            'CRUD_DIR' => base_path(env('VUEAPP_FOLDER','resources')) . '/roma-vue-4.0.0'
+            'CRUD_DIR' => config('cup-gui-vue.roma_path')
         ];
     }
 }
