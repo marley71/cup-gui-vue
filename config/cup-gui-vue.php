@@ -4,7 +4,9 @@ return [
     'services' => [
         Marley71\CupSocketServer\WebSockets\SystemService::class //classi che espletano servizi websocket
     ],
+    'cupparis-primevue-git' => 'git@github.com:marley71/cupparis-primevue.git',
     'cupparis-primevue-branch' => 'features/w-leafleft',  // branch libreria cupparis-primevue
+    'roma-vue-git' => 'git@gitlab.cupparis.it:gui/roma-vue-4.0.0.git',
     'roma-vue-branch' => 'development', // branch template roma
     //'cupparis_primevue_path' => env('VUEAPP_CUPPARIS_PRIMEVUE',resource_path('cupparis-primevue')), // path dove vogliamo venga installata la cupparis-primevue
     'env' => [

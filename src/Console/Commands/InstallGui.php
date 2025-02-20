@@ -18,10 +18,10 @@ class InstallGui extends Command {
 
     public function handle() {
         echo "
-        - git clone git@github.com:marley71/cupparis-primevue.git
+        - git clone " . config('cup-gui-vue.cupparis-primevue-git') . "
         - branch " . config('cup-gui-vue.cupparis-primevue-branch') . "
           nella cartella " . config('cup-gui-vue.cupparis_primevue_path')  . "
-        - git clone git@gitlab.cupparis.it:gui/roma-vue-4.0.0.git
+        - git clone " . config('cup-gui-vue.roma-vue-git') . "
         - branch " . config('cup-gui-vue.roma-vue-branch') . "
           nella cartella " .config('cup-gui-vue.roma_path')  . "
         - ln -s " . env('APPLICATION_PATH') . "/public
