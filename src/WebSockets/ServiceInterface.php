@@ -1,5 +1,7 @@
 <?php namespace  Marley71\CupSocketServer\WebSockets; ;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Ratchet\ConnectionInterface;
 
 abstract class ServiceInterface
@@ -19,7 +21,26 @@ abstract class ServiceInterface
      * @param string $action
      * @return mixed
      */
-    abstract public function do(array $data,ConnectionInterface $conn);
+    public function do(array $data,ConnectionInterface $conn) {
+        try {
+            echo $this->prefix . ' ' . Arr::get($data, 'action');
+            $action = Arr::get($data, 'action');
+            switch ($action) {
+                case 'info':
+                    $conn->send(json_encode($this->dumpInfo()));
+                    break;
+                default:
+                    $this->doAction($action,$data,$conn);
+                    break;
+            }
+        } catch (\Exception $e) {
+            Log::error($e);
+            throw $e;
+        }
+    }
+
+
+    abstract public function doAction(string $action,array $data,ConnectionInterface $conn);
 
     /**
      * Metodo per ottenere il prefisso.
@@ -49,11 +70,19 @@ abstract class ServiceInterface
     protected function multi_explode($array, $glue) {
         $ret = '';
 
-        foreach ($array as $item) {
+        foreach ($array as $key => $item) {
             if (is_array($item)) {
+                if (! is_numeric($key)) {
+                    $ret .= $key . $glue;
+                }
                 $ret .= $this->multi_explode($item, $glue) . $glue;
             } else {
-                $ret .= $item . $glue;
+                if (is_numeric($key)) {
+                    $ret .= $item . $glue;
+                } else {
+                    $ret .= $key . ':' . $item . $glue;
+                }
+
             }
         }
 

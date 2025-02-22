@@ -2,13 +2,15 @@
 
 
 use Illuminate\Support\ServiceProvider;
+use Marley71\CupSocketServer\Console\Commands\AnalyzeComposerPackages;
 use Marley71\CupSocketServer\Console\Commands\InstallGui;
 use Marley71\CupSocketServer\Console\Commands\SocketServer;
 
 class CupGuiVueProvider extends ServiceProvider {
     protected $commands = [
         SocketServer::class,
-        InstallGui::class
+        InstallGui::class,
+        AnalyzeComposerPackages::class
     ];
 
     public function register()

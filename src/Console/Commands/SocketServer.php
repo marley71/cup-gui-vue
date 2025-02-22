@@ -45,20 +45,26 @@ class SocketServer extends Command {
     }
 
     protected function startGui() {
-        $a = new \ReflectionClass(WebSocketServer::class);
-        $attr = pathinfo($a->getFileName());
-        if ($attr) {
-            //echo $attr['dirname'] . "\n";
-            $shell_command =$attr['dirname'] . '/shell_commands/gui_start.sh';
-            $result = Process::forever()->env(ServiceInterface::getEnvVars())
-                ->start('bash ' . "$shell_command", function (string $type, string $output) {
-                    if ($type != 'out') {
-                        throw new \Exception($output);
-                    } else {
-                        echo $output;
-                    }
-                });
+        try {
+            $a = new \ReflectionClass(WebSocketServer::class);
+            $attr = pathinfo($a->getFileName());
+            if ($attr) {
+                //echo $attr['dirname'] . "\n";
+                $shell_command =$attr['dirname'] . '/shell_commands/gui_start.sh';
+                $result = Process::forever()->env(ServiceInterface::getEnvVars())
+                    ->start('bash ' . "$shell_command", function (string $type, string $output) {
+                        echo "$type $output";
+//                        if ($type != 'out') {
+//                            throw new \Exception($output);
+//                        } else {
+//                            echo $output;
+//                        }
+                    });
+            }
+        } catch (\Exception $e) {
+            throw $e;
         }
+
     }
 
     protected function copyEnv() {
