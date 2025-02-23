@@ -80,7 +80,7 @@ abstract class ServiceInterface
                 if (is_numeric($key)) {
                     $ret .= $item . $glue;
                 } else {
-                    $ret .= $key . ':' . $item . $glue;
+                    $ret .= $key . ' : ' . $item . $glue;
                 }
 
             }
