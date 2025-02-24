@@ -1,10 +1,13 @@
 <?php namespace Marley71\CupSocketServer\WebSockets;
 
+use Faker\Provider\Miscellaneous;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Ratchet\ConnectionInterface;
 
 class DbService extends ServiceInterface
@@ -66,14 +69,15 @@ class DbService extends ServiceInterface
                 $conn->send(json_encode($response));
                 break;
             case 'check':
+                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
+                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+                // @todo fare la validation
+                $result = $this->check([
+                    'table' => $table,
+                    'model' => $model
+                ]);
                 $response = [
-                    'msg' => [
-                        'Modello' => false,
-                        'ServerConf' => true,
-                        'ClientConf' => true,
-                        'Policy' => false,
-                        'Foorm' => false,
-                    ],
+                    'msg' => $result,
                     'error' => 0,
                     'type' => 'out',
                     'command' => $action,
@@ -81,12 +85,19 @@ class DbService extends ServiceInterface
                 $conn->send(json_encode($response));
                 break;
             case 'generate':
-                $modello = Arr::get(Arr::get($data,'params',[]),'model',null);
-                $tabella = Arr::get(Arr::get($data,'params',[]),'table',null);
+                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
                 $deploy = Arr::get(Arr::get($data,'params',[]),'deploy',null);
-                if (!$modello || !$tabella || !$deploy) {
+                if (!$model || !$table || !$deploy) {
                     throw new \Exception('Parametri mancanti');
                 }
+                $response = [
+                    'msg' => $this->generate(['model' => $model,'table' => $table,'deploy' => $deploy]),
+                    'error' => 0,
+                    'type' => 'out',
+                    'command' => $action,
+                ];
+                $conn->send(json_encode($response));
                 break;
             default:
                 throw new \Exception( 'mysql service action non gestita ' . Arr::get($data,'action'));
@@ -112,7 +123,7 @@ class DbService extends ServiceInterface
         return $tables;
     }
 
-    public function getFields($tableName) {
+    public static function getFields($tableName) {
         $fields = [];
         $columns = Schema::getColumnListing($tableName);
         foreach ($columns as $column) {
@@ -125,87 +136,40 @@ class DbService extends ServiceInterface
         return $fields;
     }
 
+    public function check($params) {
+        //esistenza form
+        $foormExist = file_exists(config_path('foorms/'.$params['model'].'.php'));
+        // esistenza modello
+        $modelExist = file_exists(base_path('app/Models/'.Str::studly($params['model']).'.php'));
+        $policyExist = file_exists(base_path('app/Policies/'.Str::studly($params['model']).'Policy.php'));
+        $clientExist = file_exists(config('cup-gui-vue.application_path') . '/ModelConfs/Model' . Str::studly($params['model']). '.js');
+        return [
+            'Model' => $modelExist,
+            'ServerConf' => $foormExist,
+            'ClientConf' => $clientExist,
+            'Policy' => $policyExist,
+            //'Foorm' => false,
+        ];
+    }
+
+    public function generate($params) {
+        $output = new \Symfony\Component\Console\Output\BufferedOutput;
+        $exclude = '';
+        foreach ($params['deploy'] as $key=>$value) {
+            if (!$value) {
+                $exclude .= $exclude?','.$key:$key;
+            }
+        }
+        $callParams = [
+            'table' => $params['table'],
+            'model' => $params['model']
+        ];
+        if ($exclude) {
+            $callParams['--exclude'] = $exclude;
+        }
+        Artisan::call('cup:generate-implementation',$callParams,$output);
+        return $output->fetch();
+    }
 }
-
-
-
-/**
- * namespace App\Console\Commands;
- *
- * use Illuminate\Console\Command;
- * use Illuminate\Support\Facades\DB;
- * use Illuminate\Support\Facades\Schema;
- *
- * class AnalyzeDatabase extends Command
- * {
- * protected $signature = 'db:analyze';
- * protected $description = 'Analyze database structure and relationships';
- *
- * public function handle()
- * {
- * $tables = [];
- * $dbName = config('database.connections.mysql.database');
- *
- * // Ottieni la lista di tutte le tabelle
- * $tableList = Schema::getAllTables();
- *
- * foreach ($tableList as $table) {
- * $tableName = $table->Tables_in_database;
- * $tables[$tableName] = [
- * 'fields' => [],
- * 'relations' => []
- * ];
- *
- * // Ottieni informazioni sui campi della tabella
- * $columns = Schema::getColumnListing($tableName);
- * foreach ($columns as $column) {
- * $type = Schema::getColumnType($tableName, $column);
- * $tables[$tableName]['fields'][] = [
- * 'name' => $column,
- * 'type' => $type,
- * ];
- * }
- *
- * // Ottieni informazioni sulle relazioni (chiavi esterne)
- * $relations = DB::select("
- * SELECT
- * COLUMN_NAME,
- * REFERENCED_TABLE_NAME,
- * REFERENCED_COLUMN_NAME
- * FROM
- * INFORMATION_SCHEMA.KEY_COLUMN_USAGE
- * WHERE
- * TABLE_SCHEMA = ? AND
- * TABLE_NAME = ? AND
- * REFERENCED_TABLE_NAME IS NOT NULL
- * ", [$dbName, $tableName]);
- *
- * foreach ($relations as $relation) {
- * $tables[$tableName]['relations'][] = [
- * 'column' => $relation->COLUMN_NAME,
- * 'referenced_table' => $relation->REFERENCED_TABLE_NAME,
- * 'referenced_column' => $relation->REFERENCED_COLUMN_NAME
- * ];
- * }
- * }
- *
- * // Stampa le informazioni
- * foreach ($tables as $tableName => $tableInfo) {
- * $this->info("Tabella: $tableName");
- * $this->line("Campi:");
- * foreach ($tableInfo['fields'] as $field) {
- * $this->line("  - {$field['name']} ({$field['type']})");
- * }
- * $this->line("Relazioni:");
- * foreach ($tableInfo['relations'] as $relation) {
- * $this->line("  - {$relation['column']} -> {$relation['referenced_table']}.{$relation['referenced_column']}");
- * }
- * $this->line("");
- * }
- * }
- * }
- *
- *
- */
 
 
