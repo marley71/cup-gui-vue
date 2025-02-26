@@ -1,42 +1,30 @@
 
 export default {
-    modelName : '{{$modelName}}',
-    search: {
-        modelName : '{{$modelName}}',
-        fields: [
-            {{$searchFields}}
-        ],
-        fieldsConfig: {
-            {{$searchFieldsType}}
-        },
+    "modelName" : "{{$modelName}}",
+    "search": {
+        "modelName" : "{{$modelName}}",
+        "type" : "v-search",
+        "fields": {{$searchFields}},
+        "fieldsConfig": {{$searchFieldsType}},
     },
-    list: {
-        modelName : '{{$modelName}}',
-        actions : [
-            'action-insert',
-            'action-edit',
-            'action-delete',
-            'action-delete-selected',
+    "list": {
+        "modelName" : "{{$modelName}}",
+        "type" : "v-list",
+        "actions" : [
+            "action-insert",
+            "action-edit",
+            "action-delete",
+            "action-delete-selected",
         ],
-        fields: [
-            {{$listFields}}
-        ],
-        fieldsConfig: {
-            {{$listFieldsType}}
-        },
-        orderFields : {
-            {{$listOrderFields}}
-        }
-
+        "fields": {{$listFields}},
+        "fieldsConfig": {{$listFieldsType}},
+        "orderFields" : {{$listOrderFields}},
     },
-    edit: {
-        modelName : '{{$modelName}}',
-        actions : ['action-save','action-back'],
-        fields: [
-            {{$editFields}}
-        ],
-        fieldsConfig: {
-            {{$editFieldsType}}
-        }
+    "edit": {
+        "type" : "v-edit",
+        "modelName" : "{{$modelName}}",
+        "actions" : ["action-save","action-back"],
+        "fields": {{$editFields}},
+        "fieldsConfig":{{$editFieldsType}},
     },
 }

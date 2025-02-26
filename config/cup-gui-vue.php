@@ -39,6 +39,25 @@ return [
     "app_folder" =>  base_path(env('VUEAPP_FOLDER','resources')),
     "application_path" => base_path(env('VUEAPP_FOLDER','resources') . '/vue-application'),
     "roma_path" => base_path(env('VUEAPP_FOLDER','resources') . '/roma-vue-4.0.0'),
-    "cupparis_primevue_path" => base_path(env('VUEAPP_FOLDER','resources') . '/cupparis-primevue')
+    "cupparis_primevue_path" => base_path(env('VUEAPP_FOLDER','resources') . '/cupparis-primevue'),
+    "menu" =>  [
+        [
+            "label" =>'Dashboard', "icon"=>'fa fa-tachometer-alt', "to"=>'/',
+            //"visible" => ['Admin'],  // mi aspetto il ruolo per il quale e' visibile
+        ],
+        [
+            "label" =>'Admin',
+            'icon' => 'fa-solid fa-toolbox',
+            "items" =>[
+                [
+                    "label"  =>'User', "icon" =>'pi pi-fw pi-user', "to"=>'/manage/ModelUser',
+                    //"visible" => ['Admin','Operatore'],  // mi aspetto il ruolo per il quale e' visibile
+                ],
+                [
+                    "label"  =>'Pagina Linkata', "icon" =>'fa-regular fa-file', "to"=>'/pagina-linkata'
+                ],
+            ],
+        ],
+    ]
 
 ];

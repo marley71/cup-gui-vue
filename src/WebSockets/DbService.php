@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Marley71\CupSocketServer\Services\GenerateImplementation;
+use Marley71\CupSocketServer\Services\JavaScriptConfigParser;
 use Ratchet\ConnectionInterface;
 
 class DbService extends ServiceInterface
@@ -22,6 +24,13 @@ class DbService extends ServiceInterface
                 'command' => 'list-tables',
                 'description' => 'Lista delle tabelle del db',
                 'params' => [],
+            ],
+            [
+                'command' => 'list-fields',
+                'description' => 'Lista dei campi della tabella',
+                'params' => [
+                    'table' => 'string',
+                ],
             ],
             [
                 'command' => 'check',
@@ -68,6 +77,17 @@ class DbService extends ServiceInterface
                 ];
                 $conn->send(json_encode($response));
                 break;
+            case 'list-fields':
+                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
+                echo "table " . $table . "\n";
+                $response = [
+                    'msg' => self::getFields($table),
+                    'error' => 0,
+                    'type' => 'out',
+                    'command' => $action,
+                ];
+                $conn->send(json_encode($response));
+                break;
             case 'check':
                 $table = Arr::get(Arr::get($data,'params',[]),'table',null);
                 $model = Arr::get(Arr::get($data,'params',[]),'model',null);
@@ -78,6 +98,10 @@ class DbService extends ServiceInterface
                 ]);
                 $response = [
                     'msg' => $result,
+                    'confs' => $this->checkConf([
+                            'table' => $table,
+                            'model' => $model
+                        ]),
                     'error' => 0,
                     'type' => 'out',
                     'command' => $action,
@@ -88,11 +112,17 @@ class DbService extends ServiceInterface
                 $model = Arr::get(Arr::get($data,'params',[]),'model',null);
                 $table = Arr::get(Arr::get($data,'params',[]),'table',null);
                 $deploy = Arr::get(Arr::get($data,'params',[]),'deploy',null);
+                $modelConf = Arr::get(Arr::get($data,'params',[]),'modelConf',null);
                 if (!$model || !$table || !$deploy) {
                     throw new \Exception('Parametri mancanti');
                 }
                 $response = [
-                    'msg' => $this->generate(['model' => $model,'table' => $table,'deploy' => $deploy]),
+                    'msg' => $this->generate([
+                        'model' => $model,
+                        'table' => $table,
+                        'deploy' => $deploy,
+                        'modelConf' => $modelConf
+                    ]),
                     'error' => 0,
                     'type' => 'out',
                     'command' => $action,
@@ -152,6 +182,38 @@ class DbService extends ServiceInterface
         ];
     }
 
+    public function checkConf($params) {
+        $jsFilename = config('cup-gui-vue.application_path') . '/ModelConfs/Model' . Str::studly($params['model']). '.js';
+        $result = [
+          'jsConf' => []
+        ];
+        if (file_exists($jsFilename)) {
+            $jsParser = new JavaScriptConfigParser();
+            $content = file_get_contents($jsFilename);
+            echo $content;
+            $jsParser->parse($content);
+
+// Ora puoi accedere alle varie parti della configurazione
+            $result['jsConf'] = [
+                "modelName" => $jsParser->getModelName(),
+                "searchConfig" => $jsParser->getSearchConfig(),
+                "viewConfig" => $jsParser->getViewConfig(),
+                "listConfig" => $jsParser->getListConfig(),
+                "editConfig" => $jsParser->getEditConfig(),
+                "listEditConfig" => $jsParser->getListEditConfig(),
+
+    // Puoi anche ottenere configurazioni specifiche per ciascuna sezione
+                "listFields" => $jsParser->getFields('list'),
+                "searchFields" => $jsParser->getFields('search'),
+                "editFields" => $jsParser->getFields('edit'),
+                "editActions" => $jsParser->getActions('edit'),
+                "searchFieldsConfig" => $jsParser->getFieldsConfig('search'),
+            ];
+
+        }
+        return $result;
+    }
+
     public function generate($params) {
         $output = new \Symfony\Component\Console\Output\BufferedOutput;
         $exclude = '';
@@ -167,8 +229,15 @@ class DbService extends ServiceInterface
         if ($exclude) {
             $callParams['--exclude'] = $exclude;
         }
-        Artisan::call('cup:generate-implementation',$callParams,$output);
-        return $output->fetch();
+
+        $callParams['modelConf'] = $params['modelConf'];
+        $gi = new GenerateImplementation($callParams);
+        $gi->generate();
+        return join("\n",$gi->logs);
+//        Artisan::call('cup:generate-implementation',$callParams,$output);
+//        echo 'chiamo cup:generate-implementation';
+//        print_r($callParams);
+//        return $output->fetch();
     }
 }
 

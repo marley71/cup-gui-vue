@@ -3,7 +3,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Marley71\CupSocketServer\Console\Commands\AnalyzeComposerPackages;
-use Marley71\CupSocketServer\Console\Commands\GenerateImplementation;
+use Marley71\CupSocketServer\Console\Commands\GenerateImplementationCommand;
 use Marley71\CupSocketServer\Console\Commands\InstallGui;
 use Marley71\CupSocketServer\Console\Commands\SocketServer;
 
@@ -12,7 +12,7 @@ class CupGuiVueProvider extends ServiceProvider {
         SocketServer::class,
         InstallGui::class,
         AnalyzeComposerPackages::class,
-        GenerateImplementation::class
+        GenerateImplementationCommand::class
     ];
 
     public function register()

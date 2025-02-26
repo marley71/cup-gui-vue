@@ -1,4 +1,6 @@
-<?php namespace Marley71\CupSocketServer\Services;
+<?php
+
+namespace Marley71\CupSocketServer\Services;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
