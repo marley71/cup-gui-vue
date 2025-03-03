@@ -52,7 +52,7 @@ class SystemService extends ServiceInterface
             case 'templates':
                 $shell_command = dirname(__FILE__) . '/shell_commands/deploy.sh';
                 $shell_param = $action;
-                echo "command " . $shell_command .  " shell param " . $shell_param;
+                //echo "command " . $shell_command .  " shell param " . $shell_param;
                 $result = Process::forever()->env(self::getEnvVars())
                     ->run('bash ' . "$shell_command $shell_param", function (string $type, string $output) use ($conn,$action) {
                         //echo $output;

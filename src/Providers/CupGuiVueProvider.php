@@ -6,13 +6,14 @@ use Marley71\CupSocketServer\Console\Commands\AnalyzeComposerPackages;
 use Marley71\CupSocketServer\Console\Commands\GenerateImplementationCommand;
 use Marley71\CupSocketServer\Console\Commands\InstallGui;
 use Marley71\CupSocketServer\Console\Commands\SocketServer;
-
+use Marley71\CupSocketServer\Console\Commands\Test;
 class CupGuiVueProvider extends ServiceProvider {
     protected $commands = [
         SocketServer::class,
         InstallGui::class,
         AnalyzeComposerPackages::class,
-        GenerateImplementationCommand::class
+        GenerateImplementationCommand::class,
+        Test::class,
     ];
 
     public function register()

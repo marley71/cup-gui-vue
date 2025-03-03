@@ -135,7 +135,7 @@ class GenerateImplementation
         $outputPath = config('cup-gui-vue.application_path') . '/ModelConfs/'.$modelClass.'.js';
         $dotArray = Arr::dot(Arr::get($this->params,'modelConf',[]));
         $dbFields = DbService::getFields($table);
-        print_r($dotArray);
+        //print_r($dotArray);
         $listFields = collect($dbFields)->pluck('name')->toArray();
         $editFields = collect($dbFields)->pluck('name')->toArray();
         $searchFields = collect($dbFields)->pluck('name')->toArray();

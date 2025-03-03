@@ -49,6 +49,15 @@ class DbService extends ServiceInterface
                     'deploy' => 'json'
                 ],
             ],
+            [
+                'command' => 'load-conf',
+                'description' => 'carica la configurazione del modello',
+                'params' => [
+                    'model' => 'string',
+                    'type' => 'string'
+                ],
+            ],
+
 //            [
 //                'command' => 'save-config',
 //                'description' => 'Salvataggio impostazioni template',
@@ -129,6 +138,58 @@ class DbService extends ServiceInterface
                 ];
                 $conn->send(json_encode($response));
                 break;
+            case 'save-conf':
+                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
+                $confType = Arr::get(Arr::get($data,'params',[]),'conf-type',null);
+                $conf = Arr::get(Arr::get($data,'params',[]),'conf',null);
+                try {
+                    $result = $this->saveCode([
+                        'table' => $table,
+                        'model' => $model,
+                        'confType' => $confType,
+                        'conf' => $conf,
+                    ]);
+                    $response = [
+                        'msg' => $result,
+                        'error' => 0,
+                        'type' => 'out',
+                        'command' => $action,
+                    ];
+                    $conn->send(json_encode($response));
+                } catch (\Exception $e) {
+                    $response = [
+                        'msg' => $e->getMessage(),
+                        'error' => 1,
+                        'type' => 'error',
+                        'command' => $action,
+                    ];
+                    $conn->send(json_encode($response));
+                }
+
+                break;
+            case 'load-conf':
+                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+                $type = Arr::get(Arr::get($data,'params',[]),'type',null);
+                try {
+                    $response = [
+                        'msg' => $this->loadConf($model,$type),
+                        'error' => 0,
+                        'type' => 'out',
+                        'command' => $action,
+                    ];
+                    $conn->send(json_encode($response));
+                } catch (\Exception $e) {
+                    $response = [
+                        'msg' => $e->getMessage(),
+                        'error' => 1,
+                        'type' => 'error',
+                        'command' => $action,
+                    ];
+                    $conn->send(json_encode($response));
+                }
+
+                break;
             default:
                 throw new \Exception( 'mysql service action non gestita ' . Arr::get($data,'action'));
         }
@@ -183,16 +244,20 @@ class DbService extends ServiceInterface
     }
 
     public function checkConf($params) {
-        $jsFilename = config('cup-gui-vue.application_path') . '/ModelConfs/Model' . Str::studly($params['model']). '.js';
+        $model = $params['model'];
+        $jsFilename = config('cup-gui-vue.application_path') . '/ModelConfs/Model' . Str::studly($model). '.js';
+        $phpFilename = config_path('foorms/'.$model . '.php');
         $result = [
-          'jsConf' => []
+          'jsConf' => [],
+            'jsContent' => '',
+            'phpContent' => '',
         ];
         if (file_exists($jsFilename)) {
             $jsParser = new JavaScriptConfigParser();
             $content = file_get_contents($jsFilename);
-            echo $content;
+            //echo $content;
             $jsParser->parse($content);
-
+            $result['jsContent'] = $content;
 // Ora puoi accedere alle varie parti della configurazione
             $result['jsConf'] = [
                 "modelName" => $jsParser->getModelName(),
@@ -209,7 +274,9 @@ class DbService extends ServiceInterface
                 "editActions" => $jsParser->getActions('edit'),
                 "searchFieldsConfig" => $jsParser->getFieldsConfig('search'),
             ];
-
+        }
+        if (file_exists($phpFilename)) {
+            $result['phpContent'] = file_get_contents($phpFilename);
         }
         return $result;
     }
@@ -234,10 +301,37 @@ class DbService extends ServiceInterface
         $gi = new GenerateImplementation($callParams);
         $gi->generate();
         return join("\n",$gi->logs);
-//        Artisan::call('cup:generate-implementation',$callParams,$output);
-//        echo 'chiamo cup:generate-implementation';
-//        print_r($callParams);
-//        return $output->fetch();
+    }
+
+    public function saveCode($params) {
+        // todo creare un file backup
+        switch ($params['confType']) {
+            case 'js':
+                $modelClass = 'Model' . Str::studly($params['model']);
+                $table = $params['table'];
+                $outputPath = config('cup-gui-vue.application_path') . '/ModelConfs/'.$modelClass.'.js';
+                file_put_contents($outputPath,$params['conf']);
+                break;
+            case 'php':
+                $model = $params['model'];
+                $outputPath = config_path('foorms/'.$model . '.php');;
+                file_put_contents($outputPath,$params['conf']);
+                break;
+            default:
+                throw new \Exception('codeType non riconosciuto ' . $params['confType']);
+        }
+        return 'ok';
+    }
+
+    public function loadConf($model,$type) {
+        switch ($type) {
+            case 'js':
+                $modelClass = 'Model' . Str::studly($model);
+                $filePath = config('cup-gui-vue.application_path') . '/ModelConfs/'.$modelClass.'.js';
+                return file_get_contents($filePath);
+            default:
+                throw new \Exception('Tipo di conf ' . $type . ' non valida');
+        }
     }
 }
 
