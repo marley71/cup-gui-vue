@@ -4,6 +4,8 @@
 #LARAVEL_DIR = directory applicazione laravel
 #CRUD_DIR = directory main dell'interfaccia esempio resources/roma-vue-4.0.0
 echo "LARAVEL_DIR $LARAVEL_DIR";
+echo "PHP_BIN $PHP_BIN";
+
 if [ -z "$1" ]
 then
       echo "publish application"
@@ -15,7 +17,7 @@ else
          translate)
             echo "translate "
             cd $LARAVEL_DIR
-            php artisan translations
+            $PHP_BIN artisan translations
             echo "put translations in $APPLICATION_PATH/assets/"
             mv public/js/*-translations.json "$APPLICATION_PATH/assets/"
             ;;
