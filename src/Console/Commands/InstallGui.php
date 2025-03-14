@@ -2,79 +2,102 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
-use Marley71\CupSocketServer\WebSockets\ServiceInterface;
-use Marley71\CupSocketServer\WebSockets\WebSocketServer;
-use Ratchet\Http\HttpServer;
-use Ratchet\Server\IoServer;
-use Ratchet\WebSocket\WsServer;
-
 
 class InstallGui extends Command {
     protected $signature = 'cup:install-gui';
 
     protected $name = 'InstallGui';
 
-    protected $description = 'Scarica i moduli per eseguire l\'interfaccia web';
-
-    protected $wb = null;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->wb = new WebSocketServer();
-    }
+    protected $description = 'Scarica i moduli per eseguire l\'interfaccia web e configura i link iniziali';
 
     public function handle() {
-        $this->comment('coping env...');
-        $this->copyEnv();
-        $this->comment('copied');
-        $this->comment("start gui...");
-        $this->startGui();
-        $this->comment('started');
-        $this->comment("start websocket...");
-        $server = IoServer::factory(
-            new HttpServer(
-                new WsServer(
-                    new WebSocketServer()
-                )
-            ),
-            env('WEB_SOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
-        );
-        $this->comment('connect to ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
-        $server->run();
+        echo "
+        - git clone " . config('cup-gui-vue.cupparis-primevue-git') . "
+        - branch " . config('cup-gui-vue.cupparis-primevue-branch') . "
+          nella cartella " . config('cup-gui-vue.cupparis_primevue_path')  . "
+        - git clone " . config('cup-gui-vue.roma-vue-git') . "
+        - branch " . config('cup-gui-vue.roma-vue-branch') . "
+          nella cartella " .config('cup-gui-vue.roma_path')  . "
+        - ln -s " . env('APPLICATION_PATH') . "/public
+        - ln -s " . env('APPLICATION_PATH') . "/package.json";
+        if (!$this->confirm("Il comando eseguirà le azioni sopraindicate. Continuare?")) {
+            $this->comment('Comando abortito');
+            return ;
+        }
+        $this->comment('checkout libreria cupparis-primevue');
+        $this->gitCupparis();
+        $this->comment('-----------------');
+        $this->comment('checkout libreria roma-vue-4.0.0');
+        $this->gitRoma();
+        $this->comment('-----------------');
+        $this->comment('create simlinks');
+        $this->createSimLinks();
+
     }
 
-    protected function startGui() {
-        $a = new \ReflectionClass(WebSocketServer::class);
-        $attr = pathinfo($a->getFileName());
-        if ($attr) {
-            //echo $attr['dirname'] . "\n";
-            $shell_command =$attr['dirname'] . '/shell_commands/gui_start.sh';
-            $result = Process::forever()->env(ServiceInterface::getEnvVars())
-                ->start('bash ' . "$shell_command", function (string $type, string $output) {
-                    if ($type != 'out') {
-                        throw new \Exception($output);
-                    }
-                });
-        }
+    protected function gitCupparis() {
+        $p = Process::forever()->path(config('cup-gui-vue.app_folder'));
+        $command = 'git clone git@github.com:marley71/cupparis-primevue.git';
+        $this->comment('execute ' . $command . ' ...');
+        $p->run($command);
+        $this->comment('done ');
+
+        $p = Process::forever()->path(config('cup-gui-vue.cupparis_primevue_path') );
+        $command = 'git checkout ' . config('cup-gui-vue.cupparis-primevue-branch');
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
+
+        $p = Process::forever()->path(config('cup-gui-vue.cupparis_primevue_path') );
+        $command = 'git pull';
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
+
+        $p = Process::forever()->path(config('cup-gui-vue.cupparis_primevue_path') );
+        $command = 'npm install';
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
     }
 
-    protected function copyEnv() {
-        $env = config('websocket.env.local');
-        $content = "";
-        foreach ($env as $key => $value) {
-            $content .= "$key=$value\n";
-        }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/.env.local') ;
-        //echo $fileEnv . "\n";
-        file_put_contents($fileEnv,$content);
+    protected function gitRoma() {
+        $p = Process::forever()->path(config('cup-gui-vue.app_folder'));
+        $command = 'git clone git@gitlab.cupparis.it:gui/roma-vue-4.0.0.git';
+        $this->comment('execute ' . $command . ' ...');
+        $p->run($command);
+        $this->comment('done ');
 
-        $env = config('websocket.env.production');
-        $content = "";
-        foreach ($env as $key => $value) {
-            $content .= "$key=$value\n";
-        }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/.env.production') ;
-        file_put_contents($fileEnv,$content);
+        $p = Process::forever()->path(config('cup-gui-vue.roma_path') );
+        $command = 'git checkout ' . config('cup-gui-vue.roma-vue-branch');
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
+
+        $p = Process::forever()->path(config('cup-gui-vue.roma_path') );
+        $command = 'git pull';
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
+
+        $p = Process::forever()->path(config('cup-gui-vue.roma_path'));
+        $command = 'npm install';
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
+    }
+
+    protected function createSimLinks() {
+        $p = Process::forever()->path(config('cup-gui-vue.roma_path') );
+        $command = "ln -s " .  config('cup-gui-vue.application_path') . "/public";
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
+
+        $p = Process::forever()->path(config('cup-gui-vue.roma_path') );
+        $command = "ln -s " . config('cup-gui-vue.application_path') . "/package.json";
+        $this->comment('execute ' . $command);
+        $p->run($command);
+        $this->comment('done ');
     }
 }

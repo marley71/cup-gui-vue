@@ -13,7 +13,7 @@ class WebSocketServer implements MessageComponentInterface
     public function __construct()
     {
         $this->clients = new \SplObjectStorage;
-        $servicesClass = config('websocket.services',[]);
+        $servicesClass = config('cup-gui-vue.services',[]);
         foreach ($servicesClass as $srvCls) {
             $obj = new $srvCls();
             $this->services[$obj->getPrefix()] = $obj;
@@ -29,7 +29,7 @@ class WebSocketServer implements MessageComponentInterface
             'msg' => 'connected',
             'error' => 0,
         ];
-        $conn->send(json_encode($response,true));
+        $conn->send(json_encode($response));
     }
 
     public function onMessage(ConnectionInterface $from, $msg): void

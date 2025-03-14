@@ -1,0 +1,9 @@
+/**
+* file autogenerato per importare tutti i modelli js necessari all'applicazione vue frontend
+* viene generato utilizzando il file models.json per importare tutti i modelli necessari
+**/
+
+import cs from 'cupparis-primevue';
+{{$import_model_confs}}
+
+{{$model_confs_assign}}

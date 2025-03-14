@@ -31,32 +31,40 @@ class SocketServer extends Command {
         $this->comment("start gui...");
         $this->startGui();
         $this->comment('started');
+        $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
         $this->comment("start websocket...");
-        $server = IoServer::factory(
-            new HttpServer(
-                new WsServer(
-                    new WebSocketServer()
-                )
-            ),
-            env('WEB_SOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
+        $httpServer = new HttpServer(
+            new WsServer(
+                new WebSocketServer()
+            ));
+        $server = IoServer::factory($httpServer,
+            env('VUEAPP_WEBSOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
         );
-        $this->comment('connect to ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
+        $this->comment('Websocket awaiting connection on ws://' . env('VUEAPP_DOMAIN','localhost') . ':' . env('VUEAPP_WEBSOCKET_PORT'));
         $server->run();
     }
 
     protected function startGui() {
-        $a = new \ReflectionClass(WebSocketServer::class);
-        $attr = pathinfo($a->getFileName());
-        if ($attr) {
-            //echo $attr['dirname'] . "\n";
-            $shell_command =$attr['dirname'] . '/shell_commands/gui_start.sh';
-            $result = Process::forever()->env(ServiceInterface::getEnvVars())
-                ->start('bash ' . "$shell_command", function (string $type, string $output) {
-                    if ($type != 'out') {
-                        throw new \Exception($output);
-                    }
-                });
+        try {
+            $a = new \ReflectionClass(WebSocketServer::class);
+            $attr = pathinfo($a->getFileName());
+            if ($attr) {
+                //echo $attr['dirname'] . "\n";
+                $shell_command =$attr['dirname'] . '/shell_commands/gui_start.sh';
+                $result = Process::forever()->env(ServiceInterface::getEnvVars())
+                    ->start('bash ' . "$shell_command", function (string $type, string $output) {
+                        echo "$type $output";
+//                        if ($type != 'out') {
+//                            throw new \Exception($output);
+//                        } else {
+//                            echo $output;
+//                        }
+                    });
+            }
+        } catch (\Exception $e) {
+            throw $e;
         }
+
     }
 
     protected function copyEnv() {
@@ -65,7 +73,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/.env.local') ;
+        $fileEnv = config('cup-gui-vue.roma_path')  . '/.env.local';
         //echo $fileEnv . "\n";
         file_put_contents($fileEnv,$content);
 
@@ -74,7 +82,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = base_path(env('VUEAPP_FOLDER') . '/.env.production') ;
+        $fileEnv = config('cup-gui-vue.roma_path')  . '/.env.production';
         file_put_contents($fileEnv,$content);
     }
 }
