@@ -71,7 +71,6 @@ class WebSocketServer implements MessageComponentInterface
     public function onError(ConnectionInterface $conn, \Exception $e)
     {
         echo "Errore: {$e->getMessage()}\n";
-
         $conn->close();
     }
 }

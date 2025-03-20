@@ -3,7 +3,8 @@
 return [
     'services' => [
         Marley71\CupSocketServer\WebSockets\SystemService::class, //classi che espletano servizi websocket
-        Marley71\CupSocketServer\WebSockets\DbService::class
+        Marley71\CupSocketServer\WebSockets\DbService::class,
+        Marley71\CupSocketServer\WebSockets\RolesService::class
     ],
     'cupparis-primevue-git' => 'https://github.com/marley71/cupparis-primevue.git', //'git@github.com:marley71/cupparis-primevue.git',
     'cupparis-primevue-branch' => 'features/w-leafleft',  // branch libreria cupparis-primevue
@@ -17,7 +18,7 @@ return [
             "VITE_APP_DEV_MENU"=>1,
             "VITE_API_MENU"=>"/api/app-menu",
             "VITE_WEBSOCKET_SERVER"=>"ws://" .  env('VUEAPP_DOMAIN','localhost') . ':' . env('VUEAPP_WEBSOCKET_PORT',7071),
-            "VITE_WEB_SOCKET_SERVICES"=>"system,db",   // servizi da utilizzare un sottoinsieme dei services definiti sopra
+            "VITE_WEB_SOCKET_SERVICES"=>"system,db,roles",   // servizi da utilizzare un sottoinsieme dei services definiti sopra
             "VITE_MODE"=> "dev",
             "VITE_RESOURCES_PATH" => base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application')), // path dove ci saranno le risorse dell'applicazione
             "APP_DOMAIN" => env('VUEAPP_DOMAIN'),

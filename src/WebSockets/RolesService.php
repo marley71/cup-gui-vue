@@ -12,51 +12,51 @@ use Marley71\CupSocketServer\Services\GenerateImplementation;
 use Marley71\CupSocketServer\Services\JavaScriptConfigParser;
 use Ratchet\ConnectionInterface;
 
-class DbService extends ServiceInterface
+class RolesService extends ServiceInterface
 {
     public function __construct()
     {
         parent::__construct();
         $this->envVars = [];
-        $this->prefix = 'db';
+        $this->prefix = 'roles';
         $this->commands = [
             [
-                'command' => 'list-tables',
-                'description' => 'Lista delle tabelle del db',
+                'command' => 'conf',
+                'description' => 'Ritorna la lista dei modelli,ruoli e permessi dell\'applicazione',
                 'params' => [],
             ],
-            [
-                'command' => 'list-fields',
-                'description' => 'Lista dei campi della tabella',
-                'params' => [
-                    'table' => 'string',
-                ],
-            ],
-            [
-                'command' => 'check',
-                'description' => 'Controlla tutte le dipendenze del modello',
-                'params' => [
-                    'table' => 'string',
-                    'model' => 'string'
-                ],
-            ],
-            [
-                'command' => 'generate',
-                'description' => 'Generazione dell\'implentazione degli oggetti passati',
-                'params' => [
-                    'table' => 'string',
-                    'model' => 'string',
-                    'deploy' => 'json'
-                ],
-            ],
-            [
-                'command' => 'load-conf',
-                'description' => 'carica la configurazione del modello',
-                'params' => [
-                    'model' => 'string',
-                    'type' => 'string'
-                ],
-            ],
+//            [
+//                'command' => 'list-fields',
+//                'description' => 'Lista dei campi della tabella',
+//                'params' => [
+//                    'table' => 'string',
+//                ],
+//            ],
+//            [
+//                'command' => 'check',
+//                'description' => 'Controlla tutte le dipendenze del modello',
+//                'params' => [
+//                    'table' => 'string',
+//                    'model' => 'string'
+//                ],
+//            ],
+//            [
+//                'command' => 'generate',
+//                'description' => 'Generazione dell\'implentazione degli oggetti passati',
+//                'params' => [
+//                    'table' => 'string',
+//                    'model' => 'string',
+//                    'deploy' => 'json'
+//                ],
+//            ],
+//            [
+//                'command' => 'load-conf',
+//                'description' => 'carica la configurazione del modello',
+//                'params' => [
+//                    'model' => 'string',
+//                    'type' => 'string'
+//                ],
+//            ],
 
 //            [
 //                'command' => 'save-config',
@@ -77,9 +77,9 @@ class DbService extends ServiceInterface
     public function doAction(string $action,array $data)
     {
         switch ($action) {
-            case 'list-tables':
+            case 'conf':
                 $response = [
-                    'msg' => $this->getTables(),
+                    'msg' => $this->getRolesConf(),
                     'error' => 0,
                     'type' => 'out',
                     'command' => $action,
@@ -191,27 +191,24 @@ class DbService extends ServiceInterface
 
                 break;
             default:
-                throw new \Exception( 'mysql service action non gestita ' . Arr::get($data,'action'));
+                throw new \Exception( 'roles service action non gestita ' . Arr::get($data,'action'));
         }
     }
 
-    public static function getEnvVars() {
-        return array_merge(parent::getEnvVars(),[
-            'APPLICATION_PATH' => config('cup-gui-vue.application_path')
-        ]);
-    }
+//    public static function getEnvVars() {
+//        return array_merge(parent::getEnvVars(),[
+//            'APPLICATION_PATH' => config('cup-gui-vue.application_path')
+//        ]);
+//    }
 
 
-    public function getTables() {
-        $tableList =  Schema::getAllTables();
-        $tables = [];
-        foreach ($tableList as $table) {
-            $tableName = $table->{'Tables_in_' . env('DB_DATABASE')};
-            $tables[] = [
-              'name' =>  $tableName
-            ];
-        }
-        return $tables;
+    public function getRolesConf() {
+        $conf = [
+            'models' => config('permission.cupparis.models',[]),
+            'permissions' => config('permission.cupparis.models_permissions_prefixes',[]),
+            'roles' => config('permission.cupparis.roles.web')
+        ];
+        return $conf;
     }
 
     public static function getFields($tableName) {
@@ -332,6 +329,20 @@ class DbService extends ServiceInterface
             default:
                 throw new \Exception('Tipo di conf ' . $type . ' non valida');
         }
+    }
+
+
+    protected function updateConfigFile($key, $value)
+    {
+        $configPath = config_path('cup-gui-vue.php');
+        $configContent = file_get_contents($configPath);
+
+        // Aggiorna il valore nel file di configurazione
+        $pattern = "/('{$key}'\\s*=>\\s*)[^,]+,/";
+        $replacement = "\${1}'{$value}',";
+        $newConfigContent = preg_replace($pattern, $replacement, $configContent);
+
+        file_put_contents($configPath, $newConfigContent);
     }
 }
 

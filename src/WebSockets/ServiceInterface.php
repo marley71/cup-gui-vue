@@ -10,9 +10,44 @@ abstract class ServiceInterface
     protected $prefix;
     protected $commands = [];
     protected $envVars = [];
+
+    protected $conn = null;
+
     public function __construct()
     {
         $this->envVars = self::getEnvVars();
+    }
+
+
+    public function do(array $data,ConnectionInterface $conn) {
+        try {
+            echo $this->prefix . ' ' . Arr::get($data, 'action');
+            $action = Arr::get($data, 'action');
+            $this->conn = $conn;
+            switch ($action) {
+                case 'info':
+                    $this->send($this->dumpInfo());
+                    //$conn->send(json_encode($this->dumpInfo()));
+                    break;
+                default:
+                    $this->doAction($action,$data);
+                    break;
+            }
+        } catch (\Exception $e) {
+            $this->send([
+                'type' => 'error',
+                'msg' => $e->getMessage(),
+                'error' => 1,
+                'command' => $action,
+            ]);
+            Log::error($e);
+            //throw $e;
+        }
+    }
+
+    public function send($data) {
+        $data['service'] = $this->prefix;
+        $this->conn->send(json_encode($data));
     }
 
     /**
@@ -21,26 +56,7 @@ abstract class ServiceInterface
      * @param string $action
      * @return mixed
      */
-    public function do(array $data,ConnectionInterface $conn) {
-        try {
-            echo $this->prefix . ' ' . Arr::get($data, 'action');
-            $action = Arr::get($data, 'action');
-            switch ($action) {
-                case 'info':
-                    $conn->send(json_encode($this->dumpInfo()));
-                    break;
-                default:
-                    $this->doAction($action,$data,$conn);
-                    break;
-            }
-        } catch (\Exception $e) {
-            Log::error($e);
-            throw $e;
-        }
-    }
-
-
-    abstract public function doAction(string $action,array $data,ConnectionInterface $conn);
+    abstract public function doAction(string $action,array $data);
 
     /**
      * Metodo per ottenere il prefisso.
@@ -63,6 +79,7 @@ abstract class ServiceInterface
             'command' => 'info',
             'command_list' => $this->commands,
             'service_name' => $this->prefix,
+            'service' => $this->prefix,
         ];
         return $response;
     }

@@ -44,7 +44,7 @@ class SystemService extends ServiceInterface
      * @param string $action
      * @return void
      */
-    public function doAction(string $action,array $data,ConnectionInterface $conn)
+    public function doAction(string $action,array $data)
     {
         switch ($action) {
             case 'publish':
@@ -54,7 +54,7 @@ class SystemService extends ServiceInterface
                 $shell_param = $action;
                 //echo "command " . $shell_command .  " shell param " . $shell_param;
                 $result = Process::forever()->env(self::getEnvVars())
-                    ->run('bash ' . "$shell_command $shell_param", function (string $type, string $output) use ($conn,$action) {
+                    ->run('bash ' . "$shell_command $shell_param", function (string $type, string $output) use ($action) {
                         //echo $output;
                         $response = [
                             'msg' => $output,
@@ -62,7 +62,7 @@ class SystemService extends ServiceInterface
                             'type' => $type,
                             'command' => $action,
                         ];
-                        $conn->send(json_encode($response));
+                        $this->send($response);
                     });
                 $response = [
                     'msg' => "command $action exit code " . $result->exitCode(),
@@ -70,16 +70,7 @@ class SystemService extends ServiceInterface
                     'command' => $action,
                     'error' => 0,
                 ];
-                $conn->send(json_encode($response));
-
-
-//                $conn->send(json_encode([
-//                        'msg' => 'Ok',
-//                        'error' => 0,
-//                        'type' => 'finish',
-//                        'command' => $action,
-//                    ]));
-                //var_dump($result);
+                $this->send($response);
                 break;
             case 'save-config':
                 $config = Arr::get(Arr::get($data,'params',[]),'config',[]);
@@ -87,6 +78,13 @@ class SystemService extends ServiceInterface
                 Log::info(print_r($config,true));
                 $guiFolder = config('cup-gui-vue.application_path');
                 file_put_contents($guiFolder.'/config/template-config.json',json_encode($config,JSON_PRETTY_PRINT));
+                $response = [
+                    'msg' => "configurazione salvata in " . $guiFolder.'/config/template-config.json',
+                    'type' => 'end',
+                    'command' => $action,
+                    'error' => 0,
+                ];
+                $this->send($response);
                 break;
             default:
                 throw new \Exception( 'system service action non gestita ' . Arr::get($data,'action'));

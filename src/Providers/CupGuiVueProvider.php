@@ -22,6 +22,7 @@ class CupGuiVueProvider extends ServiceProvider {
         $this->publishes([
             __DIR__.'/../../config/cup-gui-vue.php' => config_path('cup-gui-vue.php'),
         ], 'config');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
     }
 
     public function boot()
