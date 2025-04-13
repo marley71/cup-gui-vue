@@ -86,110 +86,110 @@ class RolesService extends ServiceInterface
                 ];
                 $this->send($response);
                 break;
-            case 'list-fields':
-                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
-                echo "table " . $table . "\n";
-                $response = [
-                    'msg' => self::getFields($table),
-                    'error' => 0,
-                    'type' => 'out',
-                    'command' => $action,
-                ];
-                $this->send($response);
-                break;
-            case 'check':
-                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
-                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
-                // @todo fare la validation
-                $result = $this->check([
-                    'table' => $table,
-                    'model' => $model
-                ]);
-                $response = [
-                    'msg' => $result,
-                    'confs' => $this->checkConf([
-                            'table' => $table,
-                            'model' => $model
-                        ]),
-                    'error' => 0,
-                    'type' => 'out',
-                    'command' => $action,
-                ];
-                $this->send($response);
-                break;
-            case 'generate':
-                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
-                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
-                $deploy = Arr::get(Arr::get($data,'params',[]),'deploy',null);
-                $modelConf = Arr::get(Arr::get($data,'params',[]),'modelConf',null);
-                if (!$model || !$table || !$deploy) {
-                    throw new \Exception('Parametri mancanti');
-                }
-                $response = [
-                    'msg' => $this->generate([
-                        'model' => $model,
-                        'table' => $table,
-                        'deploy' => $deploy,
-                        'modelConf' => $modelConf
-                    ]),
-                    'error' => 0,
-                    'type' => 'out',
-                    'command' => $action,
-                ];
-                $this->send($response);
-                break;
-            case 'save-conf':
-                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
-                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
-                $confType = Arr::get(Arr::get($data,'params',[]),'conf-type',null);
-                $conf = Arr::get(Arr::get($data,'params',[]),'conf',null);
-                try {
-                    $result = $this->saveCode([
-                        'table' => $table,
-                        'model' => $model,
-                        'confType' => $confType,
-                        'conf' => $conf,
-                    ]);
-                    $response = [
-                        'msg' => $result,
-                        'error' => 0,
-                        'type' => 'out',
-                        'command' => $action,
-                    ];
-                    $this->send($response);
-                } catch (\Exception $e) {
-                    $response = [
-                        'msg' => $e->getMessage(),
-                        'error' => 1,
-                        'type' => 'error',
-                        'command' => $action,
-                    ];
-                    $this->send($response);
-                }
-
-                break;
-            case 'load-conf':
-                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
-                $type = Arr::get(Arr::get($data,'params',[]),'type',null);
-                try {
-                    $response = [
-                        'msg' => $this->loadConf($model,$type),
-                        'error' => 0,
-                        'type' => 'out',
-                        'command' => $action,
-                    ];
-                    $this->send($response);
-                } catch (\Exception $e) {
-                    $response = [
-                        'msg' => $e->getMessage(),
-                        'error' => 1,
-                        'type' => 'error',
-                        'command' => $action,
-                    ];
-                    $this->send($response);
-                }
-
-                break;
+//            case 'list-fields':
+//                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
+//                echo "table " . $table . "\n";
+//                $response = [
+//                    'msg' => self::getFields($table),
+//                    'error' => 0,
+//                    'type' => 'out',
+//                    'command' => $action,
+//                ];
+//                $this->send($response);
+//                break;
+//            case 'check':
+//                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
+//                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+//                // @todo fare la validation
+//                $result = $this->check([
+//                    'table' => $table,
+//                    'model' => $model
+//                ]);
+//                $response = [
+//                    'msg' => $result,
+//                    'confs' => $this->checkConf([
+//                            'table' => $table,
+//                            'model' => $model
+//                        ]),
+//                    'error' => 0,
+//                    'type' => 'out',
+//                    'command' => $action,
+//                ];
+//                $this->send($response);
+//                break;
+//            case 'generate':
+//                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+//                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
+//                $deploy = Arr::get(Arr::get($data,'params',[]),'deploy',null);
+//                $modelConf = Arr::get(Arr::get($data,'params',[]),'modelConf',null);
+//                if (!$model || !$table || !$deploy) {
+//                    throw new \Exception('Parametri mancanti');
+//                }
+//                $response = [
+//                    'msg' => $this->generate([
+//                        'model' => $model,
+//                        'table' => $table,
+//                        'deploy' => $deploy,
+//                        'modelConf' => $modelConf
+//                    ]),
+//                    'error' => 0,
+//                    'type' => 'out',
+//                    'command' => $action,
+//                ];
+//                $this->send($response);
+//                break;
+//            case 'save-conf':
+//                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+//                $table = Arr::get(Arr::get($data,'params',[]),'table',null);
+//                $confType = Arr::get(Arr::get($data,'params',[]),'conf-type',null);
+//                $conf = Arr::get(Arr::get($data,'params',[]),'conf',null);
+//                try {
+//                    $result = $this->saveCode([
+//                        'table' => $table,
+//                        'model' => $model,
+//                        'confType' => $confType,
+//                        'conf' => $conf,
+//                    ]);
+//                    $response = [
+//                        'msg' => $result,
+//                        'error' => 0,
+//                        'type' => 'out',
+//                        'command' => $action,
+//                    ];
+//                    $this->send($response);
+//                } catch (\Exception $e) {
+//                    $response = [
+//                        'msg' => $e->getMessage(),
+//                        'error' => 1,
+//                        'type' => 'error',
+//                        'command' => $action,
+//                    ];
+//                    $this->send($response);
+//                }
+//
+//                break;
+//            case 'load-conf':
+//                $model = Arr::get(Arr::get($data,'params',[]),'model',null);
+//                $type = Arr::get(Arr::get($data,'params',[]),'type',null);
+//                try {
+//                    $response = [
+//                        'msg' => $this->loadConf($model,$type),
+//                        'error' => 0,
+//                        'type' => 'out',
+//                        'command' => $action,
+//                    ];
+//                    $this->send($response);
+//                } catch (\Exception $e) {
+//                    $response = [
+//                        'msg' => $e->getMessage(),
+//                        'error' => 1,
+//                        'type' => 'error',
+//                        'command' => $action,
+//                    ];
+//                    $this->send($response);
+//                }
+//
+//                break;
             default:
                 throw new \Exception( 'roles service action non gestita ' . Arr::get($data,'action'));
         }
@@ -205,7 +205,7 @@ class RolesService extends ServiceInterface
     public function getRolesConf() {
         $conf = [
             'models' => config('permission.cupparis.models',[]),
-            'permissions' => config('permission.cupparis.models_permissions_prefixes',[]),
+            'permissions' => config('permission.cupparis.models_permissions_prefixes.web',[]),
             'roles' => config('permission.cupparis.roles.web')
         ];
         return $conf;

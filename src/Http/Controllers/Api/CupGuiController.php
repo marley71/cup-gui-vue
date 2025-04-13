@@ -15,12 +15,17 @@ class CupGuiController extends Controller
         $role = Role::findByName($role);
         $permissions = $role->permissions;
         $models = [];
+        $allPermissions = config('permission.cupparis.models_permissions_prefixes.web',[]);
         foreach ($permissions as $permission) {
-            list($permmesso,$modelName) = explode(' ',$permission->name);
+            list($permesso,$modelName) = explode(' ',$permission->name);
             if (!Arr::get($models,$modelName)) {
                 $models[$modelName] = [];
+                foreach ($allPermissions as $perm) {
+                    $models[$modelName][$perm] = false;
+                }
             }
-            $models[$modelName][] = $permmesso;
+            $models[$modelName][$permesso] = true;
+            //$models[$modelName][] = $permesso;
         }
         $json = [
             'error' => 0,
