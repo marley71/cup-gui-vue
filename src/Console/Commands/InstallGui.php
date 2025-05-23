@@ -37,7 +37,7 @@ class InstallGui extends Command {
 
     protected function gitCupparis() {
         $p = Process::forever()->path(config('cup-gui-vue.app_folder'));
-        $command = 'git clone git@github.com:marley71/cupparis-primevue.git';
+        $command = 'git clone ' . config('cup-gui-vue.cupparis-primevue-git');
         $this->comment('execute ' . $command . ' ...');
         $p->run($command);
         $this->comment('done ');
