@@ -34,8 +34,8 @@ else
 #            sass --update "$APPLICATION_PATH/public/theme:public/theme/"
             ;;
         publish)
-            echo "publish application in $CRUD_DIR"
-            cd $CRUD_DIR
+            echo "publish application in $CLIENT_DIR"
+            cd $CLIENT_DIR
             sh publish.sh
             ;;
 #         pattern3)

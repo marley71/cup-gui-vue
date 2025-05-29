@@ -113,6 +113,7 @@ abstract class ServiceInterface
             'LARAVEL_DIR' => base_path(),
             'CRUD_DIR' => config('cup-gui-vue.roma_path'),
             'PHP_BIN' =>  config('cup-gui-vue.php_bin'),
+            'CLIENT_DIR' => config('cup-gui-vue.application_path'),
         ];
     }
 }

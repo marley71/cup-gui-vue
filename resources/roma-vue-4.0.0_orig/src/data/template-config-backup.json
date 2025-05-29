@@ -1,0 +1,43 @@
+{
+    "layoutMode": "static",
+    "lightMenu": true,
+    "overlayMenuActive": false,
+    "staticMenuMobileActive": false,
+    "staticMenuDesktopInactive": false,
+    "isRTL": false,
+    "inlineUser": false,
+    "topbarMenuActive": false,
+    "activeTopbarItem": null,
+    "rightPanelMenuActive": false,
+    "inlineUserMenuActive": false,
+    "menuActive": false,
+    "topbarColor": "layout-topbar-bluegrey",
+    "theme": "orange",
+    "serverStatus": 444,
+    "bufferOut": "",
+    "bufferErr": "",
+    "topbarBooleanConfig": [
+        {
+            "label": "globalSearch",
+            "value": false
+        },
+        {
+            "label": "notification",
+            "value": false
+        },
+        {
+            "label": "rightMenu",
+            "value": false
+        },
+        {
+            "label": "profileMenu",
+            "value": true
+        }
+    ],
+    "topbarGenericConfig": {
+        "logo": "/layout/images/cupparis/logo1.png"
+    },
+    "selectedCategories": [
+        "profileMenu"
+    ]
+}

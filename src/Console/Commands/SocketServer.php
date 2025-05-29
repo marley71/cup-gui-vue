@@ -54,6 +54,8 @@ class SocketServer extends Command {
                 $result = Process::forever()->env(ServiceInterface::getEnvVars())
                     ->start('bash ' . "$shell_command", function (string $type, string $output) {
                         echo "$type $output";
+                        flush();
+
 //                        if ($type != 'out') {
 //                            throw new \Exception($output);
 //                        } else {
@@ -73,7 +75,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = config('cup-gui-vue.roma_path')  . '/.env.local';
+        $fileEnv = config('cup-gui-vue.application_path')  . '/.env.local';
         //echo $fileEnv . "\n";
         file_put_contents($fileEnv,$content);
 
@@ -82,7 +84,7 @@ class SocketServer extends Command {
         foreach ($env as $key => $value) {
             $content .= "$key=$value\n";
         }
-        $fileEnv = config('cup-gui-vue.roma_path')  . '/.env.production';
+        $fileEnv = config('cup-gui-vue.application_path')  . '/.env.production';
         file_put_contents($fileEnv,$content);
     }
 }
