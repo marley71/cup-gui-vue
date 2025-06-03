@@ -33,7 +33,6 @@ export default defineConfig(({ command }) => {
                 ],
                 hook: 'writeBundle', // Esegui il copy durante il writeBundle,
                 //hook: 'transform', // Esegui il copy durante il writeBundle,
-
             })
         ],
         base: command === 'serve' ? '' : '/roma-vue/',

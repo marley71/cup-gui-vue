@@ -1,0 +1,729 @@
+{
+    "layoutMode": "static",
+    "lightMenu": true,
+    "overlayMenuActive": false,
+    "staticMenuMobileActive": false,
+    "staticMenuDesktopInactive": false,
+    "isRTL": false,
+    "inlineUser": false,
+    "topbarMenuActive": false,
+    "activeTopbarItem": null,
+    "rightPanelMenuActive": false,
+    "inlineUserMenuActive": false,
+    "menuActive": false,
+    "topbarColor": "layout-topbar-orange",
+    "theme": "orange",
+    "serverStatus": "",
+    "bufferOut": [
+        {
+            "text": "save-config start\n"
+        }
+    ],
+    "bufferErr": "",
+    "topbarConfig": {
+        "globalSearch": false,
+        "notification": false,
+        "rightMenu": false,
+        "profileMenu": true
+    },
+    "topbarBooleanConfig": [
+        {
+            "label": "globalSearch",
+            "value": true
+        },
+        {
+            "label": "notification",
+            "value": false
+        },
+        {
+            "label": "rightMenu",
+            "value": false
+        },
+        {
+            "label": "profileMenu",
+            "value": false
+        }
+    ],
+    "topbarGenericConfig": {
+        "logo": "@\/application\/assets\/milano.jpg"
+    },
+    "selectedCategories": [],
+    "items": [],
+    "info": "",
+    "commandWorking": true,
+    "commandOutput": [],
+    "menu": [
+        {
+            "label": "Superadmin",
+            "icon": "fa fa-gears",
+            "items": [
+                {
+                    "label": "Ruoli",
+                    "icon": "fa fa-gear",
+                    "to": "\/admin\/ruoli"
+                },
+                {
+                    "label": "Models Configuration",
+                    "icon": "fa fa-gear",
+                    "to": "\/admin\/models-confs"
+                },
+                {
+                    "label": "Deploy",
+                    "icon": "fa fa-gear",
+                    "to": "\/admin\/deploy"
+                },
+                {
+                    "label": "Help",
+                    "icon": "fa fa-question",
+                    "items": [
+                        {
+                            "label": "Manage Constraint",
+                            "icon": "pi pi-fw pi-home",
+                            "to": "\/test2-manage-constraint\/1"
+                        },
+                        {
+                            "label": "Test2 Widgets",
+                            "icon": "pi pi-fw pi-home",
+                            "to": "\/test2-widgets"
+                        },
+                        {
+                            "label": "Test2 Actions",
+                            "icon": "fa-brands fa-artstation",
+                            "to": "\/test2-actions"
+                        },
+                        {
+                            "label": "Test2 Views",
+                            "icon": "pi pi-fw pi-home",
+                            "to": "\/test2-views"
+                        },
+                        {
+                            "label": "Test2 Manage",
+                            "icon": "pi pi-fw pi-home",
+                            "to": "\/test2-manage"
+                        },
+                        {
+                            "label": "Test2 Import",
+                            "icon": "pi pi-fw pi-home",
+                            "to": "\/test2-import"
+                        },
+                        {
+                            "label": "Test Dialogs",
+                            "icon": "pi pi-fw pi-home",
+                            "to": "\/test2-dialogs"
+                        },
+                        {
+                            "label": "Esperimenti",
+                            "icon": "pi pi-fw pi-home",
+                            "to": "\/test2-esperimenti"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Dashboard",
+            "icon": "fa fa-tachometer-alt",
+            "to": "\/",
+            "visible": [
+                "Admin"
+            ]
+        },
+        {
+            "label": "Admin",
+            "icon": "fa-solid fa-toolbox",
+            "items": [
+                {
+                    "label": "User",
+                    "icon": "pi pi-fw pi-user",
+                    "to": "\/manage\/ModelUser"
+                },
+                {
+                    "label": "Pagina Linkata",
+                    "icon": "fa-regular fa-file",
+                    "to": "\/pagina-linkata"
+                }
+            ],
+            "visible": [
+                "Admin"
+            ]
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "--- Componenti Prime vue  ---",
+            "icon": "pi pi-fw pi-home",
+            "items": []
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "Favorites",
+            "icon": "pi pi-fw pi-home",
+            "items": [
+                {
+                    "label": "Dashboard",
+                    "icon": "pi pi-fw pi-home",
+                    "to": "\/"
+                }
+            ]
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "UI Kit",
+            "icon": "pi pi-fw pi-star-fill",
+            "items": [
+                {
+                    "label": "Form Layout",
+                    "icon": "pi pi-fw pi-id-card",
+                    "to": "\/formlayout"
+                },
+                {
+                    "label": "Input",
+                    "icon": "pi pi-fw pi-check-square",
+                    "to": "\/input"
+                },
+                {
+                    "label": "Float Label",
+                    "icon": "pi pi-fw pi-bookmark",
+                    "to": "\/floatlabel"
+                },
+                {
+                    "label": "Invalid State",
+                    "icon": "pi pi-fw pi-exclamation-circle",
+                    "to": "invalidstate"
+                },
+                {
+                    "label": "Button",
+                    "icon": "pi pi-fw pi-mobile",
+                    "to": "\/button",
+                    "class": "rotated-icon"
+                },
+                {
+                    "label": "Table",
+                    "icon": "pi pi-fw pi-table",
+                    "to": "\/table"
+                },
+                {
+                    "label": "List",
+                    "icon": "pi pi-fw pi-list",
+                    "to": "\/list"
+                },
+                {
+                    "label": "Tree",
+                    "icon": "pi pi-fw pi-share-alt",
+                    "to": "\/tree"
+                },
+                {
+                    "label": "Panel",
+                    "icon": "pi pi-fw pi-tablet",
+                    "to": "\/panel"
+                },
+                {
+                    "label": "Overlay",
+                    "icon": "pi pi-fw pi-clone",
+                    "to": "\/overlay"
+                },
+                {
+                    "label": "Media",
+                    "icon": "pi pi-fw pi-image",
+                    "to": "\/media"
+                },
+                {
+                    "label": "Menu",
+                    "icon": "pi pi-fw pi-bars",
+                    "to": "\/menu"
+                },
+                {
+                    "label": "Message",
+                    "icon": "pi pi-fw pi-comment",
+                    "to": "\/messages"
+                },
+                {
+                    "label": "File",
+                    "icon": "pi pi-fw pi-file",
+                    "to": "\/file"
+                },
+                {
+                    "label": "Chart",
+                    "icon": "pi pi-fw pi-chart-bar",
+                    "to": "\/chart"
+                },
+                {
+                    "label": "Misc",
+                    "icon": "pi pi-fw pi-circle-off",
+                    "to": "\/misc"
+                }
+            ]
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "Utilities",
+            "icon": "pi pi-fw pi-compass",
+            "items": [
+                {
+                    "label": "PrimeIcons",
+                    "icon": "pi pi-fw pi-prime",
+                    "to": "\/icons"
+                },
+                {
+                    "label": "PrimeFlex",
+                    "icon": "pi pi-fw pi-directions",
+                    "url": "https:\/\/www.primefaces.org\/primeflex\/",
+                    "target": "_blank"
+                }
+            ]
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "Prime Blocks",
+            "icon": "pi pi-prime",
+            "items": [
+                {
+                    "label": "Free Blocks",
+                    "icon": "pi pi-fw pi-eye",
+                    "to": "\/blocks"
+                },
+                {
+                    "label": "All Blocks",
+                    "icon": "pi pi-fw pi-globe",
+                    "url": "https:\/\/www.primefaces.org\/primeblocks-vue",
+                    "target": "_blank"
+                }
+            ]
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "Pages",
+            "icon": "pi pi-fw pi-copy",
+            "items": [
+                {
+                    "label": "Crud",
+                    "icon": "pi pi-fw pi-pencil",
+                    "to": "\/crud"
+                },
+                {
+                    "label": "Calendar",
+                    "icon": "pi pi-fw pi-calendar-plus",
+                    "to": "\/calendar"
+                },
+                {
+                    "label": "Timeline",
+                    "icon": "pi pi-fw pi-calendar",
+                    "to": "\/timeline"
+                },
+                {
+                    "label": "Landing",
+                    "icon": "pi pi-fw pi-globe",
+                    "url": "pages\/landing.html",
+                    "target": "_blank"
+                },
+                {
+                    "label": "Login",
+                    "icon": "pi pi-fw pi-sign-in",
+                    "to": "\/login"
+                },
+                {
+                    "label": "Error",
+                    "icon": "pi pi-fw pi-exclamation-triangle",
+                    "to": "\/error"
+                },
+                {
+                    "label": "404",
+                    "icon": "pi pi-fw pi-times",
+                    "to": "\/notfound"
+                },
+                {
+                    "label": "Access Denied",
+                    "icon": "pi pi-fw pi-ban",
+                    "to": "\/access"
+                },
+                {
+                    "label": "Empty",
+                    "icon": "pi pi-fw pi-clone",
+                    "to": "\/empty"
+                }
+            ]
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "Hierarchy",
+            "icon": "pi pi-fw pi-sitemap",
+            "items": [
+                {
+                    "label": "Submenu 1",
+                    "icon": "pi pi-fw pi-sign-in",
+                    "items": [
+                        {
+                            "label": "Submenu 1.1",
+                            "icon": "pi pi-fw pi-sign-in",
+                            "items": [
+                                {
+                                    "label": "Submenu 1.1.1",
+                                    "icon": "pi pi-fw pi-sign-in"
+                                },
+                                {
+                                    "label": "Submenu 1.1.2",
+                                    "icon": "pi pi-fw pi-sign-in"
+                                },
+                                {
+                                    "label": "Submenu 1.1.3",
+                                    "icon": "pi pi-fw pi-sign-in"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Submenu 1.2",
+                            "icon": "pi pi-fw pi-sign-in",
+                            "items": [
+                                {
+                                    "label": "Submenu 1.2.1",
+                                    "icon": "pi pi-fw pi-sign-in"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "label": "Submenu 2",
+                    "icon": "pi pi-fw pi-sign-in",
+                    "items": [
+                        {
+                            "label": "Submenu 2.1",
+                            "icon": "pi pi-fw pi-sign-in",
+                            "items": [
+                                {
+                                    "label": "Submenu 2.1.1",
+                                    "icon": "pi pi-fw pi-sign-in"
+                                },
+                                {
+                                    "label": "Submenu 2.1.2",
+                                    "icon": "pi pi-fw pi-sign-in"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "Submenu 2.2",
+                            "icon": "pi pi-fw pi-sign-in",
+                            "items": [
+                                {
+                                    "label": "Submenu 2.2.1",
+                                    "icon": "pi pi-fw pi-sign-in"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "separator": true
+        },
+        {
+            "label": "Start",
+            "icon": "pi pi-fw pi-download",
+            "items": [
+                {
+                    "label": "Buy Now",
+                    "icon": "pi pi-fw pi-shopping-cart"
+                },
+                {
+                    "label": "Documentation",
+                    "icon": "pi pi-fw pi-file",
+                    "to": "\/documentation"
+                }
+            ]
+        }
+    ],
+    "themeColors": [
+        {
+            "name": "Application",
+            "file": "application",
+            "color": "#53a209",
+            "external": true
+        },
+        {
+            "name": "Cupparis",
+            "file": "cupparis",
+            "color": "#0f97c7"
+        },
+        {
+            "name": "Blue",
+            "file": "blue",
+            "color": "#0f97c7"
+        },
+        {
+            "name": "Blue Grey",
+            "file": "bluegrey",
+            "color": "#578697"
+        },
+        {
+            "name": "Brown",
+            "file": "brown",
+            "color": "#97664A"
+        },
+        {
+            "name": "Cyan",
+            "file": "cyan",
+            "color": "#1BA7AF"
+        },
+        {
+            "name": "Deep Orange",
+            "file": "deeporange",
+            "color": "#F96F43"
+        },
+        {
+            "name": "Deep Purple",
+            "file": "deeppurple",
+            "color": "#6952EC"
+        },
+        {
+            "name": "Green",
+            "file": "green",
+            "color": "#10B163"
+        },
+        {
+            "name": "Teal",
+            "file": "teal",
+            "color": "#4EA279"
+        },
+        {
+            "name": "Indigo",
+            "file": "indigo",
+            "color": "#435AD8"
+        },
+        {
+            "name": "Lime",
+            "file": "lime",
+            "color": "#A5B600"
+        },
+        {
+            "name": "Magenta",
+            "file": "magenta",
+            "color": "#B944D6"
+        },
+        {
+            "name": "Orange",
+            "file": "orange",
+            "color": "#E2841A"
+        },
+        {
+            "name": "Pink",
+            "file": "pink",
+            "color": "#E93A76"
+        },
+        {
+            "name": "Purple",
+            "file": "purple",
+            "color": "#9643F9"
+        },
+        {
+            "name": "Rose",
+            "file": "rose",
+            "color": "#AB5353"
+        }
+    ],
+    "topbarColors": [
+        {
+            "name": "Application",
+            "topbarColor": "layout-topbar-application",
+            "logo": "logo-roma",
+            "color": "#53a209",
+            "external": true
+        },
+        {
+            "name": "Cupparis",
+            "topbarColor": "layout-topbar-cupparis",
+            "logo": "logo-roma",
+            "color": "#53a209"
+        },
+        {
+            "name": "Light",
+            "topbarColor": "layout-topbar-light",
+            "logo": "logo-roma",
+            "color": "#ffffff"
+        },
+        {
+            "name": "Dark",
+            "topbarColor": "layout-topbar-dark",
+            "logo": "logo-roma-white",
+            "color": "#252529"
+        },
+        {
+            "name": "Blue",
+            "topbarColor": "layout-topbar-blue",
+            "logo": "logo-roma-white",
+            "color": "#0772B3"
+        },
+        {
+            "name": "Green",
+            "topbarColor": "layout-topbar-green",
+            "logo": "logo-roma-white",
+            "color": "#0F8C50"
+        },
+        {
+            "name": "Orange",
+            "topbarColor": "layout-topbar-orange",
+            "logo": "logo-roma-white",
+            "color": "#C76D09"
+        },
+        {
+            "name": "Magenta",
+            "topbarColor": "layout-topbar-magenta",
+            "logo": "logo-roma-white",
+            "color": "#972BB1"
+        },
+        {
+            "name": "Blue Grey",
+            "topbarColor": "layout-topbar-bluegrey",
+            "logo": "logo-roma-white",
+            "color": "406E7E"
+        },
+        {
+            "name": "Deep Purple",
+            "topbarColor": "layout-topbar-deeppurple",
+            "logo": "logo-roma-white",
+            "color": "#543CD9"
+        },
+        {
+            "name": "Brown",
+            "topbarColor": "layout-topbar-brown",
+            "logo": "logo-roma-white",
+            "color": "#794F36"
+        },
+        {
+            "name": "Lime",
+            "topbarColor": "layout-topbar-lime",
+            "logo": "logo-roma-white",
+            "color": "#849201"
+        },
+        {
+            "name": "Rose",
+            "topbarColor": "layout-topbar-rose",
+            "logo": "logo-roma-white",
+            "color": "#8F3939"
+        },
+        {
+            "name": "Cyan",
+            "topbarColor": "layout-topbar-cyan",
+            "logo": "logo-roma-white",
+            "color": "#0C8990"
+        },
+        {
+            "name": "Teal",
+            "topbarColor": "layout-topbar-teal",
+            "logo": "logo-roma-white",
+            "color": "#337E59"
+        },
+        {
+            "name": "Deep Orange",
+            "topbarColor": "layout-topbar-deeporange",
+            "logo": "logo-roma-white",
+            "color": "#D74A1D"
+        },
+        {
+            "name": "Indigo",
+            "topbarColor": "layout-topbar-indigo",
+            "logo": "logo-roma-white",
+            "color": "#3D53C9"
+        },
+        {
+            "name": "Pink",
+            "topbarColor": "layout-topbar-pink",
+            "logo": "logo-roma-white",
+            "color": "#BF275B"
+        },
+        {
+            "name": "Purple",
+            "topbarColor": "layout-topbar-purple",
+            "logo": "logo-roma-white",
+            "color": "#7F32DA"
+        }
+    ],
+    "serviceResponse": null,
+    "waitingResponse": true,
+    "listConf": {
+        "modelName": "user",
+        "type": "v-list",
+        "selected": null,
+        "routeName": "list",
+        "actions": [
+            "action-view",
+            "action-edit",
+            "action-delete",
+            "action-delete-selected",
+            "action-insert"
+        ],
+        "primaryKey": "id",
+        "recordActionsConf": [],
+        "collectionActions": [],
+        "widgetsConfig": [],
+        "selectedRow": null,
+        "menuModel": []
+    },
+    "editConf": {
+        "modelName": "user",
+        "type": "v-edit",
+        "pk": 3,
+        "layout": {
+            "cols": 3,
+            "labelPosition": "top"
+        },
+        "widgetsConfig": [],
+        "recordActionsConf": [],
+        "routeName": "edit",
+        "defaultWidgetType": "w-input",
+        "actions": [
+            "action-save",
+            "action-back"
+        ]
+    },
+    "viewConf": {
+        "modelName": "user",
+        "type": "v-view",
+        "pk": 3,
+        "layout": {
+            "cols": 3,
+            "labelPosition": "top"
+        },
+        "widgetsConfig": [],
+        "recordActionsConf": [],
+        "routeName": "view",
+        "actions": [],
+        "defaultWidgetType": "w-text"
+    },
+    "user": {
+        "id": 2,
+        "name": "Piero Paolo Ciullo",
+        "email": "ciullo@gmail.com",
+        "email_verified_at": null,
+        "banned": 0,
+        "created_at": "2023-05-02T14:55:18.000000Z",
+        "updated_at": "2023-05-02T14:55:18.000000Z",
+        "created_by": null,
+        "updated_by": 2,
+        "mainrole": {
+            "id": 1,
+            "name": "Superutente",
+            "guard_name": "web",
+            "created_at": "2023-05-02T14:55:18.000000Z",
+            "updated_at": "2023-05-02T14:55:18.000000Z",
+            "pivot": {
+                "model_type": "App\\Models\\User",
+                "model_id": 2,
+                "role_id": 1
+            }
+        }
+    }
+}

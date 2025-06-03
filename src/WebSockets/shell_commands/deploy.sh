@@ -18,15 +18,17 @@ else
             echo "translate "
             cd $LARAVEL_DIR
             $PHP_BIN artisan translations
-            echo "put translations in $APPLICATION_PATH/assets/"
-            mv public/js/*-translations.json "$APPLICATION_PATH/assets/"
+            #echo "put translations in $APPLICATION_PATH/assets/"
+            echo  "put translations in $CLIENT_DIR/src/application/assets/"
+            #mv public/js/*-translations.json "$APPLICATION_PATH/assets/"
+            mv public/js/*-translations.json "$CLIENT_DIR/src/application/assets/"
             ;;
          templates)
             echo "generating template"
             cd $CRUD_DIR
-            echo "call sass application dir $CRUD_DIR"
-            sass --update "$APPLICATION_PATH/public/layout/css"
-            sass --update "$APPLICATION_PATH/public/theme"
+            echo "call sass application dir $CLIENT_DIR"
+            sass "$CLIENT_DIR/public/layout/css"
+            sass "$CLIENT_DIR/public/theme"
 
 #            sass --update public/layout:public/layout
 #            sass --update public/theme:public/theme

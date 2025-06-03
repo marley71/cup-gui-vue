@@ -1,8 +1,0 @@
-import cs from 'cupparis-primevue';
-{importModels}
-
-export default {
-    install() {
-        {installModels}
-    }
-}

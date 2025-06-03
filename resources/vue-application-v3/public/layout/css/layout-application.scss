@@ -5,4 +5,4 @@ $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
 $primaryTextColor: #ffffff !default;
 $primaryLightestColor:#2ed7e4;
 
-@import '../../../src/assets/sass/layout/_layout';
+@import '../../../src/application/assets/sass/layout/_layout';

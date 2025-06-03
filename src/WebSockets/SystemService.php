@@ -77,9 +77,9 @@ class SystemService extends ServiceInterface
                 Log::info('config ');
                 Log::info(print_r($config,true));
                 $guiFolder = config('cup-gui-vue.application_path');
-                file_put_contents($guiFolder.'/config/template-config.json',json_encode($config,JSON_PRETTY_PRINT));
+                file_put_contents($guiFolder.'/src/application/config/template-config.json',json_encode($config,JSON_PRETTY_PRINT));
                 $response = [
-                    'msg' => "configurazione salvata in " . $guiFolder.'/config/template-config.json',
+                    'msg' => "configurazione salvata in " . $guiFolder.'/src/application/config/template-config.json',
                     'type' => 'end',
                     'command' => $action,
                     'error' => 0,

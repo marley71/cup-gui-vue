@@ -5,4 +5,5 @@ $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
 $primaryTextColor: #ffffff !default;
 $primaryLightestColor:#2ed7e4;
 
-@import '../../src/assets/sass/theme/_theme';
+@import '../../src/application/assets/sass/theme/_theme' ;
+
