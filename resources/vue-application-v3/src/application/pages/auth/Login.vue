@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import cupparisPrimevue from 'cupparis-primevue';
+import {ref, computed, onMounted, onUnmounted} from 'vue';
+import cs from 'cupparis-primevue';
 import { useRouter } from 'vue-router'
 import CrudInit from '@/rome-vue-v4.0.0/crud/CrudInit.js';
 
@@ -11,6 +11,7 @@ const errorMsg = ref('');
 const router = useRouter();
 const checked = ref(false);
 const csrfToken = ref(null);
+const isProd = ref(import.meta.env.PROD);
 // const logoUrl = computed(() => {
 //     return `${contextPath}layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
 // });
@@ -20,20 +21,30 @@ const logoUrl = computed(() => {
     //return `${contextPath}layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
 });
 
-const isProd = () => {
-  console.debug('isProd',import.meta.env.PROD);
-  return import.meta.env.PROD;
-}
+// const isProd = () => {
+//   console.debug('isProd',import.meta.env.PROD);
+//   return import.meta.env.PROD;
+// }
 
 onMounted (() => {
   let selector = document.querySelector('meta[name="csrf-token"]');
   csrfToken.value = (selector ? selector.content : '');
+  if (! isProd.value) {
+      window.addEventListener('keydown', swithPage);
+  }
+  cs.CrudCore.messageDialog('Questa pagina ha due modalità dev e produzione in quanto cambia il modo in cui viene fatta la chiamata. per vedere come si vedrà in produzione e in sviluppo premere il tasto P (produzione) o D (development)')
 });
+
+onUnmounted( () => {
+    if (! isProd.value) {
+        window.removeEventListener('keydown', swithPage);
+    }
+})
 
 function login() {
     error.value = false;
     console.log('login',email.value,password.value)
-    cupparisPrimevue.Server.post('/api/login',{
+    cs.Server.post('/api/login',{
         email : email.value,
         password : password.value,
     },function(json) {
@@ -53,14 +64,28 @@ function login() {
     })
 }
 
+function  swithPage(event) {
+    // Checks se è D o P
+    if (event.key === 'd' || event.key === 'D') {
+        // Azione per D
+        console.log('Premuto D');
+        isProd.value = false;
+        cs.CrudCore.alertInfo('Pagina in modalità sviluppo')
+    } else if (event.key === 'p' || event.key === 'P') {
+        // Azione per P
+        console.log('Premuto P');
+        isProd.value = true;
+        cs.CrudCore.alertInfo('Pagina in modalità produzione')
+    }
+}
 </script>
 
 <template>
     <div class="login-body">
         <div class="card login-panel p-fluid">
             <div class="login-panel-content">
-                <div v-if="isProd()" class="grid">
-                  <form action="/login" method="POST">
+                <div v-if="isProd" class="grid">
+                  <form class="w-full" action="/login" method="POST">
                     <input type="hidden" name="_token" :value="csrfToken">
                     <div class="col-12 sm:col-6 md:col-6 logo-container">
                       <img src="/layout/images/logo-roma.svg" alt="roma" />

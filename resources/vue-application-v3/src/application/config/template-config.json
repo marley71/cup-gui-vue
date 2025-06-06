@@ -12,7 +12,7 @@
     "inlineUserMenuActive": false,
     "menuActive": false,
     "topbarColor": "layout-topbar-orange",
-    "theme": "orange",
+    "theme": "purple",
     "serverStatus": "",
     "bufferOut": [
         {
@@ -21,9 +21,9 @@
     ],
     "bufferErr": "",
     "topbarConfig": {
-        "globalSearch": false,
-        "notification": false,
-        "rightMenu": false,
+        "globalSearch": true,
+        "notification": true,
+        "rightMenu": true,
         "profileMenu": true
     },
     "topbarBooleanConfig": [
