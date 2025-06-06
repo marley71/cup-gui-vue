@@ -30,9 +30,9 @@ onMounted (() => {
   let selector = document.querySelector('meta[name="csrf-token"]');
   csrfToken.value = (selector ? selector.content : '');
   if (! isProd.value) {
+      cs.CrudCore.messageDialog('Questa pagina ha due modalità dev e produzione in quanto cambia il modo in cui viene fatta la chiamata. per vedere come si vedrà in produzione e in sviluppo premere il tasto P (produzione) o D (development)')
       window.addEventListener('keydown', swithPage);
   }
-  cs.CrudCore.messageDialog('Questa pagina ha due modalità dev e produzione in quanto cambia il modo in cui viene fatta la chiamata. per vedere come si vedrà in produzione e in sviluppo premere il tasto P (produzione) o D (development)')
 });
 
 onUnmounted( () => {

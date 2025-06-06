@@ -3,9 +3,8 @@ AUTH_DIR="../../resources/views/roma-vue/auth"
 DASHBOARD="../../resources/views/roma-vue/dashboard.blade.php"
 LOGINBLADE=${AUTH_DIR}/login.blade.php
 HEADBLADE=${INCLUDE_DIR}/head.blade.php
-HTML_SOURCE="../../public/roma-vue/index.html"
+HTML_SOURCE="./dist/index.html"
 HTML_LOGIN=${AUTH_DIR}/"login.vue.html"
-VUE_LOGIN="../vue-application/src/pages/auth/LoginProd.html"
 
 mkdir -p ${INCLUDE_DIR}
 
@@ -16,8 +15,7 @@ echo "------------  generazione HEAD blade ------------"
 echo "<head>\n" > ${HEADBLADE}
 echo "<meta name=\"bearer-token\" content=\"{{Session::get('sanctum_token')}}\">\n" >> ${HEADBLADE}
 echo "<meta name=\"csrf-token\" content=\"{{csrf_token()}}\">\n" >> ${HEADBLADE}
-#tr "\n" "|" < ${HTML_SOURCE} | grep -o '<head>.*</head>' >> ${INCLUDE_DIR}/head.blade.php
-#tr "\n" "|" < ${HTML_SOURCE} | grep -o '<head>.*</head>' | sed -r 's/<script/\n <!-- /g'  | sed -r  's/<\/script>/ -->\n/g' >> ${INCLUDE_DIR}/head.blade.php
+#prendo il contenuto dentro i tag <head></head> e lo inserisco nell'header blade
 tr "\n" "|" < ${HTML_SOURCE} | grep -o '<head>.*</head>' | sed 's/\(<head>\|<\/head>\)//g;s/|/\n/g' >> ${HEADBLADE}
 echo "</head>\n" >> ${HEADBLADE}
 
