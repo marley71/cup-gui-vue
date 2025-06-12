@@ -37,7 +37,9 @@ export default {
                 window.app = app;
                 window.$ = jQuery;
                 window.jQuery = jQuery;
-
+                if (!import.meta.env.VITE_APP_DINAMIC_CONF) {
+                    return resolve('ok');
+                }
                 axios.get(import.meta.env.VITE_APP_DINAMIC_CONF,{}).then((response) => {
                     console.log('response', response);
                     that.setEnv(response.data.result);

@@ -21,7 +21,7 @@ function mountApp(error) {
         router.push('/error');
     } else {
         console.debug('Applicazione installata senza errori redirect to /')
-        router.push('/');
+        //router.push('/');
     }
 }
 

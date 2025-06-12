@@ -1,10 +1,10 @@
 <script>
 import cs from "cupparis-primevue"
 
-const cView = cs.cView;
+const vList = cs.vList;
 export default {
     name: "PaginaLinkata",
-    components : {cView},
+    components : {vList},
     data() {
         let conf = cs.CrudCore.clone(cs.CrudVars.modelConfs.ModelUser);
         return {
@@ -19,7 +19,7 @@ export default {
         <div class="card">
             <h5>Pagina Linkata 2</h5>
             <p>
-                <c-view :conf="confView"></c-view>
+                <v-list :conf="confView"></v-list>
             </p>
         </div>
     </div>
