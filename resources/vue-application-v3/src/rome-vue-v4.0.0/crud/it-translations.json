@@ -175,6 +175,8 @@
     "app.salvataggio-ok": "Salvataggio avvenuto con successo!",
     "app.vista": "Vista",
     "app.seleziona": "Seleziona...",
+    "app.import-title" : "Importazione dati",
+    "app.import-desc" : "Questa sezione è per importare dati esterni",
     "model.user": "Utente|utenti",
     "model.cup_geo_comune": "Comune|Comuni",
     "model.cup_geo_provincia": "Provincia|Province",

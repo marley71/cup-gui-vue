@@ -29,6 +29,7 @@
 
 import cupparisPrimevue from "cupparis-primevue";
 import ModelUser from './ModelUser';
+
 const cManage = cupparisPrimevue.cManage;
 
 export default {

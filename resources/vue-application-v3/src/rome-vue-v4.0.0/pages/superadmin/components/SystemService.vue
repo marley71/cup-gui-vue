@@ -263,7 +263,7 @@ export default {
             <Card>
                 <template #title>Lista</template>
                 <template #content>
-                    <c-view :conf="listConf"></c-view>
+                    <component :is="listConf.type" :conf="listConf"></component>
                 </template>
             </Card>
             <div class="grid mt-3">
@@ -271,7 +271,7 @@ export default {
                     <Card>
                         <template #title>Vista</template>
                         <template #content>
-                            <c-view :conf="viewConf"></c-view>
+                            <component :is="viewConf.type" :conf="viewConf"></component>
                         </template>
                     </Card>
                 </div>
@@ -279,7 +279,7 @@ export default {
                     <Card>
                         <template #title>Edit</template>
                         <template #content>
-                            <c-view :conf="editConf"></c-view>
+                            <component :is="editConf.type" :conf="editConf"></component>
                         </template>
                     </Card>
                 </div>
