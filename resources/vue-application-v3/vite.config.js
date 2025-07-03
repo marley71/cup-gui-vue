@@ -38,13 +38,8 @@ export default defineConfig(({ command }) => {
         base: command === 'serve' ? '' : '/roma-vue/',
         resolve: {
             alias: {
-                //'@': fileURLToPath(new URL('./src', import.meta.url)),
                 '@' : path.resolve(__dirname, './src'),
-                //'@rome': path.resolve(__dirname, '../../packages/cup-gui-vue/resources/roma-vue-4.0.0/src'),
-                //'cupparis-primevue': path.resolve(env.APP_CUPPARIS_PRIMEVUE),
-                //'@templates': fileURLToPath(new URL(env.APP_CUPPARIS_PRIMEVUE + '/src/templates', import.meta.url)),
-                //'@templates': path.resolve(env.APP_VUE_TEMPLATES),
-                //'@templates': path.resolve('/@fs//home/vagrant/workspace/newgit/cupparis10/resources/vue-application/templates_custom/')
+                '@cupparis-lib' : path.resolve(__dirname, './cupparis-primevue/src'),
             },
             dedupe: [
                 'vue'
