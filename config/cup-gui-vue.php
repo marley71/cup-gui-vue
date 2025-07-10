@@ -2,9 +2,9 @@
 
 return [
     'services' => [
-        Marley71\CupSocketServer\WebSockets\SystemService::class, //classi che espletano servizi websocket
-        Marley71\CupSocketServer\WebSockets\DbService::class,
-        Marley71\CupSocketServer\WebSockets\RolesService::class
+        Marley71\CupGuiVue\WebSockets\SystemService::class, //classi che espletano servizi websocket
+        Marley71\CupGuiVue\WebSockets\DbService::class,
+        Marley71\CupGuiVue\WebSockets\RolesService::class
     ],
     'cupparis-primevue-git' => 'https://github.com/marley71/cupparis-primevue.git', //'git@github.com:marley71/cupparis-primevue.git',
     'cupparis-primevue-branch' => 'v3',  // branch libreria cupparis-primevue

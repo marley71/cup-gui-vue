@@ -1,4 +1,4 @@
-<?php namespace Marley71\CupSocketServer\Console\Commands;
+<?php namespace Marley71\CupGuiVue\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;

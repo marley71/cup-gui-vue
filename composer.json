@@ -23,13 +23,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Marley71\\CupSocketServer\\Providers\\CupGuiVueProvider"
+                "Marley71\\CupGuiVue\\Providers\\CupGuiVueServiceProvider"
             ]
         }
     },
     "autoload": {
         "psr-4": {
-            "Marley71\\CupSocketServer\\": "src/"
+            "Marley71\\CupGuiVue\\": "src/"
         },
         "aliases": {
 

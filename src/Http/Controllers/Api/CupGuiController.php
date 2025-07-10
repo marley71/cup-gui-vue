@@ -1,6 +1,6 @@
 <?php
 
-namespace Marley71\CupSocketServer\Http\Controllers\Api;
+namespace Marley71\CupGuiVue\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

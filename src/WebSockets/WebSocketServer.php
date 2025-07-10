@@ -1,4 +1,4 @@
-<?php namespace Marley71\CupSocketServer\WebSockets;
+<?php namespace Marley71\CupGuiVue\WebSockets;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;

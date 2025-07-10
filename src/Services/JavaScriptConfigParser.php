@@ -1,6 +1,6 @@
 <?php
 
-namespace Marley71\CupSocketServer\Services;
+namespace Marley71\CupGuiVue\Services;
 
 use Illuminate\Support\Arr;
 

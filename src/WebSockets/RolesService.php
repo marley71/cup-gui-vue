@@ -1,4 +1,4 @@
-<?php namespace Marley71\CupSocketServer\WebSockets;
+<?php namespace Marley71\CupGuiVue\WebSockets;
 
 use Faker\Provider\Miscellaneous;
 use Illuminate\Support\Arr;
@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Marley71\CupSocketServer\Services\GenerateImplementation;
-use Marley71\CupSocketServer\Services\JavaScriptConfigParser;
+use Marley71\CupGuiVue\Services\GenerateImplementation;
+use Marley71\CupGuiVue\Services\JavaScriptConfigParser;
 use Ratchet\ConnectionInterface;
 
 class RolesService extends ServiceInterface

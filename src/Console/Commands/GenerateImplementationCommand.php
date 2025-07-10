@@ -1,13 +1,13 @@
-<?php namespace Marley71\CupSocketServer\Console\Commands;
+<?php namespace Marley71\CupGuiVue\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Services\ClassGenerator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
-use Marley71\CupSocketServer\Services\CodeGenerator;
-use Marley71\CupSocketServer\Services\GenerateImplementation;
-use Marley71\CupSocketServer\WebSockets\DbService;
+use Marley71\CupGuiVue\Services\CodeGenerator;
+use Marley71\CupGuiVue\Services\GenerateImplementation;
+use Marley71\CupGuiVue\WebSockets\DbService;
 
 class GenerateImplementationCommand extends Command
 {

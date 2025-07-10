@@ -1,11 +1,11 @@
-<?php namespace  Marley71\CupSocketServer\Services;
+<?php namespace  Marley71\CupGuiVue\Services;
 
 
 use App\Services\ClassGenerator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
-use Marley71\CupSocketServer\WebSockets\DbService;
+use Marley71\CupGuiVue\WebSockets\DbService;
 
 class GenerateImplementation
 {

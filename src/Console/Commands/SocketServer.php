@@ -1,9 +1,9 @@
-<?php namespace Marley71\CupSocketServer\Console\Commands;
+<?php namespace Marley71\CupGuiVue\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
-use Marley71\CupSocketServer\WebSockets\ServiceInterface;
-use Marley71\CupSocketServer\WebSockets\WebSocketServer;
+use Marley71\CupGuiVue\WebSockets\ServiceInterface;
+use Marley71\CupGuiVue\WebSockets\WebSocketServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
