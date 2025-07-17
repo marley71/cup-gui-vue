@@ -4,5 +4,5 @@ git clone $CUPPARIS_GIT
 cd cupparis-primevue
 git pull
 git checkout $CUPPARIS_BRANCH
-ln -s "$APP_FOLDER/cupparis-primevue/dist_base" "$APP_FOLDER/cupparis-primevue/dist"
+ln -s "$APP_FOLDER/cupparis-primevue/src/dist_base" "$APP_FOLDER/cupparis-primevue/src/dist"
 

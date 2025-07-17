@@ -63,23 +63,8 @@ class InstallGui extends Command {
     }
 
     protected function gitCupparis() {
-//        $p = Process::forever()->env($this->cupparisEnv);
-//        $command = "sh " . dirname(__FILE__) . '/shell_commands/cupparis-install.sh';
-//        $this->comment('execute ' . $command );
-//        $result = $p->run($command);
-//        if (!$result->successful()) {
-//            // Il processo ha fallito
-//            $this->error($result->errorOutput());
-//            exit(1);
-//        } else {
-//            $this->comment($result->output());
-//            $this->comment('done ');
-//        }
-
-
-        $path = config('cup-gui-vue.app_folder') . '/vue-application-v3';
-        $p = Process::forever()->path($path);
-        $command = 'git clone ' . config('cup-gui-vue.cupparis-primevue-git');
+        $p = Process::forever()->env($this->cupparisEnv);
+        $command = "sh " . dirname(__FILE__) . '/shell_commands/cupparis-install.sh';
         $this->comment('execute ' . $command );
         $result = $p->run($command);
         if (!$result->successful()) {
@@ -92,33 +77,48 @@ class InstallGui extends Command {
         }
 
 
-        $this->comment("cupparis-primevue path " . $path . '/cupparis-primevue');
-
-        $p = Process::forever()->path($path . '/cupparis-primevue' );
-        $command = 'git checkout ' . config('cup-gui-vue.cupparis-primevue-branch');
-        $this->comment('execute ' . $command);
-        $p->run($command);
-        if (!$result->successful()) {
-            // Il processo ha fallito
-            $this->error($result->errorOutput());
-            exit(1);
-        } else {
-            $this->comment($result->output());
-            $this->comment('done ');
-        }
-
-        $p = Process::forever()->path($path . '/cupparis-primevue' );
-        $command = 'git pull';
-        $this->comment('execute ' . $command);
-        $p->run($command);
-        if (!$result->successful()) {
-            // Il processo ha fallito
-            $this->error($result->errorOutput());
-            exit(1);
-        } else {
-            $this->comment($result->output());
-            $this->comment('done ');
-        }
+//        $path = config('cup-gui-vue.app_folder') . '/vue-application-v3';
+//        $p = Process::forever()->path($path);
+//        $command = 'git clone ' . config('cup-gui-vue.cupparis-primevue-git');
+//        $this->comment('execute ' . $command );
+//        $result = $p->run($command);
+//        if (!$result->successful()) {
+//            // Il processo ha fallito
+//            $this->error($result->errorOutput());
+//            exit(1);
+//        } else {
+//            $this->comment($result->output());
+//            $this->comment('done ');
+//        }
+//
+//
+//        $this->comment("cupparis-primevue path " . $path . '/cupparis-primevue');
+//
+//        $p = Process::forever()->path($path . '/cupparis-primevue' );
+//        $command = 'git checkout ' . config('cup-gui-vue.cupparis-primevue-branch');
+//        $this->comment('execute ' . $command);
+//        $p->run($command);
+//        if (!$result->successful()) {
+//            // Il processo ha fallito
+//            $this->error($result->errorOutput());
+//            exit(1);
+//        } else {
+//            $this->comment($result->output());
+//            $this->comment('done ');
+//        }
+//
+//        $p = Process::forever()->path($path . '/cupparis-primevue' );
+//        $command = 'git pull';
+//        $this->comment('execute ' . $command);
+//        $p->run($command);
+//        if (!$result->successful()) {
+//            // Il processo ha fallito
+//            $this->error($result->errorOutput());
+//            exit(1);
+//        } else {
+//            $this->comment($result->output());
+//            $this->comment('done ');
+//        }
     }
 
     protected function installClient() {
@@ -134,20 +134,5 @@ class InstallGui extends Command {
             $this->comment($result->output());
             $this->comment('done ');
         }
-
-
-//        $path = config('cup-gui-vue.app_folder');
-//        $p = Process::forever()->path($path );
-//        $command = 'npm install';
-//        $this->comment('execute ' . $command);
-//        $result = $p->run($command);
-//        if (!$result->successful()) {
-//            // Il processo ha fallito
-//            $this->error($result->errorOutput());
-//            exit(1);
-//        } else {
-//            $this->comment($result->output());
-//            $this->comment('done ');
-//        }
     }
 }
