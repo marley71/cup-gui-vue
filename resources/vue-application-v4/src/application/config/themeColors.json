@@ -1,0 +1,88 @@
+[
+    {
+        "name": "Application",
+        "file": "application",
+        "color": "#53a209",
+        "external" : true
+    },
+    {
+        "name": "Cupparis",
+        "file": "cupparis",
+        "color": "#0f97c7"
+    },
+    {
+        "name": "Blue",
+        "file": "blue",
+        "color": "#0f97c7"
+    },
+    {
+        "name": "Blue Grey",
+        "file": "bluegrey",
+        "color": "#578697"
+    },
+    {
+        "name": "Brown",
+        "file": "brown",
+        "color": "#97664A"
+    },
+    {
+        "name": "Cyan",
+        "file": "cyan",
+        "color": "#1BA7AF"
+    },
+    {
+        "name": "Deep Orange",
+        "file": "deeporange",
+        "color": "#F96F43"
+    },
+    {
+        "name": "Deep Purple",
+        "file": "deeppurple",
+        "color": "#6952EC"
+    },
+    {
+        "name": "Green",
+        "file": "green",
+        "color": "#10B163"
+    },
+    {
+        "name": "Teal",
+        "file": "teal",
+        "color": "#4EA279"
+    },
+    {
+        "name": "Indigo",
+        "file": "indigo",
+        "color": "#435AD8"
+    },
+    {
+        "name": "Lime",
+        "file": "lime",
+        "color": "#A5B600"
+    },
+    {
+        "name": "Magenta",
+        "file": "magenta",
+        "color": "#B944D6"
+    },
+    {
+        "name": "Orange",
+        "file": "orange",
+        "color": "#E2841A"
+    },
+    {
+        "name": "Pink",
+        "file": "pink",
+        "color": "#E93A76"
+    },
+    {
+        "name": "Purple",
+        "file": "purple",
+        "color": "#9643F9"
+    },
+    {
+        "name": "Rose",
+        "file": "rose",
+        "color": "#AB5353"
+    }
+]

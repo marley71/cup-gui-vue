@@ -14,21 +14,16 @@ class InstallGui extends Command {
 
     public function handle() {
         echo "
-        - copia cartella vue-application-v3 in " . config('cup-gui-vue.app_folder') . "
+        - copia cartella vue-application-v4 in " . config('cup-gui-vue.app_folder') . "
         - git clone " . config('cup-gui-vue.cupparis-primevue-git') . "
         - branch " . config('cup-gui-vue.cupparis-primevue-branch') . "
-          nella cartella " . config('cup-gui-vue.cupparis_primevue_path')  . "
-        - git clone " . config('cup-gui-vue.roma-vue-git') . "
-        - branch " . config('cup-gui-vue.roma-vue-branch') . "
-          nella cartella " .config('cup-gui-vue.roma_path')  . "
-        - ln -s " . env('APPLICATION_PATH') . "/public
-        - ln -s " . env('APPLICATION_PATH') . "/package.json";
+          nella cartella " . config('cup-gui-vue.cupparis_primevue_path');
         if (!$this->confirm("Il comando eseguirà le azioni sopraindicate. Continuare?")) {
             $this->comment('Comando abortito');
             return ;
         }
         $this->cupparisEnv['CUPPARIS_GIT'] =  config('cup-gui-vue.cupparis-primevue-git') ;
-        $this->cupparisEnv['APP_FOLDER'] = config('cup-gui-vue.app_folder') . '/vue-application-v3';
+        $this->cupparisEnv['APP_FOLDER'] = config('cup-gui-vue.app_folder') . '/vue-application-v4';
         $this->cupparisEnv['CUPPARIS_BRANCH'] =   config('cup-gui-vue.cupparis-primevue-branch');
 
         $this->comment('copia folder application');
@@ -49,7 +44,7 @@ class InstallGui extends Command {
     protected function copyApplicationFolder() {
         config('cup-gui-vue.app_folder');
         $p = Process::forever();
-        $command = "cp -ra " . dirname(__FILE__) . '/../../../resources/vue-application-v3 ' . config('cup-gui-vue.app_folder');
+        $command = "cp -Ra " . dirname(__FILE__) . '/../../../resources/vue-application-v4 ' . config('cup-gui-vue.app_folder');
         $this->comment('execute ' . $command );
         $result = $p->run($command);
         if (!$result->successful()) {
@@ -77,7 +72,7 @@ class InstallGui extends Command {
         }
 
 
-//        $path = config('cup-gui-vue.app_folder') . '/vue-application-v3';
+//        $path = config('cup-gui-vue.app_folder') . '/vue-application-v4';
 //        $p = Process::forever()->path($path);
 //        $command = 'git clone ' . config('cup-gui-vue.cupparis-primevue-git');
 //        $this->comment('execute ' . $command );
