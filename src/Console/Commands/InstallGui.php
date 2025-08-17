@@ -49,7 +49,7 @@ class InstallGui extends Command {
     protected function copyApplicationFolder() {
         config('cup-gui-vue.app_folder');
         $p = Process::forever();
-        $command = "cp -ra " . dirname(__FILE__) . '/../../../resources/vue-application-v3 ' . config('cup-gui-vue.app_folder');
+        $command = "cp -Ra " . dirname(__FILE__) . '/../../../resources/vue-application-v3 ' . config('cup-gui-vue.app_folder');
         $this->comment('execute ' . $command );
         $result = $p->run($command);
         if (!$result->successful()) {
