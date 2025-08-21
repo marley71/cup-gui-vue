@@ -40,6 +40,7 @@ export default defineConfig(({ command }) => {
             alias: {
                 '@' : path.resolve(__dirname, './src'),
                 '@cupparis-lib' : path.resolve(__dirname, './cupparis-primevue/src'),
+                '@templates' : path.resolve(__dirname, './cupparis-primevue/src/templates'),
             },
             dedupe: [
                 'vue'

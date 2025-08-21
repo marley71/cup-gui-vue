@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+import cs from "cupparis-primevue";
 
 export const userApp = defineStore('userApp', {
 
@@ -7,6 +8,7 @@ export const userApp = defineStore('userApp', {
             userInfo : {},
             axiosControllers : {},
             keycloak : null,
+            loaded : false,
         }
     },
     actions : {
@@ -15,9 +17,20 @@ export const userApp = defineStore('userApp', {
                 this.userInfo[k] = payload[k];
             }
         },
-        getUserInfo() {
+        async getUserInfo() {
+            return new Promise((resolve,reject) => {
+                if (!this.loaded) {
+                    cs.Server.get('/api/me',{},(json) => {
+                        this.setUserInfo(json);
+                        this.loaded = true;
+                        resolve()
+                    })
+                }
+                resolve();
+            })
             return this.userInfo;
         },
+
         isLogged() {
             let token = null;
             if (import.meta.env.VITE_MODE == 'dev') {

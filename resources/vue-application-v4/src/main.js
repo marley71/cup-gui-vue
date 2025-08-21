@@ -1,18 +1,30 @@
+// import { createApp } from 'vue'
+import './primeblocks4/style.css'
+//
+// createApp(App).mount('#app')
 import { createApp } from 'vue';
 import { createPinia } from 'pinia'
-import App from "./application/App.vue";
+import App from './application/App.vue'
+import PrimeVue from 'primevue/config';
 import "@fortawesome/fontawesome-free/css/all.css"
-import "@/rome-vue-v4.0.0/styles.scss"
-import CrudInit from './rome-vue-v4.0.0/crud/CrudInit.js';
-import cs from "cupparis-primevue";
-import router from "./rome-vue-v4.0.0/router";
+import router from "./primeblocks4/router";
 import {appStatus} from "./application/stores/appStatus";
 import application from "./application";
+import cs from "cupparis-primevue";
+import MyPreset from './application/applicationPreset'
+import CrudInit from './primeblocks4/crud/CrudInit.js';
 
 const app = createApp(App);
 const pinia = createPinia();
 app.use(pinia);
 app.use(router);
+
+
+app.use(PrimeVue, {
+    theme: {
+        preset: MyPreset
+    }
+});
 
 function mountApp(error) {
     console.debug('mountApp',error);
@@ -24,7 +36,6 @@ function mountApp(error) {
         //router.push('/');
     }
 }
-
 CrudInit.install(app).then(function () {
     cs.install(app);
     CrudInit.loadMenu().then(function() {
@@ -37,6 +48,7 @@ CrudInit.install(app).then(function () {
             })
         } catch (error) {
             console.debug('installo applicazione ...errore ')
+            console.error(error);
             const appStatusInstance = appStatus();
             appStatusInstance.setError('Caricamento menu applicazione fallito',error);
             mountApp(true);
@@ -50,8 +62,3 @@ CrudInit.install(app).then(function () {
         console.error(error);
     })
 })
-
-
-
-// app.mount('#app');
-// router.push('/');

@@ -1,13 +1,13 @@
-import AppLayout from "./layout/AppLayout.vue";
+import SidebarLayout from "./layout/SidebarLayout.vue";
 export default [
     {
         path: '/',
-        component: AppLayout,
+        component: SidebarLayout,
         children: [
             {
                 path: '/',
                 name: 'dashboard',
-                component: () => import('./pages/Dashboard.vue'),
+                component: () => import('./pages/Dashboard1.vue'),
                 meta : {
                     requiredAuth : true,
                 }

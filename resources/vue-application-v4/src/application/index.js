@@ -1,6 +1,4 @@
 import cs from 'cupparis-primevue';
-//import ModelUser from './ModelConfs/ModelUser';
-//import ModelUser3 from './ModelConfs/ModelUser3';
 import appLang from './assets/it-translations.json';
 import models from './config/models.json';
 import "./ModelConfs";
