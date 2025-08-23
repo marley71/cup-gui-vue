@@ -24,7 +24,7 @@ import DataView from "primevue/dataview";
 //import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Dialog from "primevue/dialog";
 import Divider from "primevue/divider";
-import Dropdown from "primevue/dropdown";
+import Select from "primevue/select";
 import Editor from "primevue/editor";
 import Fieldset from "primevue/fieldset";
 import FileUpload from "primevue/fileupload";
@@ -137,7 +137,7 @@ function _setupComponents() {
         'Dialog' : Dialog,
         'Divider' : Divider,
         //'Dock' : Dock,
-        'Dropdown' : Dropdown,
+        'Select' : Select,
         //'DynamicDialog' : DynamicDialog,
         'Editor' : Editor,
         'Fieldset' : Fieldset,
