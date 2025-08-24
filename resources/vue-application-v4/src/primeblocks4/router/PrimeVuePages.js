@@ -1,8 +1,8 @@
-import SidebarLayout from '@/application/layout/SidebarLayout.vue';
+import ApplicationLayout from "@/application/layout/ApplicationLayout.vue";
 export default [
     {
         path: '/',
-        component: SidebarLayout,
+        component: ApplicationLayout,
         children: [
             // {
             //     path: '/formlayout',

@@ -1,11 +1,11 @@
-import SidebarLayout from '@/application/layout/SidebarLayout.vue';
+import ApplicationLayout from "@/application/layout/ApplicationLayout.vue";
 import LoginLayout from "@/application/layout/LoginLayout.vue";
 import ErrorLayout from '@/application/layout/ErrorLayout.vue';
 
 export default [
     {
         path: '/',
-        component: SidebarLayout,
+        component: ApplicationLayout,
         children: [
             // {
             //     path: '/test-socket',

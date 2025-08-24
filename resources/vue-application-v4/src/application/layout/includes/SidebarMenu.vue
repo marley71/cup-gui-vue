@@ -102,8 +102,8 @@
 </template>
 
 <script >
-import menuSuperAdmin from "../config/menuSuperAdmin";
-import {userApp} from "../stores/userApp";
+import menuSuperAdmin from "../../config/menuSuperAdmin";
+import {userApp} from "../../stores/userApp";
 import cs from 'cupparis-primevue';
 
 export default {

@@ -1,20 +1,22 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import appiclationRoutes from "@/application/routes";
+import applicationRoutes from "@/application/routes";
 import CorePages from "./CorePages";
 import DevPages from "./DevPages";
 import PrimeVuePages from "./PrimeVuePages";
 import SuperAdminPages from "./SuperAdminPages";
-import SidebarLayout from '@/application/layout/SidebarLayout.vue';
+
+import ApplicationLayout from "@/application/layout/ApplicationLayout.vue";
 import cs from 'cupparis-primevue';
 import {userApp} from "@/application/stores/userApp";
 import {appStatus} from "@/application/stores/appStatus";
 
-let appRoutes = appiclationRoutes.concat(CorePages);
+let appRoutes = applicationRoutes.concat(CorePages);
 // inserimento routes default dei modelli, manage,view,edit,list,insert,import
 appRoutes = appRoutes.concat([
     {
         path: '/',
-        component: SidebarLayout,
+        //component: SidebarLayout,
+        component : ApplicationLayout,
         children: cs.routerConf,    // routes della libreria cupparis le facciamo tutte con utente loggato
         meta : {
             requiredAuth : true,

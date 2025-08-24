@@ -21,7 +21,7 @@
         </div>
 
         <div class="overflow-y-auto flex-1 p-4">
-            <AppMenu></AppMenu>
+            <SidebarMenu></SidebarMenu>
         </div>
 
         <div class="p-4 border-t border-primary-400">
@@ -90,7 +90,7 @@
 </template>
 
 <script setup>
-import AppMenu from './AppMenu.vue'
+import SidebarMenu from './includes/SidebarMenu.vue'
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';

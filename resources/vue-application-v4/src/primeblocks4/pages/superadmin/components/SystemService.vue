@@ -1,9 +1,9 @@
 <script>
 import cs from "cupparis-primevue";
 //import AppConfigFlat from "@/application/layout/AppConfigFlat.vue";
-import templateConfig from '@/application/config/template-config.json';
-import topbarColors from '@/application/config/topbarColors.json';
-import themeColors from '@/application/config/themeColors.json';
+import templateConfig from '@/application/config/templateConfig.json';
+//import topbarColors from '@/application/config/topbarColors.json';
+//import themeColors from '@/application/config/themeColors.json';
 import ProgressSpinner from 'primevue/progressspinner';
 
 export default {
@@ -18,6 +18,10 @@ export default {
     },
     data() {
         return  Object.assign(templateConfig,{
+            layouts : {
+                'SidebarLayout' : 'Layout con menu a icone',
+                'SidebarGroupedLayout' : 'Template con menu a cascata'
+            },
             serverStatus : '',
             commandWorking : false,
             commandOutput : [],
@@ -27,8 +31,8 @@ export default {
             items : [],
             info : '',
             //services : services,
-            themeColors : themeColors,
-            topbarColors : topbarColors,
+            themeColors : {}, //themeColors,
+            topbarColors : {},//topbarColors,
             serviceResponse : null,
             listConf : {
                 modelName : 'user',
@@ -88,22 +92,22 @@ export default {
         },
 
         saveCurrentConfig() {
-            templateConfig.layoutMode = this.layoutMode;
-            templateConfig.staticMenuDesktopInactive = this.staticMenuDesktopInactive;
-            templateConfig.overlayMenuActive = this.overlayMenuActive;
-            templateConfig.inlineUser = this.inlineUser;
-            templateConfig.inlineUserMenuActive = this.inlineUserMenuActive;
-            templateConfig.lightMenu = this.lightMenu;
-            templateConfig.isRTL = this.isRTL;
-            templateConfig.inlineUser = this.inlineUser;
-            templateConfig.topbarMenuActive = this.topbarMenuActive;
-            templateConfig.activeTopbarItem = this.activeTopbarItem;
-            templateConfig.rightPanelMenuActive = this.rightPanelMenuActive;
-            templateConfig.inlineUserMenuActive = this.inlineUserMenuActive;
-            templateConfig.menuActive = this.menuActive;
-            templateConfig.topbarColor = this.topbarColor;
-            templateConfig.theme = this.theme;
-            templateConfig.topbarConfig = this.topbarConfig;
+            // templateConfig.layoutMode = this.layoutMode;
+            // templateConfig.staticMenuDesktopInactive = this.staticMenuDesktopInactive;
+            // templateConfig.overlayMenuActive = this.overlayMenuActive;
+            // templateConfig.inlineUser = this.inlineUser;
+            // templateConfig.inlineUserMenuActive = this.inlineUserMenuActive;
+            // templateConfig.lightMenu = this.lightMenu;
+            // templateConfig.isRTL = this.isRTL;
+            // templateConfig.inlineUser = this.inlineUser;
+            // templateConfig.topbarMenuActive = this.topbarMenuActive;
+            // templateConfig.activeTopbarItem = this.activeTopbarItem;
+            // templateConfig.rightPanelMenuActive = this.rightPanelMenuActive;
+            // templateConfig.inlineUserMenuActive = this.inlineUserMenuActive;
+            // templateConfig.menuActive = this.menuActive;
+            // templateConfig.topbarColor = this.topbarColor;
+            // templateConfig.theme = this.theme;
+            // templateConfig.topbarConfig = this.topbarConfig;
         },
 
         changeTopBarConfig() {
@@ -183,7 +187,7 @@ export default {
                 service : 'system',
                 action : 'save-config',
                 params : {
-                    config: templateConfig
+                    config: {} //templateConfig
                 }
             });
         },
