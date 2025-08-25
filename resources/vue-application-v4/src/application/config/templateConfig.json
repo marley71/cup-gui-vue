@@ -1,3 +1,7 @@
 {
-    "layout": "SidebarGroupedLayout"
+    "layout": "SidebarGroupedLayout",
+    "layouts": {
+        "SidebarLayout": "Layout con menu a icone",
+        "SidebarGroupedLayout": "Template con menu a cascata"
+    }
 }

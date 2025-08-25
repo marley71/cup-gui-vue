@@ -17,22 +17,22 @@
             <div class="py-2 mt-auto has-[ul.hidden]:border-t border-primary-400 dark:border-primary-300">
                 <ul class="list-none p-2 m-0 hidden origin-bottom animate-duration-150 border-t border-primary-400 dark:border-primary-300">
                     <li>
-                        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                        <router-link to="/profilo" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
                             <i class="pi pi-user text-base! leading-none! text-primary-contrast" />
                             <span class="font-medium text-base leading-tight">Profile</span>
-                        </a>
+                        </router-link>
                     </li>
+<!--                    <li>-->
+<!--                        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">-->
+<!--                            <i class="pi pi-cog text-base! leading-none! text-primary-contrast" />-->
+<!--                            <span class="font-medium text-base leading-tight">Settings</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
                     <li>
-                        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
-                            <i class="pi pi-cog text-base! leading-none! text-primary-contrast" />
-                            <span class="font-medium text-base leading-tight">Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                        <router-link to="/logout" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
                             <i class="pi pi-sign-out text-base! leading-none! text-primary-contrast" />
                             <span class="font-medium text-base leading-tight">Sign Out</span>
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
                 <a
@@ -46,13 +46,13 @@
                     class="flex items-center cursor-pointer p-2 gap-2 text-primary-contrast"
                 >
                     <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full" />
-                    <span class="font-medium text-base leading-tight">Amy Elsner</span>
+                    <span class="font-medium text-base leading-tight">{{userName}}</span>
                     <i class="pi pi-angle-up text-base! leading-none! text-primary-contrast ml-auto" />
                 </a>
             </div>
         </div>
     </div>
-    <div class="min-h-screen flex flex-col relative flex-auto">
+    <div class="bottom-0 min-h-screen flex flex-col relative flex-auto">
         <div class="flex justify-between items-center py-4 px-8 bg-surface-0 dark:bg-surface-900 border-b border-surface-200 dark:border-surface-700 relative lg:static">
             <div class="flex items-center">
                 <a
@@ -74,7 +74,7 @@
                 <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full cursor-pointer" />
             </div>
         </div>
-        <div class="p-8 flex flex-col flex-auto">
+        <div class="p-6 flex flex-col flex-auto">
             <router-view :key="$route.fullPath"/>
 <!--            <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded-2xl bg-surface-50 dark:bg-surface-800 flex-auto" />-->
         </div>
@@ -85,5 +85,25 @@
 <script setup>
 import SidebarGroupedMenu from "./includes/SidebarGroupedMenu.vue";
 import { useRouter } from 'vue-router'
+import {onMounted,ref} from "vue";
+import {userApp} from "../stores/userApp";
 const router = useRouter();
+const userInfo = ref({})
+const userName = ref('');
+
+onMounted(() => {
+    userApp().getUserInfo().then(() => {
+        userInfo.value = userApp().userInfo;
+        userName.value = (userInfo.value.mainrole?userInfo.value.mainrole.name:'');
+        if (isDev()) {
+            userName.value +=' Dev';
+        }
+        // menuItems.value[0].label =  menuTitle;
+        // userLoaded.value = true;
+    })
+})
+
+function isDev() {
+    return (import.meta.env.VITE_MODE === 'dev')
+}
 </script>

@@ -46,9 +46,9 @@
 
                                         <li v-for="item in child.items">
 
-                                            <router-link :to="item.to" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
-                                                <i class="pi pi-home text-base! leading-none! text-primary-contrast" />
-                                                <span class="font-medium text-base leading-tight">{{item.label}}</span>
+                                            <router-link :to="item.to" class="flex items-center cursor-pointer p-1 gap-1 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                                                <i :class="item.icon" class="text-base! leading-none! text-primary-contrast" />
+                                                <span class="font-light text-sm text-base leading-tight">{{item.label}}</span>
                                             </router-link>
                                         </li>
 

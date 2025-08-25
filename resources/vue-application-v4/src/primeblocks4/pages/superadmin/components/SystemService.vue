@@ -5,23 +5,21 @@ import templateConfig from '@/application/config/templateConfig.json';
 //import topbarColors from '@/application/config/topbarColors.json';
 //import themeColors from '@/application/config/themeColors.json';
 import ProgressSpinner from 'primevue/progressspinner';
+import TemplateConfig from "./TemplateConfig.vue";
 
 export default {
     name: "SystemService",
     props : ['data'],
     emits : ['call-action'],
-    components : {ProgressSpinner},  //AppConfigFlat,
+    components : {ProgressSpinner,TemplateConfig},  //AppConfigFlat,
     watch: {
         data(value) {
             this.response(value);
         }
     },
     data() {
-        return  Object.assign(templateConfig,{
-            layouts : {
-                'SidebarLayout' : 'Layout con menu a icone',
-                'SidebarGroupedLayout' : 'Template con menu a cascata'
-            },
+        return {
+            templateConfig : templateConfig,
             serverStatus : '',
             commandWorking : false,
             commandOutput : [],
@@ -48,7 +46,7 @@ export default {
                 type : 'v-view',
                 pk : 3,
             }
-        });
+        };
     },
     methods: {
         onLayoutChange(layoutMode) {
@@ -92,6 +90,7 @@ export default {
         },
 
         saveCurrentConfig() {
+            //templateConfig.layout = this.layout;
             // templateConfig.layoutMode = this.layoutMode;
             // templateConfig.staticMenuDesktopInactive = this.staticMenuDesktopInactive;
             // templateConfig.overlayMenuActive = this.overlayMenuActive;
@@ -183,11 +182,12 @@ export default {
         saveConfig() {
             this.saveCurrentConfig();
             this.reset('save-config');
+
             this.$emit('call-action',{
                 service : 'system',
                 action : 'save-config',
                 params : {
-                    config: {} //templateConfig
+                    config: this.templateConfig
                 }
             });
         },
@@ -245,26 +245,7 @@ export default {
             </Accordion>
 
         </div>
-        <div class="w-3/4">
-            Spazio per la configurazione del template come per roma
-        </div>
-<!--        <AppConfigFlat-->
-<!--            :layoutMode="layoutMode"-->
-<!--            @layout-change="onLayoutChange"-->
-<!--            :lightMenu="lightMenu"-->
-<!--            @menu-color-change="onMenuColorChange"-->
-<!--            :inlineUser="inlineUser"-->
-<!--            @profile-mode-change="onProfileModeChange"-->
-<!--            :isRTL="isRTL"-->
-<!--            @orientation-change="onChangeOrientation"-->
-<!--            :topbarColor="topbarColor"-->
-<!--            :topbarColors="topbarColors"-->
-<!--            @topbar-color-change="onTopbarColorChange"-->
-<!--            :theme="theme"-->
-<!--            :themes="themeColors"-->
-<!--            @theme-change="onThemeChange"-->
-<!--            :topbarConfig="topbarConfig"-->
-<!--        ></AppConfigFlat>-->
+        <TemplateConfig v-model="templateConfig"></TemplateConfig>
         <div>
             <h2>Esempi</h2>
             <Card>
