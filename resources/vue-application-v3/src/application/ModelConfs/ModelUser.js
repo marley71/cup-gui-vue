@@ -24,7 +24,19 @@ export default {
         "type" : "v-edit",
         "modelName" : "user",
         "actions" : ["action-save","action-back"],
-        "fields": ["id","name","email","email_verified_at","banned","password","remember_token","created_at","updated_at","created_by","updated_by"],
-        "fieldsConfig":{},
+        "fields": ["name","email","mainrole","password","password_confirmation"],
+        "fieldsConfig":{
+            mainrole : {
+                type : 'w-select'
+            },
+            password:{
+                type : 'w-input',
+                inputType : 'password'
+            },
+            password_confirmation : {
+                type : 'w-input',
+                inputType : 'password'
+            }
+        },
     },
 }
