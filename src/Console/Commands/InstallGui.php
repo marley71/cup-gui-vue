@@ -32,13 +32,6 @@ class InstallGui extends Command {
         $this->gitCupparis();
         $this->comment('installazione client');
         $this->installClient();
-//        $this->comment('-----------------');
-//        $this->comment('checkout libreria roma-vue-4.0.0');
-//        $this->gitRoma();
-//        $this->comment('-----------------');
-//        $this->comment('create simlinks');
-//        $this->createSimLinks();
-
     }
 
     protected function copyApplicationFolder() {

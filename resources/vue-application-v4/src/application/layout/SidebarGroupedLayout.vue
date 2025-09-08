@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="p-6 flex flex-col flex-auto">
-            <router-view :key="$route.fullPath"/>
+            <router-view class="app-container overflow-auto " :key="$route.fullPath"/>
 <!--            <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded-2xl bg-surface-50 dark:bg-surface-800 flex-auto" />-->
         </div>
     </div>
@@ -107,3 +107,9 @@ function isDev() {
     return (import.meta.env.VITE_MODE === 'dev')
 }
 </script>
+
+<style>
+    .app-container {
+        height : calc(100vh - 115px) !important;
+    }
+</style>

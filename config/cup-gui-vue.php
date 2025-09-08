@@ -19,6 +19,7 @@ return [
             "VITE_WEB_SOCKET_SERVICES"=>"system,db,roles",   // servizi da utilizzare un sottoinsieme dei services definiti sopra
             "VITE_MODE"=> "dev",
             "VITE_RESOURCES_PATH" => base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4')), // path dove ci saranno le risorse dell'applicazione
+            "VITE_APP_TARGET" => env('APP_URL','localhost'),
             "APP_DOMAIN" => env('VUEAPP_DOMAIN'),
             "APP_TARGET"=> env('APP_URL','localhost'),
             "APP_HOST"=> env('VUEAPP_HOST','0.0.0.0'), // url in ascolto del server npm vite
