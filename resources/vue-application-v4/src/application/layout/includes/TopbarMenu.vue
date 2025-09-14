@@ -4,9 +4,37 @@ import Badge from "primevue/badge";
 import { ref, onMounted } from 'vue';
 import menuSuperAdmin from "../../config/menuSuperAdmin";
 import cs from "cupparis-primevue";
+import {userApp} from  "../../stores/userApp";
 import { useRouter } from 'vue-router'
+import {TopbarStatus} from "./TopbarStatus";
+
+const menu = ref();
+const userInfo = ref({});
+const userLoaded = ref(false);
 const router = useRouter();
 const menuPath = ref([]);
+const menuItems = ref([
+    {
+        label: '',
+        items: [
+            {
+                label: 'Profilo',
+                icon: 'pi pi-refresh',
+                command() {
+                    router.push('/profilo')
+                }
+            },
+            {
+                label: 'Logout',
+                icon: 'pi pi-upload',
+                command() {
+                    router.push('/logout')
+                }
+            }
+        ]
+    }
+]);
+
 
 const navs = ref([
     // {
@@ -34,7 +62,12 @@ const navs = ref([
 
 const selectedNav = ref('Dashboard');
 onMounted(() => {
+    setMenu();
+    setPath();
+    setUserMenu();
+})
 
+function setMenu() {
     if (import.meta.env.VITE_MODE == 'dev') {
         navs.value.push(menuSuperAdmin)
     }
@@ -47,6 +80,7 @@ onMounted(() => {
             navs.value[i].command = () => {
                 router.push(navs.value[i].to);
                 menuPath.value = [navs.value[i].label];
+                TopbarStatus().setMenuPath(menuPath.value)
             }
         }
 
@@ -57,6 +91,7 @@ onMounted(() => {
                 navs.value[i].items[j].command = () => {
                     router.push(navs.value[i].items[j].to);
                     menuPath.value = [navs.value[i].label,navs.value[i].items[j].label];
+                    TopbarStatus().setMenuPath(menuPath.value)
                 }
             }
             if (navs.value[i].items[j].items) {
@@ -65,41 +100,60 @@ onMounted(() => {
                     subItems[k].command = () => {
                         router.push(subItems[k].to);
                         menuPath.value = [navs.value[i].label, navs.value[i].items[j].label, subItems[k].label];
+                        TopbarStatus().setMenuPath(menuPath.value)
                     }
                 }
             }
         }
     }
+}
 
+function setPath() {
+    menuPath.value = TopbarStatus().menuPath;
+    // let currentPath = router.currentRoute.value.path;
+    // console.debug(currentPath,'menu',navs.value)
+    // for (let i in navs.value) {
+    //     if (navs.value[i].to && navs.value[i].to==currentPath) {
+    //         menuPath.value = [navs.value[i].label];
+    //         break;
+    //     }
+    //     let items = navs.value[i].items?navs.value[i].items:[];
+    //     for (let j in items) {
+    //         if (navs.value[i].items[j].to && navs.value[i].items[j].to==currentPath) {
+    //             menuPath.value = [navs.value[i].label,navs.value[i].items[j].label];
+    //             break;
+    //         }
+    //         if (navs.value[i].items[j].items) {
+    //             let subItems = navs.value[i].items[j].items;
+    //             for (let k in subItems) {
+    //                 if (subItems[k].to && subItems[k].to==currentPath) {
+    //                     menuPath.value = [navs.value[i].label, navs.value[i].items[j].label, subItems[k].label];
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+}
 
-    let currentPath = router.currentRoute.value.path;
-    console.debug(currentPath,'menu',navs.value)
-    for (let i in navs.value) {
-        navs.value[i].mId = mId++;
-        if (navs.value[i].to && navs.value[i].to==currentPath) {
-            menuPath.value = [navs.value[i].label];
-            break;
+function setUserMenu() {
+    userApp().getUserInfo().then(() => {
+        userInfo.value = userApp().userInfo;
+        let menuTitle = (userInfo.value.mainrole?userInfo.value.mainrole.name:'');
+        if (isDev()) {
+            menuTitle+=' Dev';
         }
-        let items = navs.value[i].items?navs.value[i].items:[];
-        for (let j in items) {
-            if (navs.value[i].items[j].to && navs.value[i].items[j].to==currentPath) {
-                menuPath.value = [navs.value[i].label,navs.value[i].items[j].label];
-            }
-            if (navs.value[i].items[j].items) {
-                let subItems = navs.value[i].items[j].items;
-                for (let k in subItems) {
-                    if (subItems[k].to && subItems[k].to==currentPath) {
-                        menuPath.value = [navs.value[i].label, navs.value[i].items[j].label, subItems[k].label];
-                    }
-                }
-            }
-        }
-    }
-})
+        menuItems.value[0].label =  menuTitle;
+        userLoaded.value = true;
+    })
+}
 
+function isDev() {
+    return (import.meta.env.VITE_MODE === 'dev')
+}
 
-
-
+const toggle = (event) => {
+    menu.value.toggle(event);
+};
 </script>
 
 <template>
@@ -159,7 +213,27 @@ onMounted(() => {
                 <div class="w-full lg:w-auto">
                     <i class="pi pi-bell text-xl! leading-normal! text-primary-contrast/90 cursor-pointer" />
                 </div>
-                <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/circle/avatar-m-1.png" class="w-8 h-8 rounded-full shrink-0 cursor-pointer" />
+                <div v-if="userLoaded" class="flex items-center justify-between gap-8 w-full lg:w-auto">
+                    <a
+                        v-styleclass="{
+                            selector: '#app-sidebar-6',
+                            enterFromClass: 'hidden',
+                            enterActiveClass: 'animate-fadeinleft',
+                            leaveToClass: 'hidden',
+                            leaveActiveClass: 'animate-fadeoutleft',
+                            hideOnOutsideClick: true
+                        }"
+                        class="cursor-pointer flex items-center justify-center lg:hidden text-surface-700 dark:text-surface-100 mr-auto"
+                    >
+                        <i class="pi pi-bars !text-xl !leading-none" />
+                    </a>
+                    <i class="pi pi-bell !text-xl !leading-tight text-surface-500 dark:text-surface-400 cursor-pointer" />
+                    <div class="flex layout-profile-name gap-1 cursor-pointer" @click="toggle">
+                        <span class="mt-1">{{ userInfo.name }}</span>
+                        <img src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="w-8 h-8 rounded-full cursor-pointer" />
+                    </div>
+                    <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
+                </div>
             </div>
         </div>
     </nav>

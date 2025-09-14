@@ -4,6 +4,7 @@ import './primeblocks4/style.css'
 // createApp(App).mount('#app')
 import { createApp } from 'vue';
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './application/App.vue'
 import PrimeVue from 'primevue/config';
 import "@fortawesome/fontawesome-free/css/all.css"
@@ -16,6 +17,8 @@ import CrudInit from './primeblocks4/crud/CrudInit.js';
 
 const app = createApp(App);
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate)
+
 app.use(pinia);
 app.use(router);
 
