@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-    <div class="bottom-0 min-h-screen flex flex-col relative flex-auto">
+    <div class="bottom-0 min-h-screen flex flex-col relative max-w-screen" style="width:calc(100% - 280px)">
         <div class="flex justify-between items-center py-4 px-8 bg-surface-0 dark:bg-surface-900 border-b border-surface-200 dark:border-surface-700 relative lg:static">
             <div class="flex items-center">
                 <a
@@ -74,20 +74,22 @@
                 <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full cursor-pointer" />
             </div>
         </div>
-        <div class="p-6 flex flex-col flex-auto">
-            <router-view class="app-container overflow-auto " :key="$route.fullPath"/>
-<!--            <div class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded-2xl bg-surface-50 dark:bg-surface-800 flex-auto" />-->
+        <div class="overflow-auto" style="width:calc(100% - 0px)">
+            <div class="p-6 flex flex-col max-w-screen" >
+                <router-view  class="app-container" :key="$route.fullPath"/>
+            </div>
         </div>
+
     </div>
     </div>
 </template>
 
 <script setup>
 import SidebarGroupedMenu from "./includes/SidebarGroupedMenu.vue";
-import { useRouter } from 'vue-router'
+//import { useRouter } from 'vue-router'
 import {onMounted,ref} from "vue";
 import {userApp} from "../stores/userApp";
-const router = useRouter();
+//const router = useRouter();
 const userInfo = ref({})
 const userName = ref('');
 

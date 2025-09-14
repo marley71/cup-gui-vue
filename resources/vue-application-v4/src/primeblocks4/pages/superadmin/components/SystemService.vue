@@ -231,17 +231,20 @@ export default {
                 <Button label="Compilazione Templates" @click="templates"></Button>
                 <Button label="Salva configurazione" @click="saveConfig"></Button>
             </div>
-            <Accordion>
-                <AccordionTab header="command output">
-                    <ProgressSpinner v-if="commandWorking" style="width:40px;height:40px"></ProgressSpinner>
-                    <div class="w-full overflow-auto h-30rem min-h-30rem">
-                        <template  v-for="item in bufferOut">
-                            <pre v-if="item.error" class="text-red-500">{{item.text}}</pre>
-                            <pre v-else>{{item.text}}</pre>
-                        </template>
+            <Accordion value="1">
+                <AccordionPanel value="0">
+                    <AccordionHeader>command output</AccordionHeader>
+                    <AccordionContent>
+                        <ProgressSpinner v-if="commandWorking" style="width:40px;height:40px"></ProgressSpinner>
+                        <div class="w-full overflow-auto h-[300px]">
+                            <template  v-for="item in bufferOut">
+                                <pre v-if="item.error" class="text-red-500">{{item.text}}</pre>
+                                <pre v-else>{{item.text}}</pre>
+                            </template>
 
-                    </div>
-                </AccordionTab>
+                        </div>
+                    </AccordionContent>
+                </AccordionPanel>
             </Accordion>
 
         </div>

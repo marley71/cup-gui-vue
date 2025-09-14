@@ -17,7 +17,12 @@ export default {
             "action-delete-selected",
         ],
         "fields": ["id","name","email","email_verified_at","banned","password","remember_token","created_at","updated_at","created_by","updated_by"],
-        "fieldsConfig": {},
+        "fieldsConfig": {
+            remember_token : {
+                type :'w-text',
+                label : 'pupu',
+            }
+        },
         "orderFields" : {},
     },
     "edit": {

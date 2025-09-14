@@ -1,5 +1,5 @@
 <template>
-    <div class="overflow-y-auto flex-1 p-2 flex flex-col gap-4">
+    <div class="overflow-y-auto flex-1 p-2 flex flex-col gap-4 scrollbar-custom">
         <template v-for="mainItem in menu" >
 
                 <ul class="list-none m-0 flex flex-col gap-1">
@@ -18,7 +18,7 @@
                             <span class="font-semibold text-base leading-tight text-primary-contrast">{{mainItem.label}}</span>
                             <i class="fa fa-angle-down text-base! leading-none! text-primary-contrast ml-auto" />
                         </div>
-                        <ul class="list-none m-0 overflow-hidden  flex-col gap-1 mt-1" :class="menuStatus.opened[mainItem.mId]?'flex':'hidden'">
+                        <ul :id="mainItem.mId" class="list-none m-0 overflow-hidden  flex-col gap-1 mt-1" :class="menuStatus.opened[mainItem.mId]?'flex':'hidden'">
 
                             <li v-for="child in mainItem.items">
                                 <template v-if="child.to">
@@ -42,13 +42,13 @@
                                         <span class="font-semibold text-base leading-tight text-primary-contrast">{{child.label}}</span>
                                         <i class="fa fa-angle-down text-base! leading-none! text-primary-contrast ml-auto" />
                                     </div>
-                                    <ul class="list-none m-0 overflow-hidden flex-col gap-1 mt-1 ml-5 " :class="menuStatus.opened[child.mId]?'flex':'hidden'">
+                                    <ul class="list-none m-0 overflow-hidden flex-col gap-1 mt-1 ml-5" :class="menuStatus.opened[child.mId]?'flex':'hidden'">
 
                                         <li v-for="item in child.items">
 
                                             <router-link :to="item.to" class="flex items-center cursor-pointer p-1 gap-1 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
                                                 <i :class="item.icon" class="text-base! leading-none! text-primary-contrast" />
-                                                <span class="font-light text-sm text-base leading-tight">{{item.label}}</span>
+                                                <span class="font-light text-sm leading-tight">{{item.label}}</span>
                                             </router-link>
                                         </li>
 
@@ -78,9 +78,9 @@
 </template>
 
 <script >
-import Badge from 'primevue/badge';
-import { useRouter } from 'vue-router'
-const router = useRouter();
+//import Badge from 'primevue/badge';
+//import { useRouter } from 'vue-router'
+//const router = useRouter();
 import menuSuperAdmin from "../../config/menuSuperAdmin";
 import {userApp} from "../../stores/userApp";
 import cs from 'cupparis-primevue';
@@ -129,6 +129,9 @@ export default {
             setTimeout(function () {
                 that.menuStatus.setOpen(menuId,!that.menuStatus.opened[menuId])
                 console.debug('sitauazione',that.menuStatus.opened[menuId]);
+                if (document.getElementById(menuId)) {
+                    document.getElementById(menuId).style['max-height'] = '500px';
+                }
             },20)
 
 
@@ -136,3 +139,18 @@ export default {
     }
 }
 </script>
+<style>
+.scrollbar-custom {
+    scrollbar-width: thin;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+    width: 1px;
+    height: 1px; /* per la scrollbar orizzontale */
+}
+
+/* Puoi anche personalizzare i thumb */
+.scrollbar-custom::-webkit-scrollbar-thumb {
+    background: #888; /* colore del thumb per visibilità */
+}
+</style>

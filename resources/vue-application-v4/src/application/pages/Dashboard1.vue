@@ -416,6 +416,8 @@
 </template>
 <script setup>
 import Button from 'primevue/button';
+import MeterGroup from 'primevue/metergroup';
+
 import {ref} from 'vue';
 
 const search = ref('');

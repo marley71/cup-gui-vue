@@ -1,9 +1,9 @@
 <template>
     <div>
-        <OverlayPanel ref="help">
+        <Popover ref="help">
             <pre v-if="info" class="h-20rem overflow-auto">{{info}}</pre>
             <ProgressSpinner v-else></ProgressSpinner>
-        </OverlayPanel>
+        </Popover>
         <Card v-if="connected">
             <template #title>
                 Servizi

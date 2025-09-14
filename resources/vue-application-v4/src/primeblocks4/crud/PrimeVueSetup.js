@@ -1,6 +1,8 @@
 import cupparisPrimevue from "cupparis-primevue";
 import Accordion from "primevue/accordion";
-import AccordionTab from "primevue/accordiontab";
+import AccordionPanel from "primevue/accordionpanel";
+import AccordionHeader from "primevue/accordionheader";
+import AccordionContent from "primevue/accordioncontent";
 import AutoComplete from "primevue/autocomplete";
 import Avatar from "primevue/avatar";
 import AvatarGroup from "primevue/avatargroup";
@@ -45,7 +47,7 @@ import Message from "primevue/message";
 import MultiSelect from "primevue/multiselect";
 import OrderList from "primevue/orderlist";
 import OrganizationChart from "primevue/organizationchart";
-import OverlayPanel from "primevue/overlaypanel";
+import Popover from "primevue/popover";
 import Paginator from "primevue/paginator";
 import Panel from "primevue/panel";
 import PanelMenu from "primevue/panelmenu";
@@ -108,7 +110,9 @@ function _setupComponents() {
         //'BlockViewer' : BlockViewer,
 
         'Accordion' : Accordion,
-        'AccordionTab' : AccordionTab,
+        'AccordionPanel' : AccordionPanel,
+        'AccordionHeader' : AccordionHeader,
+        'AccordionContent' : AccordionContent,
         'AutoComplete' : AutoComplete,
         'Avatar' : Avatar,
         'AvatarGroup' : AvatarGroup,
@@ -159,7 +163,7 @@ function _setupComponents() {
         'MultiSelect' : MultiSelect,
         'OrderList' : OrderList,
         'OrganizationChart' : OrganizationChart,
-        'OverlayPanel' : OverlayPanel,
+        'Popover' : Popover,
         'Paginator' : Paginator,
         'Panel' : Panel,
         'PanelMenu' : PanelMenu,

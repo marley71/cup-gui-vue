@@ -203,7 +203,7 @@ export default {
         <template #center>
             <div class="flex gap-2">
                 <div class="pt-2">Tabella</div>
-                <div><Dropdown :options="tables" v-model="tableSelected" optionLabel="name" @change="getFields"></Dropdown></div>
+                <div><Select :options="tables" v-model="tableSelected" optionLabel="name" @change="getFields"></Select></div>
             </div>
             <div class="flex gap-2 ml-3">
                 <div class="pt-2">Modello</div>

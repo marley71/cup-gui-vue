@@ -102,7 +102,7 @@
         </template>
         <div class="flex mb-3">
             <label>Modello</label>
-            <Dropdown class="w-7 ml-2" v-model="modelSelected" :options="modelOptions"
+            <Select class="w-7 ml-2" v-model="modelSelected" :options="modelOptions"
             optionLabel="label" optionValue="id" @change="modelSelect"/>
         </div>
         <div class="grid">
