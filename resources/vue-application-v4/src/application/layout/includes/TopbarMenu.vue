@@ -205,7 +205,7 @@ const toggle = (event) => {
 <!--                    <Badge v-if="item.badge" :value="item.badge" severity="contrast" class="ml-2" />-->
 <!--                </a>-->
 <!--            </div>-->
-            <div  class="hidden lg:flex flex-1 absolute lg:static w-full bg-primary-500 left-0 top-full z-10 shadow lg:shadow-none border lg:border-0 border-primary-400"
+            <div  class="text-white hidden lg:flex flex-1 absolute lg:static w-full bg-primary-500 left-0 top-full z-10 shadow lg:shadow-none border lg:border-0 border-primary-400"
             >
                 <span v-for="(label,index) in menuPath">{{label}}{{ index==menuPath.length-1?'':'&nbsp;/&nbsp;' }}</span>
             </div>
@@ -243,20 +243,30 @@ const toggle = (event) => {
 .p-menubar {
     background: var(--bg-primary-500) !important;
     border : none;
+    color:white !important;
 }
 
 .p-menubar-submenu {
     background: var(--bg-primary-500) !important;
     border : none;
+    color:white !important;
 }
 
 .p-menubar-item-content {
     background: var(--bg-primary-500) !important;
     border : none;
+    color:white !important;
 }
 
 .p-menubar-item, .p-menubar-item-link {
     background: var(--bg-primary-500) !important;
     border : none;
+    color:white !important;
+}
+span .p-menubar-item-label {
+    color:white !important;
+}
+.p-menubar-item-link {
+    color:white !important;
 }
 </style>

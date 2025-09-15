@@ -12,8 +12,8 @@ import router from "./primeblocks4/router";
 import {appStatus} from "./application/stores/appStatus";
 import application from "./application";
 import cs from "cupparis-primevue";
-import MyPreset from './application/applicationPreset'
 import CrudInit from './primeblocks4/crud/CrudInit.js';
+import themeColors from "./application/themeColors";
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -21,11 +21,12 @@ pinia.use(piniaPluginPersistedstate)
 
 app.use(pinia);
 app.use(router);
-
+console.debug('colors',themeColors.getTheme());
 
 app.use(PrimeVue, {
     theme: {
-        preset: MyPreset
+        //preset: MyPreset
+        preset: themeColors.getTheme()
     }
 });
 

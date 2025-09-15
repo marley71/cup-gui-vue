@@ -4,5 +4,10 @@
         "SidebarLayout": "Layout con menu a icone",
         "SidebarGroupedLayout": "Layout con menu a cascata",
         "TopbarLayout": "Layout con menu top"
+    },
+    "themeColor": "orangeColor",
+    "themeColors": {
+        "defaultColor": "Colori di default (indigo)",
+        "orangeColor": "Arancio"
     }
 }
