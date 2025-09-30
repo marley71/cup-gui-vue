@@ -14,12 +14,12 @@
                 <span class="text-lg font-semibold leading-tight text-primary-contrast">ZenTrail</span>
             </div>
             <SidebarGroupedMenu></SidebarGroupedMenu>
-            <div class="py-2 mt-auto has-[ul.hidden]:border-t border-primary-400 dark:border-primary-300">
+            <div v-if="templateConfig.layoutsConf.SidebarGroupedLayout.profileMenu==='sidebar'"  class="py-2 mt-auto has-[ul.hidden]:border-t border-primary-400 dark:border-primary-300">
                 <ul class="list-none p-2 m-0 hidden origin-bottom animate-duration-150 border-t border-primary-400 dark:border-primary-300">
                     <li>
                         <router-link to="/profilo" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
                             <i class="pi pi-user text-base! leading-none! text-primary-contrast" />
-                            <span class="font-medium text-base leading-tight">Profile</span>
+                            <span class="font-medium text-base leading-tight">{{ translate('app.profile') }}</span>
                         </router-link>
                     </li>
 <!--                    <li>-->
@@ -31,7 +31,7 @@
                     <li>
                         <router-link to="/logout" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
                             <i class="pi pi-sign-out text-base! leading-none! text-primary-contrast" />
-                            <span class="font-medium text-base leading-tight">Sign Out</span>
+                            <span class="font-medium text-base leading-tight">{{translate('app.logout')}}</span>
                         </router-link>
                     </li>
                 </ul>
@@ -45,7 +45,9 @@
                             }"
                     class="flex items-center cursor-pointer p-2 gap-2 text-primary-contrast"
                 >
-                    <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full" />
+                    <Avatar v-if="userInfo.fotos && userInfo.fotos.length > 0" :image="getImg()" shape="circle" ></Avatar>
+                    <Avatar v-else :label="getLetter()" shape="circle" ></Avatar>
+<!--                    <img  src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full" />-->
                     <span class="font-medium text-base leading-tight">{{userName}}</span>
                     <i class="pi pi-angle-up text-base! leading-none! text-primary-contrast ml-auto" />
                 </a>
@@ -55,9 +57,29 @@
     <div class="bottom-0 min-h-screen flex flex-col relative max-w-screen" style="width:calc(100% - 280px)">
         <div class="flex justify-between items-center py-4 px-8 bg-surface-0 dark:bg-surface-900 border-b border-surface-200 dark:border-surface-700 relative lg:static">
             <div class="flex items-center">
+                <ul class="list-none p-2 m-0 hidden origin-bottom animate-duration-150 border-t border-primary-400 dark:border-primary-300">
+                    <li>
+                        <router-link to="/profilo" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                            <i class="pi pi-user text-base! leading-none! text-primary-contrast" />
+                            <span class="font-medium text-base leading-tight">{{ translate('app.profile') }}</span>
+                        </router-link>
+                    </li>
+                    <!--                    <li>-->
+                    <!--                        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">-->
+                    <!--                            <i class="pi pi-cog text-base! leading-none! text-primary-contrast" />-->
+                    <!--                            <span class="font-medium text-base leading-tight">Settings</span>-->
+                    <!--                        </a>-->
+                    <!--                    </li>-->
+                    <li>
+                        <router-link to="/logout" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                            <i class="pi pi-sign-out text-base! leading-none! text-primary-contrast" />
+                            <span class="font-medium text-base leading-tight">{{translate('app.logout')}}</span>
+                        </router-link>
+                    </li>
+                </ul>
                 <a
                     v-styleclass="{
-                                selector: '#app-sidebar-colored',
+                                selector: '@prev',
                                 enterFromClass: 'hidden',
                                 enterActiveClass: 'animate-fadeinleft',
                                 leaveToClass: 'hidden',
@@ -69,9 +91,13 @@
                     <i class="pi pi-bars text-xl!" />
                 </a>
             </div>
-            <div class="flex items-center gap-8">
-                <i class="pi pi-bell text-lg! leading-none! text-surface-500 dark:text-surface-400 cursor-pointer" />
-                <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full cursor-pointer" />
+            <div v-if="templateConfig.layoutsConf.SidebarGroupedLayout.profileMenu==='top'"   class="flex items-center gap-1 cursor-pointer" @click="toggle" :title="userName">
+
+                <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
+                {{userName}}
+<!--                <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full cursor-pointer" />-->
+                <Avatar v-if="userInfo.fotos && userInfo.fotos.length > 0" :image="getImg()" shape="circle" ></Avatar>
+                <Avatar v-else :label="getLetter()" shape="circle" ></Avatar>
             </div>
         </div>
         <div class="overflow-auto" style="width:calc(100% - 0px)">
@@ -86,12 +112,38 @@
 
 <script setup>
 import SidebarGroupedMenu from "./includes/SidebarGroupedMenu.vue";
-//import { useRouter } from 'vue-router'
+import templateConfig from '@/application/config/templateConfig.json';
+import { useRouter } from 'vue-router'
 import {onMounted,ref} from "vue";
 import {userApp} from "../stores/userApp";
-//const router = useRouter();
+import cs from 'cupparis-primevue';
+
+
+const menu = ref();
+const router = useRouter();
 const userInfo = ref({})
 const userName = ref('');
+const menuItems = ref([
+    {
+        label: '',
+        items: [
+            {
+                label: cs.CrudCore.translate('app.profile'),
+                icon: 'pi pi-refresh',
+                command() {
+                    router.push('/profilo')
+                }
+            },
+            {
+                label:cs.CrudCore.translate('app.logout'),
+                icon: 'pi pi-upload',
+                command() {
+                    router.push('/logout')
+                }
+            }
+        ]
+    }
+]);
 
 onMounted(() => {
     userApp().getUserInfo().then(() => {
@@ -108,6 +160,30 @@ onMounted(() => {
 function isDev() {
     return (import.meta.env.VITE_MODE === 'dev')
 }
+
+function translate(key) {
+    return cs.CrudCore.translate(key)
+}
+function getImg() {
+    if (isDev()) {
+        return import.meta.env.VITE_APP_TARGET +  userInfo.value.fotos[0].resource.url;
+    }
+
+    return userInfo.fotos[0].resource.url;
+
+}
+function getLetter() {
+    let l = userName.value.split(' ');
+    let label = ''
+    for (let word of l) {
+        label += word.charAt(0).toUpperCase()
+    }
+    return label;
+}
+
+const toggle = (event) => {
+    menu.value.toggle(event);
+};
 </script>
 
 <style>

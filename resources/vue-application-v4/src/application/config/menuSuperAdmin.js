@@ -21,9 +21,9 @@ export default {
             'label': 'Help',
             'icon': 'fa fa-question',
             items: [
-                {
-                    label: 'Manage Constraint', icon: 'fa-solid fa-vial', to: '/test2-manage-constraint/1'
-                },
+                // {
+                //     label: 'Manage Constraint', icon: 'fa-solid fa-vial', to: '/test2-manage-constraint/1'
+                // },
                 {
                     label: 'Test2 Widgets', icon: 'fa-solid fa-vial', to: '/test2-widgets'
                 },

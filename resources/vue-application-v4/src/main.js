@@ -40,6 +40,8 @@ function mountApp(error) {
         //router.push('/');
     }
 }
+const appStatusInstance = appStatus();
+appStatusInstance.clear();
 CrudInit.install(app).then(function () {
     cs.install(app);
     CrudInit.loadMenu().then(function() {
@@ -53,12 +55,12 @@ CrudInit.install(app).then(function () {
         } catch (error) {
             console.debug('installo applicazione ...errore ')
             console.error(error);
-            const appStatusInstance = appStatus();
             appStatusInstance.setError('Caricamento menu applicazione fallito',error);
             mountApp(true);
         }
 
     }).catch(error => {
+        console.error(error);
         console.error('Caricamento menu applicazione fallito',error);
         const appStatusInstance = appStatus();
         appStatusInstance.setError('Caricamento menu applicazione fallito',error.message);

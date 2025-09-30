@@ -85,7 +85,7 @@ import menuSuperAdmin from "../../config/menuSuperAdmin";
 import {userApp} from "../../stores/userApp";
 import cs from 'cupparis-primevue';
 import {SidebarGroupedStatus} from "./SidebarGroupedStatus";
-
+import templateConfig from '@/application/config/templateConfig.json';
 
 export default {
     data() {

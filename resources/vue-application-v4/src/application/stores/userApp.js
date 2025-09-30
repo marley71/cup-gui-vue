@@ -16,6 +16,7 @@ export const userApp = defineStore('userApp', {
             for (let k in payload) {
                 this.userInfo[k] = payload[k];
             }
+            this.loaded = true;
         },
         async getUserInfo() {
             return new Promise((resolve,reject) => {

@@ -10,11 +10,11 @@ export default [
                 name: 'notfound',
                 component: () => import('@/application/pages/NotFound.vue')
             },
-            {
-                path: '/test2-manage-constraint/:created_by',
-                name: 'test2-manage-constraint',
-                component: () => import('@/primeblocks4/pages/help/ManageConstraint.vue')
-            },
+            // {
+            //     path: '/test2-manage-constraint/:created_by',
+            //     name: 'test2-manage-constraint',
+            //     component: () => import('@/primeblocks4/pages/help/ManageConstraint.vue')
+            // },
             {
                 path: '/test2-widgets/:case*',
                 name: 'test2-widgets',
@@ -36,7 +36,7 @@ export default [
                 component: () => import('@/primeblocks4/pages/help/TestManage.vue')
             },
             {
-                path: '/test2-import',
+                path: '/test2-import/:case*',
                 name: 'test2-import',
                 component: () => import('@/primeblocks4/pages/help/TestImport.vue')
             },

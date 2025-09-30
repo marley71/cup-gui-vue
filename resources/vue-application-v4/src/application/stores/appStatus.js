@@ -15,6 +15,11 @@ export const appStatus = defineStore('appStatus', {
             this.errorIssue = issue || 'motivo non definito'
             this.error = 1;
         },
+        clear() {
+            this.errorMessage = '';
+            this.errorIssue = ''
+            this.error = 0;
+        }
     },
     persist : true,
 })

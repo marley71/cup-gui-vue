@@ -8,8 +8,6 @@ onMounted (() => {
 </script>
 
 <template>
-    <form class="w-full" action="/login" method="POST">
-        <input type="hidden" name="_token" :value="csrfToken">
         <div class="px-8 md:px-12 lg:px-20 py-12 flex flex-col items-center gap-12 w-full backdrop-blur-2xl rounded-2xl bg-white/10 border border-white/10 max-w-sm">
             <div class="flex flex-col items-center gap-4 w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" width="33" height="32" viewBox="0 0 33 32" fill="none">
@@ -29,6 +27,8 @@ onMounted (() => {
                 </div>
             </div>
             <div class="flex flex-col items-center gap-8 w-full">
+                <form class="w-full" action="/login" method="POST">
+                    <input type="hidden" name="_token" :value="csrfToken">
                 <div class="flex flex-col gap-6 w-full">
                     <IconField>
                         <InputIcon class="pi pi-user text-white/70!" />
@@ -44,11 +44,11 @@ onMounted (() => {
                         />
                     </IconField>
                 </div>
+                </form>
                 <Button type="submit"  label="Sign In" class="w-full! rounded-3xl! bg-surface-950! border! border-surface-950! text-white! hover:bg-surface-950/80!" />
             </div>
             <a class="text-white/80 cursor-pointer hover:text-white/90">Forgot Password?</a>
         </div>
-    </form>
 </template>
 
 <style scoped>

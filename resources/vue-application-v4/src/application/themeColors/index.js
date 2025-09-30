@@ -1,10 +1,12 @@
 import defaultColor from './defaultColor'
 import orangeColor from "./orangeColor";
+import greenColor from './greenColor'
 import templateConfig from '../config/templateConfig.json';
 
 const allColors = {
     defaultColor : defaultColor,
-    orangeColor : orangeColor
+    orangeColor : orangeColor,
+    greenColor : greenColor,
 }
 
 export default {

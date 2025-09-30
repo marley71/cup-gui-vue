@@ -1,5 +1,11 @@
 <div>
-    <div>L'importazione si aspetta un file excel con i seguenti campi:</div>
+    <hr>
+    <div class="italic">Questo esempio mostra come passare un file html da sostituire alla descrizione.</div>
+    <div class="italic">Il file deve essere messo nella cartella definita dalla variabile di configurazione VITE_PUBLISH_DIR</div>
+    <div class="italic">Questo modo di aggiungere html dinamico in una form, o pagina custom e' utlizzabile ovuque, utilizzando
+    la funzione del core fetchHtml('nomefile.html',callback(htmlContenuto),templateData)</div>
+    <hr>
+    <div class="mt-5">L'importazione si aspetta un file excel con i seguenti campi:</div>
     <div class="flex gap-3 mb-3">
         <div>(<b>GTComIstat</b>, per esempio 12939)</div>
         <div>(<b>GTComDes</b>, per esempio Pontedera)</div>
@@ -9,5 +15,6 @@
     <div class="text-red-500 font-italic mb-3">
         Attenzione, il programma tiene conto delle maiuscole e minuscole. Scrivere le intestazioni delle colonne excel come evidenziato in grassetto.
     </div>
-    <div>Valore dinamico {{nome}}</div>
+    <div>Valore dinamico di una variabile passato dalla configurazione o elaborato dinamicamente che vogliamo mostrare in descrizione
+        <b>{{nome}}</b></div>
 </div>

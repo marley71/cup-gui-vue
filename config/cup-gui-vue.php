@@ -27,7 +27,7 @@ return [
             "APP_RESOURCES_PATH" => base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4')), // path dove ci saranno le risorse dell'applicazione
             "APP_CUPPARIS_PRIMEVUE" => base_path(env('VUEAPP_FOLDER','resources'))  . '/cupparis-primevue', // path dove si trova la libreria cupparis-primevue
             "APP_CERT_PATH" => env('VUEAPP_CERT_FOLDER',null),
-            "VITE_PUBLISH_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4') . '/src/assets/html-template/'),
+            "VITE_PUBLISH_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4') . '/src/application/assets/html-template/'),
         ],
         'production' => [ // crea il file env per vite .env.production
             "VITE_APP_USE_API"=>1,
@@ -56,7 +56,7 @@ return [
             'icon' => 'fa-solid fa-toolbox',
             "items" =>[
                 [
-                    "label"  =>'User', "icon" =>'pi pi-fw pi-user', "to"=>'/manage/ModelUser',
+                    "label"  =>'User', "icon" =>'fa fa-user', "to"=>'/manage/ModelUser',
                     //"visible" => ['Admin','Operatore'],  // mi aspetto il ruolo per il quale e' visibile
                 ],
                 [

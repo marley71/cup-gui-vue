@@ -3,6 +3,7 @@ import cs from "cupparis-primevue";
 import CrudInit from '@/primeblocks4/crud/CrudInit.js';
 import {ref} from "vue";
 import { useRouter } from 'vue-router'
+import {userApp} from "../../../stores/userApp";
 
 const router = useRouter();
 const email = ref('');
@@ -25,6 +26,7 @@ function login() {
         }
         if (json.access_token) {
             window.localStorage.setItem('token',json.access_token);
+            userApp().setUserInfo(json);
             CrudInit.loadMenu().then(() => {
                 router.push('/');
             })
