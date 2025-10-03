@@ -23,11 +23,11 @@ class SystemService extends ServiceInterface
                 'description' => 'Aggiorna le traduzioni',
                 'params' => [],
             ],
-            [
-                'command' => 'templates',
-                'description' => 'Compilazione sass template e layout',
-                'params' => [],
-            ],
+//            [
+//                'command' => 'templates',
+//                'description' => 'Compilazione sass template e layout',
+//                'params' => [],
+//            ],
             [
                 'command' => 'save-config',
                 'description' => 'Salvataggio impostazioni template',
@@ -49,7 +49,7 @@ class SystemService extends ServiceInterface
         switch ($action) {
             case 'publish':
             case 'translate':
-            case 'templates':
+            //case 'templates':
                 $shell_command = dirname(__FILE__) . '/shell_commands/deploy.sh';
                 $shell_param = $action;
                 //echo "command " . $shell_command .  " shell param " . $shell_param;

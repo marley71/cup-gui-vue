@@ -29,23 +29,24 @@ onMounted (() => {
             <div class="flex flex-col items-center gap-8 w-full">
                 <form class="w-full" action="/login" method="POST">
                     <input type="hidden" name="_token" :value="csrfToken">
-                <div class="flex flex-col gap-6 w-full">
-                    <IconField>
-                        <InputIcon class="pi pi-user text-white/70!" />
-                        <InputText name="email" type="text" class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-sm!" placeholder="Username" />
-                    </IconField>
-                    <IconField>
-                        <InputIcon class="pi pi-lock text-white/70!" />
-                        <InputText
-                            name="password"
-                            type="password"
-                            class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-sm!"
-                            placeholder="Password"
-                        />
-                    </IconField>
-                </div>
+                    <div class="flex flex-col gap-6 w-full">
+                        <IconField>
+                            <InputIcon class="pi pi-user text-white/70!" />
+                            <InputText name="email" type="text" class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-sm!" placeholder="Username" />
+                        </IconField>
+                        <IconField>
+                            <InputIcon class="pi pi-lock text-white/70!" />
+                            <InputText
+                                name="password"
+                                type="password"
+                                class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-sm!"
+                                placeholder="Password"
+                            />
+                        </IconField>
+                    </div>
+                    <Button type="submit"  label="Sign In" class="w-full! rounded-3xl! bg-surface-950! border! border-surface-950! text-white! hover:bg-surface-950/80!" />
+
                 </form>
-                <Button type="submit"  label="Sign In" class="w-full! rounded-3xl! bg-surface-950! border! border-surface-950! text-white! hover:bg-surface-950/80!" />
             </div>
             <a class="text-white/80 cursor-pointer hover:text-white/90">Forgot Password?</a>
         </div>

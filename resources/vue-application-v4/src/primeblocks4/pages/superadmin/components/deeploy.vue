@@ -24,7 +24,7 @@
                 <Button label="Publish" @click="publish"></Button>
                 <Button label="Aggiorna traduzioni" @click="translate"></Button>
                 <Button label="Aggiorna importazioni" @click="generateImport"></Button>
-                <Button label="Aggiorna Templates" @click="generateTemplates"></Button>
+<!--                <Button label="Aggiorna Templates" @click="generateTemplates"></Button>-->
                 <Button label="Test Spawn" @click="testSpawn"></Button>
                 <Button label="Test Exec" @click="testExec"></Button>
                 <label class="flex-grow-1 text-right p-1 pt-3 mr-2">WebSocket Server</label>

@@ -8,7 +8,7 @@
     "layoutsConf": {
         "SidebarLayout": [],
         "SidebarGroupedLayout": {
-            "profileMenu": "top"
+            "profileMenu": "sidebar"
         }
     },
     "themeColor": "greenColor",

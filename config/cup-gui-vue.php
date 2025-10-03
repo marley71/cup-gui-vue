@@ -28,6 +28,8 @@ return [
             "APP_CUPPARIS_PRIMEVUE" => base_path(env('VUEAPP_FOLDER','resources'))  . '/cupparis-primevue', // path dove si trova la libreria cupparis-primevue
             "APP_CERT_PATH" => env('VUEAPP_CERT_FOLDER',null),
             "VITE_PUBLISH_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4') . '/src/application/assets/html-template/'),
+            "VITE_HELP_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4'))  . '/cupparis-primevue/',
+
         ],
         'production' => [ // crea il file env per vite .env.production
             "VITE_APP_USE_API"=>1,
