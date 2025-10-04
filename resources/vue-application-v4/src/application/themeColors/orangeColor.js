@@ -1,7 +1,7 @@
 import {definePreset} from "@primeuix/themes";
-import Aura from "@primevue/themes/aura";
+import themes from "./themes";
 
-const MyPreset = definePreset(Aura, {
+const MyPreset = definePreset(themes.getTheme(), {
     semantic: {
         colorScheme: {
             light: {

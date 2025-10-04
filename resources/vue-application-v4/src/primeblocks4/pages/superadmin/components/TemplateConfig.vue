@@ -27,7 +27,7 @@ export default {
         <h1 class="text-3xl text-center">Configurazione del template</h1>
         <div class="flex gap-2 align-content-center justify-between">
             <div>
-                <h3 class="mb-2">Layout applicazione <span class="font-bold">{{localModel.layout}}</span></h3>
+                <h3 class="mb-2">Layout <span class="font-bold">{{localModel.layout}}</span></h3>
                 <template v-for="(item,key) in localModel.layouts">
                     <div class="flex">
                         <RadioButton v-model="localModel.layout" :value="key" ></RadioButton>
@@ -55,7 +55,16 @@ export default {
                 </template>
             </div>
             <div>
-                <h3 class="mb-2">Colori applicazione <span class="font-bold">{{localModel.themeColor}}</span></h3>
+                <h3 class="mb-2">Tema <span class="font-bold">{{localModel.theme}}</span></h3>
+                <template v-for="(item,key) in localModel.themes">
+                    <div class="flex">
+                        <RadioButton v-model="localModel.theme" :value="key" ></RadioButton>
+                        <label>{{item}}</label>
+                    </div>
+                </template>
+            </div>
+            <div>
+                <h3 class="mb-2">Colori <span class="font-bold">{{localModel.themeColor}}</span></h3>
                 <template v-for="(item,key) in localModel.themeColors">
                     <div class="flex">
                         <RadioButton v-model="localModel.themeColor" :value="key" ></RadioButton>

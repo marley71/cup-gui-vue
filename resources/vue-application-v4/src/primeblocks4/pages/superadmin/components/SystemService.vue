@@ -6,12 +6,13 @@ import templateConfig from '@/application/config/templateConfig.json';
 //import themeColors from '@/application/config/themeColors.json';
 import ProgressSpinner from 'primevue/progressspinner';
 import TemplateConfig from "./TemplateConfig.vue";
+import ListaWidgets from "./ListaWidgets.vue";
 
 export default {
     name: "SystemService",
     props : ['data'],
     emits : ['call-action'],
-    components : {ProgressSpinner,TemplateConfig},  //AppConfigFlat,
+    components : {ProgressSpinner,TemplateConfig,ListaWidgets},  //AppConfigFlat,
     watch: {
         data(value) {
             this.response(value);
@@ -228,7 +229,7 @@ export default {
             <div class="flex gap-2">
                 <Button label="Publish" @click="publish"></Button>
                 <Button label="Aggiorna traduzioni" @click="translate"></Button>
-                <Button label="Compilazione Templates" @click="templates"></Button>
+<!--                <Button label="Compilazione Templates" @click="templates"></Button>-->
                 <Button label="Salva configurazione" @click="saveConfig"></Button>
             </div>
             <Accordion value="1">
@@ -251,14 +252,20 @@ export default {
         <TemplateConfig v-model="templateConfig"></TemplateConfig>
         <div>
             <h2>Esempi</h2>
-            <Card>
+            <Card class="mt-2">
+                <template #title>Widgets</template>
+                <template #content>
+                    <ListaWidgets></ListaWidgets>
+                </template>
+            </Card>
+            <Card class="mt-2">
                 <template #title>Lista</template>
                 <template #content>
                     <component :is="listConf.type" :conf="listConf"></component>
                 </template>
             </Card>
-            <div class="grid mt-3">
-                <div class="col-6">
+            <div class="grid grid-cols-2 mt-3 gap-1">
+                <div >
                     <Card>
                         <template #title>Vista</template>
                         <template #content>
@@ -266,7 +273,7 @@ export default {
                         </template>
                     </Card>
                 </div>
-                <div class="col-6">
+                <div >
                     <Card>
                         <template #title>Edit</template>
                         <template #content>

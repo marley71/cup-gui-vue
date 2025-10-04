@@ -4,7 +4,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
 
 class InstallGui extends Command {
-    protected $signature = 'cup:install-gui';
+    protected $signature = 'cup:install-gui {--update-cupparis : aggiorna solo il git della libreria cupparis-primevue al branch}';
 
     protected $name = 'InstallGui';
 
@@ -13,6 +13,15 @@ class InstallGui extends Command {
     protected $cupparisEnv = [];
 
     public function handle() {
+        $this->cupparisEnv['CUPPARIS_GIT'] =  config('cup-gui-vue.cupparis-primevue-git') ;
+        $this->cupparisEnv['APP_FOLDER'] = config('cup-gui-vue.app_folder') . '/vue-application-v4';
+        $this->cupparisEnv['CUPPARIS_BRANCH'] =   config('cup-gui-vue.cupparis-primevue-branch');
+
+        if ($this->option('update-cupparis') ) {
+            $this->updateCupparis();
+            return ;
+        }
+
         echo "
         - copia cartella vue-application-v4 in " . config('cup-gui-vue.app_folder') . "
         - git clone " . config('cup-gui-vue.cupparis-primevue-git') . "
@@ -22,9 +31,7 @@ class InstallGui extends Command {
             $this->comment('Comando abortito');
             return ;
         }
-        $this->cupparisEnv['CUPPARIS_GIT'] =  config('cup-gui-vue.cupparis-primevue-git') ;
-        $this->cupparisEnv['APP_FOLDER'] = config('cup-gui-vue.app_folder') . '/vue-application-v4';
-        $this->cupparisEnv['CUPPARIS_BRANCH'] =   config('cup-gui-vue.cupparis-primevue-branch');
+
 
         $this->comment('copia folder application');
         $this->copyApplicationFolder();
@@ -63,55 +70,26 @@ class InstallGui extends Command {
             $this->comment($result->output());
             $this->comment('done ');
         }
-
-
-//        $path = config('cup-gui-vue.app_folder') . '/vue-application-v4';
-//        $p = Process::forever()->path($path);
-//        $command = 'git clone ' . config('cup-gui-vue.cupparis-primevue-git');
-//        $this->comment('execute ' . $command );
-//        $result = $p->run($command);
-//        if (!$result->successful()) {
-//            // Il processo ha fallito
-//            $this->error($result->errorOutput());
-//            exit(1);
-//        } else {
-//            $this->comment($result->output());
-//            $this->comment('done ');
-//        }
-//
-//
-//        $this->comment("cupparis-primevue path " . $path . '/cupparis-primevue');
-//
-//        $p = Process::forever()->path($path . '/cupparis-primevue' );
-//        $command = 'git checkout ' . config('cup-gui-vue.cupparis-primevue-branch');
-//        $this->comment('execute ' . $command);
-//        $p->run($command);
-//        if (!$result->successful()) {
-//            // Il processo ha fallito
-//            $this->error($result->errorOutput());
-//            exit(1);
-//        } else {
-//            $this->comment($result->output());
-//            $this->comment('done ');
-//        }
-//
-//        $p = Process::forever()->path($path . '/cupparis-primevue' );
-//        $command = 'git pull';
-//        $this->comment('execute ' . $command);
-//        $p->run($command);
-//        if (!$result->successful()) {
-//            // Il processo ha fallito
-//            $this->error($result->errorOutput());
-//            exit(1);
-//        } else {
-//            $this->comment($result->output());
-//            $this->comment('done ');
-//        }
     }
 
     protected function installClient() {
         $p = Process::forever()->env($this->cupparisEnv);
         $command = "sh " . dirname(__FILE__) . '/shell_commands/client-install.sh';
+        $this->comment('execute ' . $command );
+        $result = $p->run($command);
+        if (!$result->successful()) {
+            // Il processo ha fallito
+            $this->error($result->errorOutput());
+            exit(1);
+        } else {
+            $this->comment($result->output());
+            $this->comment('done ');
+        }
+    }
+
+    protected function updateCupparis() {
+        $p = Process::forever()->env($this->cupparisEnv);
+        $command = "sh " . dirname(__FILE__) . '/shell_commands/cupparis-update.sh';
         $this->comment('execute ' . $command );
         $result = $p->run($command);
         if (!$result->successful()) {
