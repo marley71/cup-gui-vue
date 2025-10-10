@@ -1,5 +1,5 @@
 {
-    "layout": "SidebarGroupedLayout",
+    "layout": "TopbarLayout",
     "layouts": {
         "SidebarLayout": "Layout con menu a icone",
         "SidebarGroupedLayout": "Layout con menu a cascata",
@@ -11,14 +11,14 @@
             "profileMenu": "sidebar"
         }
     },
-    "theme": "Lara",
+    "theme": "Aura",
     "themes": {
         "Aura": "Aura",
         "Lara": "Lara",
         "Nora": "Nora",
         "Material": "Material"
     },
-    "themeColor": "greenColor",
+    "themeColor": "blueColor",
     "themeColors": {
         "defaultColor": "Colori di default (indigo)",
         "orangeColor": "Arancio",
