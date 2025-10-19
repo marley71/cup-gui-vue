@@ -132,7 +132,7 @@ class GenerateImplementation
         $modelName = $this->params['model'];
         $modelClass = 'Model' . Str::studly($modelName);
         $table = $this->params['table'];
-        $outputPath = config('cup-gui-vue.application_path') . '/ModelConfs/'.$modelClass.'.js';
+        $outputPath = config('cup-gui-vue.application_path') . '/src/application/ModelConfs/'.$modelClass.'.js';
         $dotArray = Arr::dot(Arr::get($this->params,'modelConf',[]));
         $dbFields = DbService::getFields($table);
         //print_r($dotArray);
@@ -168,7 +168,7 @@ class GenerateImplementation
         if ($generator->generate()) {
             $this->logs[] = "Generated $outputPath generated successfully!";
         }
-        $models = json_decode(file_get_contents(config('cup-gui-vue.application_path') . '/config/models.json'),true);
+        $models = json_decode(file_get_contents(config('cup-gui-vue.application_path') . '/src/application/config/models.json'),true);
         $found = false;
         foreach ($models as $key => $filename) {
             if ($key == $modelClass) {

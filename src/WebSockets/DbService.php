@@ -245,7 +245,7 @@ class DbService extends ServiceInterface
 
     public function checkConf($params) {
         $model = $params['model'];
-        $jsFilename = config('cup-gui-vue.application_path') . '/ModelConfs/Model' . Str::studly($model). '.js';
+        $jsFilename = config('cup-gui-vue.application_path') . '/src/application/ModelConfs/Model' . Str::studly($model). '.js';
         $phpFilename = config_path('foorms/'.$model . '.php');
         $result = [
           'jsConf' => [],
