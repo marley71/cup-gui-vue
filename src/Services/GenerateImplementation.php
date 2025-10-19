@@ -179,7 +179,7 @@ class GenerateImplementation
         // aggiorno il file json per tenere traccia dei modelli da importare.
         if (!$found) {
             $models[$modelClass] = $modelClass . '.js';
-            file_put_contents(config('cup-gui-vue.application_path') . '/config/models.json',json_encode($models,JSON_PRETTY_PRINT));
+            file_put_contents(config('cup-gui-vue.application_path') . '/src/application/config/models.json',json_encode($models,JSON_PRETTY_PRINT));
         }
 
         // sovrascrivo il file index.js di modelconfs per importare i modelli corretti.
@@ -189,7 +189,7 @@ class GenerateImplementation
             $import_model_confs .= "import $model from './$filename';\n";
             $model_confs_assign .= "cs.CrudVars.modelConfs.$model = $model;\n";
         }
-        $outputPath = config('cup-gui-vue.application_path') . '/ModelConfs/index.js';
+        $outputPath = config('cup-gui-vue.application_path') . '/src/application/ModelConfs/index.js';
         $generator = new CodeGenerator(
             dirname(__FILE__) . '/../../resources/stubs/model-index.stub',
             [
