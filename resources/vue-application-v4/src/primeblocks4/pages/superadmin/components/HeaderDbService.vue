@@ -37,15 +37,15 @@ export default {
 </script>
 
 <template>
-    <div class="flex flex-column" v-if="response">
-        <div class="flex w-full align-content-center">
+    <div class="flex flex-col gap-5" v-if="response">
+        <div class="flex flex-col gap-5 w-full align-content-center">
             <div class="flex-grow-1">
                 <h6>Implementazioni esistenti</h6>
                 <div class="flex gap-4">
                     <div class="flex flex-column align-items-center" v-for="(value,key) in response.msg" :key="key">
+                        <i v-if="value" class="fa fa-check-circle p-1"></i>
+                        <i v-else class="fa fa-times p-1"></i>
                         <div>{{key}}</div>
-                        <i v-if="value" class="fa fa-check-circle"></i>
-                        <i v-else class="fa fa-times"></i>
                     </div>
                 </div>
             </div>
@@ -53,8 +53,8 @@ export default {
             <div class="flex-grow-1">
                 <h6>Scegli cosa generare</h6>
                 <div class="flex">
-                    <div v-for="(value,key) in generaImplementazione" :key="key">
-                        {{key}} <Checkbox v-model="generaImplementazione[key]" :value="value" :binary="true"></Checkbox>
+                    <div class="border-[1px] border-round-2xl p-1 m-1" v-for="(value,key) in generaImplementazione" :key="key">
+                        <Checkbox v-model="generaImplementazione[key]" :value="value" :binary="true"></Checkbox> {{key}}
                     </div>
                 </div>
             </div>

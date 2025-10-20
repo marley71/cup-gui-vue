@@ -1,11 +1,10 @@
 <script>
 import cs from "cupparis-primevue"
-import Structure from "./Structure.vue";
 import EditorCode from "./EditorCode.vue";
 import HeaderDbService from "./HeaderDbService.vue";
 export default {
     name: "DbService",
-    components: {HeaderDbService, EditorCode, Structure},
+    components: {HeaderDbService, EditorCode},
     props : ['data'],
     emits : ['call-action'],
     watch: {
@@ -224,8 +223,7 @@ export default {
 <!--            <SplitButton label="Save" :model="items"></SplitButton>-->
         </template>
     </Toolbar>
-    <HeaderDbService v-if="checkResult" :response="checkResult" @genera="genera" @preview="preview"></HeaderDbService>
-<!--    <Structure v-if="checkResult && mode=='structure'" ref="structure" :response="checkResult" :fields="fields" @genera="genera" @preview="preview"></Structure>-->
+    <HeaderDbService v-if="checkResult" ref="structure" :response="checkResult" @genera="genera" @preview="preview"></HeaderDbService>
     <EditorCode v-if="checkResult && mode=='codejs'" ref="codejs" :response="checkResult" :conf="modelConf" mode="js"></EditorCode>
     <EditorCode v-if="checkResult && mode=='codephp'" ref="codephp" :response="checkResult" :conf="modelConf" mode="php"></EditorCode>
     <InlineMessage severity="danger" v-if="error">{{error}}</InlineMessage>
