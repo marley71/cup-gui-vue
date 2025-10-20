@@ -70,7 +70,7 @@ class GenerateImplementation
     }
     protected function createServerConf() {
         $model = $this->params['model'];
-        $confName = Str::camel($model);
+        $confName = $model; //Str::camel($model);
         $table = $this->params['table'];
         $outputPath = config_path('foorms/'.$confName.'.php');
         $fields = DbService::getFields($table);
