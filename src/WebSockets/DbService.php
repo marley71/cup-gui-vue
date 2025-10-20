@@ -233,7 +233,7 @@ class DbService extends ServiceInterface
         // esistenza modello
         $modelExist = file_exists(base_path('app/Models/'.Str::studly($params['model']).'.php'));
         $policyExist = file_exists(base_path('app/Policies/'.Str::studly($params['model']).'Policy.php'));
-        $clientExist = file_exists(config('cup-gui-vue.application_path') . '/ModelConfs/Model' . Str::studly($params['model']). '.js');
+        $clientExist = file_exists(config('cup-gui-vue.application_path') . '/src/application/ModelConfs/Model' . Str::studly($params['model']). '.js');
         return [
             'Model' => $modelExist,
             'ServerConf' => $foormExist,
