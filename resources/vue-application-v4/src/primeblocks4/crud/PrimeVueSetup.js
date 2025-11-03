@@ -9,13 +9,11 @@ import AvatarGroup from "primevue/avatargroup";
 import Badge from "primevue/badge";
 import Breadcrumb from "primevue/breadcrumb";
 import Button from "primevue/button";
-import Calendar from "primevue/calendar";
 import Card from "primevue/card";
 import Chart from "primevue/chart";
 import Carousel from "primevue/carousel";
 import Checkbox from "primevue/checkbox";
 import Chip from "primevue/chip";
-import Chips from "primevue/chips";
 import ColorPicker from "primevue/colorpicker";
 import Column from "primevue/column";
 import ConfirmDialog from "primevue/confirmdialog";
@@ -23,21 +21,29 @@ import ConfirmPopup from "primevue/confirmpopup";
 import ContextMenu from "primevue/contextmenu";
 import DataTable from "primevue/datatable";
 import DataView from "primevue/dataview";
+import DatePicker from "primevue/datepicker";
 //import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Dialog from "primevue/dialog";
 import Divider from "primevue/divider";
+import Drawer from "primevue/drawer";
 import Select from "primevue/select";
 import Editor from "primevue/editor";
 import Fieldset from "primevue/fieldset";
 import FileUpload from "primevue/fileupload";
+import FloatLabel from "primevue/floatlabel";
 import Galleria from "primevue/galleria";
 import Image from "primevue/image";
 import InlineMessage from "primevue/inlinemessage";
+import IconField from "primevue/iconfield";
+import IftaLabel from "primevue/iftalabel";
 import Inplace from "primevue/inplace";
+import InputGroup from "primevue/inputgroup";
 import InputMask from "primevue/inputmask";
 import InputNumber from "primevue/inputnumber";
 import InputSwitch from "primevue/inputswitch";
 import InputText from "primevue/inputtext";
+import InputIcon from "primevue/inputicon";
+
 import Knob from "primevue/knob";
 import Listbox from "primevue/listbox";
 import MegaMenu from "primevue/megamenu";
@@ -54,6 +60,7 @@ import PanelMenu from "primevue/panelmenu";
 import Password from "primevue/password";
 import PickList from "primevue/picklist";
 import ProgressBar from "primevue/progressbar";
+import ProgressSpinner from "primevue/progressspinner";
 import RadioButton from "primevue/radiobutton";
 import Rating from "primevue/rating";
 import SelectButton from "primevue/selectbutton";
@@ -68,7 +75,10 @@ import Splitter from "primevue/splitter";
 import SplitterPanel from "primevue/splitterpanel";
 import Steps from "primevue/steps";
 import TabMenu from "primevue/tabmenu";
-import TabView from "primevue/tabview";
+import Tabs from "primevue/tabs";
+import Tab from 'primevue/tab';
+import TabPanels from 'primevue/tabpanels';
+import TabList from 'primevue/tablist';
 import TabPanel from "primevue/tabpanel";
 import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
@@ -120,14 +130,12 @@ function _setupComponents() {
         //'BlockUI' : BlockUI,
         'Breadcrumb' : Breadcrumb,
         'Button' : Button,
-        'Calendar' : Calendar,
         'Card' : Card,
         'Chart' : Chart,
         'Carousel' : Carousel,
         //'CascadeSelect' : CascadeSelect,
         'Checkbox' : Checkbox,
         'Chip' : Chip,
-        'Chips' : Chips,
         'ColorPicker' : ColorPicker,
         'Column' : Column,
         //'ColumnGroup' : ColumnGroup,
@@ -136,20 +144,27 @@ function _setupComponents() {
         'ContextMenu' : ContextMenu,
         'DataTable' : DataTable,
         'DataView' : DataView,
+        'DatePicker' : DatePicker,
         //'DataViewLayoutOptions' : DataViewLayoutOptions,
         //'DeferredContent' : DeferredContent,
         'Dialog' : Dialog,
         'Divider' : Divider,
+        'Drawer' : Drawer,
         //'Dock' : Dock,
         'Select' : Select,
         //'DynamicDialog' : DynamicDialog,
         'Editor' : Editor,
         'Fieldset' : Fieldset,
         'FileUpload' : FileUpload,
+        'FloatLabel' : FloatLabel,
         'Galleria' : Galleria,
+        'IconField' : IconField,
+        'IftaLabel' : IftaLabel,
         'Image' : Image,
         'InlineMessage' : InlineMessage,
         'Inplace' : Inplace,
+        'InputGroup' : InputGroup,
+        'InputIcon' : InputIcon,
         'InputMask' : InputMask,
         'InputNumber' : InputNumber,
         'InputSwitch' : InputSwitch,
@@ -170,7 +185,7 @@ function _setupComponents() {
         'Password' : Password,
         'PickList' : PickList,
         'ProgressBar' : ProgressBar,
-        //'ProgressSpinner' : ProgressSpinner,
+        'ProgressSpinner' : ProgressSpinner,
         'RadioButton' : RadioButton,
         'Rating' : Rating,
         //'Row' : Row,
@@ -186,8 +201,11 @@ function _setupComponents() {
         'SplitterPanel' : SplitterPanel,
         'Steps' : Steps,
         'TabMenu' : TabMenu,
-        'TabView' : TabView,
+        'Tabs' : Tabs,
+        'Tab' : Tab,
+        'TabPanels' : TabPanels,
         'TabPanel' : TabPanel,
+        'TabList' : TabList,
         'Tag' : Tag,
         'Textarea' : Textarea,
         //'Terminal' : Terminal,

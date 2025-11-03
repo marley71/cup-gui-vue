@@ -26,7 +26,10 @@ console.debug('colors',themeColors.getTheme());
 app.use(PrimeVue, {
     theme: {
         //preset: MyPreset
-        preset: themeColors.getTheme()
+        preset: themeColors.getTheme(),
+        options : {
+            darkModeSelector: '.app-dark'
+        },
     }
 });
 
@@ -44,6 +47,9 @@ const appStatusInstance = appStatus();
 appStatusInstance.clear();
 CrudInit.install(app).then(function () {
     cs.install(app);
+    if (cs.CrudHelpers.hasDarkMode()) {
+        document.documentElement.classList.add('app-dark');
+    }
     CrudInit.loadMenu().then(function() {
         try {
             console.debug('installo applicazione ... ')

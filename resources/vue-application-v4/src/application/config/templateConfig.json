@@ -1,14 +1,18 @@
 {
-    "layout": "TopbarLayout",
+    "layout": "SidebarGroupedLayout2",
     "layouts": {
         "SidebarLayout": "Layout con menu a icone",
         "SidebarGroupedLayout": "Layout con menu a cascata",
+        "SidebarGroupedLayout2": "Layout con menu a cascata 2",
         "TopbarLayout": "Layout con menu top"
     },
     "layoutsConf": {
         "SidebarLayout": [],
         "SidebarGroupedLayout": {
             "profileMenu": "sidebar"
+        },
+        "SidebarGroupedLayout2": {
+            "profileMenu": "top"
         }
     },
     "theme": "Aura",

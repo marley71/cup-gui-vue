@@ -32,14 +32,14 @@ onMounted (() => {
                     <div class="flex flex-col gap-6 w-full">
                         <IconField>
                             <InputIcon class="pi pi-user text-white/70!" />
-                            <InputText name="email" type="text" class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-sm!" placeholder="Username" />
+                            <InputText name="email" type="text" class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-xs!" placeholder="Username" />
                         </IconField>
                         <IconField>
                             <InputIcon class="pi pi-lock text-white/70!" />
                             <InputText
                                 name="password"
                                 type="password"
-                                class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-sm!"
+                                class="appearance-none! border! border-white/10! w-full! outline-0! bg-white/10! text-white! placeholder:text-white/70! rounded-3xl! shadow-xs!"
                                 placeholder="Password"
                             />
                         </IconField>

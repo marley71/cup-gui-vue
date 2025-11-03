@@ -159,7 +159,7 @@ export default {
 </script>
 <template>
     <div class="w-full grid grid-cols-2 gap-1">
-        <div class="w-full border-1 border-gray-100 border p-1" v-for="(item) in widgets">
+        <div class="w-full border border-gray-100 border p-1" v-for="(item) in widgets">
             <div class="text-center">{{item.widget}}</div>
             <component class="w-full" :is="item.widget" :conf="item.conf"></component>
         </div>

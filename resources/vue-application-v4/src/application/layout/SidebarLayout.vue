@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen flex relative lg:static bg-surface-50 dark:bg-surface-950">
-    <div id="app-sidebar-6" class="h-screen hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-10 select-none w-[10.54rem] bg-primary animate-duration-300 animate-ease-in-out">
+    <div id="app-sidebar-6" class="h-screen hidden lg:block shrink-0 absolute lg:static left-0 top-0 z-10 select-none w-[10.54rem] bg-primary animate-duration-300 animate-ease-in-out">
       <div class="flex flex-col h-full">
-        <div class="flex items-center justify-center flex-shrink-0 p-4">
+        <div class="flex items-center justify-center shrink-0 p-4">
           <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
             <path
                 fill-rule="evenodd"
@@ -15,8 +15,8 @@
 
         <div class="p-4">
           <IconField icon-position="left">
-            <InputIcon class="pi pi-search !text-primary-contrast" />
-            <InputText type="text" class="!border-0 !bg-primary-400 dark:!bg-primary-300 !rounded-lg !text-primary-contrast placeholder:!text-primary-contrast/60 w-full" placeholder="Search" />
+            <InputIcon class="pi pi-search text-primary-contrast!" />
+            <InputText type="text" class="border-0! bg-primary-400! dark:bg-primary-300! rounded-lg! text-primary-contrast! placeholder:text-primary-contrast/60! w-full" placeholder="Search" />
           </IconField>
         </div>
 
@@ -34,12 +34,12 @@
             <a
                 class="p-2 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 cursor-pointer"
             >
-              <i class="pi pi-slack !text-xl !leading-none text-primary-100 dark:text-primary-contrast" />
+              <i class="pi pi-slack text-xl! leading-none! text-primary-100 dark:text-primary-contrast" />
             </a>
             <a
                 class="p-2 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 cursor-pointer"
             >
-              <i class="pi pi-github !text-xl !leading-none text-primary-100 dark:text-primary-contrast" />
+              <i class="pi pi-github text-xl! leading-none! text-primary-100 dark:text-primary-contrast" />
             </a>
           </div>
         </div>
@@ -69,9 +69,9 @@
                         }"
               class="cursor-pointer flex items-center justify-center lg:hidden text-surface-700 dark:text-surface-100 mr-auto"
           >
-            <i class="pi pi-bars !text-xl !leading-none" />
+            <i class="pi pi-bars text-xl! leading-none!" />
           </a>
-          <i class="pi pi-bell !text-xl !leading-tight text-surface-500 dark:text-surface-400 cursor-pointer" />
+          <i class="pi pi-bell text-xl! leading-tight! text-surface-500 dark:text-surface-400 cursor-pointer" />
               <div class="flex layout-profile-name gap-1 cursor-pointer" @click="toggle">
                   <span class="mt-1">{{ userInfo.name }}</span>
                   <img src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="w-8 h-8 rounded-full cursor-pointer" />

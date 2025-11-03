@@ -1,5 +1,5 @@
 <template>
-    <div class="overflow-y-auto flex-1 p-2 flex flex-col gap-4 scrollbar-custom">
+    <div id="menu-sidebar" class="overflow-y-auto flex-1 p-2 flex flex-col gap-4 scrollbar-custom">
         <template v-for="mainItem in menu" >
 
                 <ul class="list-none m-0 flex flex-col gap-1">
@@ -22,7 +22,7 @@
 
                             <li v-for="child in mainItem.items">
                                 <template v-if="child.to">
-                                    <router-link :to="child.to" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                                    <router-link :name="child.to" :to="child.to" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
                                         <i class="pi pi-home text-base! leading-none! text-primary-contrast" />
                                         <span class="font-medium text-base leading-tight">{{child.label}}</span>
                                     </router-link>
@@ -42,11 +42,11 @@
                                         <span class="font-semibold text-base leading-tight text-primary-contrast">{{child.label}}</span>
                                         <i class="fa fa-angle-down text-base! leading-none! text-primary-contrast ml-auto" />
                                     </div>
-                                    <ul class="list-none m-0 overflow-hidden flex-col gap-1 mt-1 ml-5" :class="menuStatus.opened[child.mId]?'flex':'hidden'">
+                                    <ul :id="child.mId" class="list-none m-0 overflow-hidden flex-col gap-1 mt-1 ml-5" :class="menuStatus.opened[child.mId]?'flex':'hidden'">
 
                                         <li v-for="item in child.items">
 
-                                            <router-link :to="item.to" class="flex items-center cursor-pointer p-1 gap-1 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                                            <router-link :name="item.to" :to="item.to" class="flex items-center cursor-pointer p-1 gap-1 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
                                                 <i :class="item.icon" class="text-base! leading-none! text-primary-contrast" />
                                                 <span class="font-light text-sm leading-tight">{{item.label}}</span>
                                             </router-link>
@@ -63,7 +63,7 @@
 <!--                            <i class="pi pi-home text-base! leading-none! text-primary-contrast" />-->
 <!--                            <span class="font-medium text-base leading-tight">{{mainItem.label}}</span>-->
 <!--                        </a>-->
-                        <router-link :to="mainItem.to"
+                        <router-link :name="mainItem.to" :to="mainItem.to"
                                      class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150"
                         >
                             <i :class="mainItem.icon" class="text-base! leading-none! text-primary-contrast" />
@@ -78,16 +78,13 @@
 </template>
 
 <script >
-//import Badge from 'primevue/badge';
-//import { useRouter } from 'vue-router'
-//const router = useRouter();
 import menuSuperAdmin from "../../config/menuSuperAdmin";
 import {userApp} from "../../stores/userApp";
 import cs from 'cupparis-primevue';
 import {SidebarGroupedStatus} from "./SidebarGroupedStatus";
-import templateConfig from '@/application/config/templateConfig.json';
 
 export default {
+
     data() {
 
         let menu = [];
@@ -121,6 +118,25 @@ export default {
         return dt;
 
     },
+    mounted() {
+        let path = this.$router.currentRoute.value.path;
+        setTimeout(function () {
+            console.debug('path',path,);
+            const container = document.getElementById('menu-sidebar');
+            const elemento = document.querySelector('a[name="' + path +'"]');
+            if (!container || !elemento) return;
+            const containerRect = container.getBoundingClientRect();
+            const elementoRect = elemento.getBoundingClientRect();
+            const isVisible = (
+                elementoRect.top >= containerRect.top &&
+                elementoRect.bottom <= containerRect.bottom
+            );
+            if (!isVisible) {
+                elemento.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+            }
+            elemento.classList.add('highlight');
+        },200)
+    },
     methods : {
         changeMenuStatus(menuId,event) {
             event.preventDefault();
@@ -128,22 +144,23 @@ export default {
             let that = this;
             setTimeout(function () {
                 that.menuStatus.setOpen(menuId,!that.menuStatus.opened[menuId])
-                console.debug('sitauazione',that.menuStatus.opened[menuId]);
+                console.debug('sitauazione',that.menuStatus.opened[menuId],document.getElementById(menuId));
                 if (document.getElementById(menuId)) {
-                    document.getElementById(menuId).style['max-height'] = '500px';
+                    document.getElementById(menuId).style['max-height'] = '1000px';
                 }
-            },20)
+            },200)
 
 
-        }
+        },
     }
 }
 </script>
 <style>
+/*
 .scrollbar-custom {
     scrollbar-width: thin;
 }
-
+*/
 .scrollbar-custom::-webkit-scrollbar {
     width: 1px;
     height: 1px; /* per la scrollbar orizzontale */
@@ -151,6 +168,24 @@ export default {
 
 /* Puoi anche personalizzare i thumb */
 .scrollbar-custom::-webkit-scrollbar-thumb {
-    background: #888; /* colore del thumb per visibilità */
+    background: transparent !important; /* colore del thumb per visibilità */
+}
+
+::-webkit-scrollbar {
+    width: 1px; /* larghezza del scroll */
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5); /* colore thumb */
+    border-radius: 4px; /* angoli arrotondati */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; /* traccia trasparente */
+}
+
+.highlight span {
+    font-weight: bold;
+    font-size : 1.02em;
 }
 </style>

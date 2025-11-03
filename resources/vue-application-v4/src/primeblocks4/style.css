@@ -1,4 +1,75 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-primeui';
+
+@source '../../cupparis-primevue/src/**/*.{vue,js,ts,jsx,tsx}';
+
+@custom-variant dark (&:where([class~="app-dark"], [class~="app-dark"] *));
+
+@theme {
+    --font-sans: Roboto, sans-serif;
+    --font-serif: Merriweather, serif;
+
+}
+
+@theme inline {
+    --color-background: var(--background);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
+
+    :root {
+        --light-background: #f9f9f9;
+        --dark-background: #0b1a1a;
+    }
+
+    html {
+        --background: var(--light-background);
+    }
+
+    html.app-dark {
+        --background: var(--dark-background);
+    }
+
+    .p-chip {
+        display: inline-flex
+    ;
+        align-items: center;
+        background: var(--p-surface-200);
+        color: var(--p-surface-800);
+        border-radius: 16px;
+        padding-block: 0.5rem;
+        padding-inline: 0.5rem;
+        gap: 0.25rem;
+
+        @variant dark {
+            background: var(--p-surface-700);
+            color: var(--p-surface-50);
+        }
+    }
+
+    .p-chip-remove-icon {
+        cursor: pointer;
+        margin-left: 0.5rem;
+    }
+
+    .p-chip:has(.p-chip-remove-icon) {
+        padding-inline-end: 0.5rem;
+    }
+}
 

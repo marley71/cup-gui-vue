@@ -53,7 +53,7 @@
             <template #grid="slotProps">
                 <div class="grid grid-nogutter">
                     <div class="col-12 p-2"> <!--v-for="(item, index) in slotProps" :key="index" -->
-                        <div class="p-4 border-1 surface-border surface-card border-round flex flex-column">
+                        <div class="p-4 border surface-border surface-card border-round flex flex-column">
                             <div class="surface-50 flex justify-content-center border-round p-3">
                                 <div class="relative mx-auto"> {{slotProps.data.model}}
 <!--                                    <img class="border-round w-full" :src="`https://primefaces.org/cdn/primevue/images/product/${item.image}`" :alt="item.name" style="max-width: 300px"/>-->

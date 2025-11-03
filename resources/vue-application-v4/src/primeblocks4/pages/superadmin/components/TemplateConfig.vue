@@ -50,6 +50,17 @@ export default {
                         </template>
                     </div>
                 </template>
+              <template v-if="localModel.layout === 'SidebarGroupedLayout2'">
+                <h3 class="mb-2">Menu utente<span class="font-bold">{{localModel.layoutsConf.SidebarGroupedLayout2.profileMenu}}</span></h3>
+                <div>
+                  <template v-for="(item,key) in {'top':'Top','sidebar':'Sidebar'}">
+                    <div class="flex">
+                      <RadioButton v-model="localModel.layoutsConf.SidebarGroupedLayout2.profileMenu" :value="key" ></RadioButton>
+                      <label>{{item}}</label>
+                    </div>
+                  </template>
+                </div>
+              </template>
                 <template v-if="localModel.layout === 'TopbarLayout'">
                     <div></div>
                 </template>

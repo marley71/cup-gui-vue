@@ -39,7 +39,7 @@ export default {
 <template>
     <div class="flex flex-col gap-5" v-if="response">
         <div class="flex flex-col gap-5 w-full align-content-center">
-            <div class="flex-grow-1">
+            <div class="grow">
                 <h6>Implementazioni esistenti</h6>
                 <div class="flex gap-4">
                     <div class="flex flex-column align-items-center" v-for="(value,key) in response.msg" :key="key">
@@ -50,10 +50,10 @@ export default {
                 </div>
             </div>
 
-            <div class="flex-grow-1">
+            <div class="grow">
                 <h6>Scegli cosa generare</h6>
                 <div class="flex">
-                    <div class="border-[1px] border-round-2xl p-1 m-1" v-for="(value,key) in generaImplementazione" :key="key">
+                    <div class="border border-round-2xl p-1 m-1" v-for="(value,key) in generaImplementazione" :key="key">
                         <Checkbox v-model="generaImplementazione[key]" :value="value" :binary="true"></Checkbox> {{key}}
                     </div>
                 </div>

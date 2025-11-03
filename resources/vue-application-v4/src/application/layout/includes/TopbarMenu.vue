@@ -187,7 +187,7 @@ const toggle = (event) => {
         </a>
 
         <div
-            class="hidden lg:flex flex-1 items-center justify-between absolute lg:static w-full bg-primary-500 left-0 top-full z-10 shadow lg:shadow-none border lg:border-0 border-primary-400"
+            class="hidden lg:flex flex-1 items-center justify-between absolute lg:static w-full bg-primary-500 left-0 top-full z-10 shadow-sm lg:shadow-none border lg:border-0 border-primary-400"
         >
             <Menubar :model="navs" class="bg-primary-500"></Menubar>
 <!--            <div class="flex-1 flex items-start gap-4 px-6 lg:px-0 py-4 lg:py-0 flex-col lg:flex-row">-->
@@ -205,7 +205,7 @@ const toggle = (event) => {
 <!--                    <Badge v-if="item.badge" :value="item.badge" severity="contrast" class="ml-2" />-->
 <!--                </a>-->
 <!--            </div>-->
-            <div  class="text-white hidden lg:flex flex-1 absolute lg:static w-full bg-primary-500 left-0 top-full z-10 shadow lg:shadow-none border lg:border-0 border-primary-400"
+            <div  class="text-white hidden lg:flex flex-1 absolute lg:static w-full bg-primary-500 left-0 top-full z-10 shadow-sm lg:shadow-none border lg:border-0 border-primary-400"
             >
                 <span v-for="(label,index) in menuPath">{{label}}{{ index==menuPath.length-1?'':'&nbsp;/&nbsp;' }}</span>
             </div>
@@ -225,9 +225,9 @@ const toggle = (event) => {
                         }"
                         class="cursor-pointer flex items-center justify-center lg:hidden text-surface-700 dark:text-surface-100 mr-auto"
                     >
-                        <i class="pi pi-bars !text-xl !leading-none" />
+                        <i class="pi pi-bars text-xl! leading-none!" />
                     </a>
-                    <i class="pi pi-bell !text-xl !leading-tight text-surface-500 dark:text-surface-400 cursor-pointer" />
+                    <i class="pi pi-bell text-xl! leading-tight! text-surface-500 dark:text-surface-400 cursor-pointer" />
                     <div class="flex layout-profile-name gap-1 cursor-pointer" @click="toggle">
                         <span class="mt-1">{{ userInfo.name }}</span>
                         <img src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="w-8 h-8 rounded-full cursor-pointer" />

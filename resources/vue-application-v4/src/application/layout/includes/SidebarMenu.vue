@@ -9,7 +9,7 @@
                                 <router-link :to="child.to"
                                              class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"
                                 >
-                                    <i :class="child.icon?child.icon:'fa fa-gear'" class="!text-xl !leading-tight text-primary-contrast dark:text-primary-contrast" />
+                                    <i :class="child.icon?child.icon:'fa fa-gear'" class="text-xl! leading-tight! text-primary-contrast dark:text-primary-contrast" />
                                 </router-link>
                                 <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">{{child.label}}</div>
                             </template>
@@ -25,7 +25,7 @@
                                         <router-link :to="item.to"
                                                      class="rounded-lg dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary transition-colors duration-150 shrink-0 cursor-pointer"
                                         >
-                                            <i :class="item.icon" class="!text-xl !leading-tight text-primary-contrast dark:text-primary-contrast" />
+                                            <i :class="item.icon" class="text-xl! leading-tight! text-primary-contrast dark:text-primary-contrast" />
                                             {{item.label}}
                                         </router-link>
                                     </template>
@@ -38,7 +38,7 @@
                         <router-link :to="mainItem.to"
                                      class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"
                         >
-                            <i :class="mainItem.icon" class="pi pi-home !text-xl !leading-tight text-primary-contrast dark:text-primary-contrast" />
+                            <i :class="mainItem.icon" class="pi pi-home text-xl! leading-tight! text-primary-contrast dark:text-primary-contrast" />
                         </router-link>
                         <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">{{mainItem.label}}</div>
                     </div>
@@ -49,7 +49,7 @@
 <!--            <a-->
 <!--                class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"-->
 <!--            >-->
-<!--                <i class="pi pi-home !text-xl !leading-tight text-primary-contrast dark:text-primary-contrast" />-->
+<!--                <i class="pi pi-home text-xl! leading-tight! text-primary-contrast dark:text-primary-contrast" />-->
 <!--            </a>-->
 <!--            <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">Home</div>-->
 <!--        </div>-->
@@ -58,7 +58,7 @@
 <!--            <a-->
 <!--                class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"-->
 <!--            >-->
-<!--                <i class="pi pi-bookmark !text-xl !leading-tight text-primary-100 dark:text-primary-contrast" />-->
+<!--                <i class="pi pi-bookmark text-xl! leading-tight! text-primary-100 dark:text-primary-contrast" />-->
 <!--            </a>-->
 <!--            <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">Favorite</div>-->
 <!--        </div>-->
@@ -67,7 +67,7 @@
 <!--            <a-->
 <!--                class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"-->
 <!--            >-->
-<!--                <i class="pi pi-users !text-xl !leading-tight text-primary-100 dark:text-primary-contrast" />-->
+<!--                <i class="pi pi-users text-xl! leading-tight! text-primary-100 dark:text-primary-contrast" />-->
 <!--            </a>-->
 <!--            <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">People</div>-->
 <!--        </div>-->
@@ -76,7 +76,7 @@
 <!--            <a-->
 <!--                class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"-->
 <!--            >-->
-<!--                <i class="pi pi-comments !text-xl !leading-tight text-primary-100 dark:text-primary-contrast" />-->
+<!--                <i class="pi pi-comments text-xl! leading-tight! text-primary-100 dark:text-primary-contrast" />-->
 <!--            </a>-->
 <!--            <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">Chat</div>-->
 <!--        </div>-->
@@ -85,7 +85,7 @@
 <!--            <a-->
 <!--                class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"-->
 <!--            >-->
-<!--                <i class="pi pi-calendar !text-xl !leading-tight text-primary-100 dark:text-primary-contrast" />-->
+<!--                <i class="pi pi-calendar text-xl! leading-tight! text-primary-100 dark:text-primary-contrast" />-->
 <!--            </a>-->
 <!--            <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">Calendar</div>-->
 <!--        </div>-->
@@ -94,7 +94,7 @@
 <!--            <a-->
 <!--                class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"-->
 <!--            >-->
-<!--                <i class="pi pi-cog !text-xl !leading-tight text-primary-100 dark:text-primary-contrast" />-->
+<!--                <i class="pi pi-cog text-xl! leading-tight! text-primary-100 dark:text-primary-contrast" />-->
 <!--            </a>-->
 <!--            <div class="mt-2 text-primary-100 dark:text-primary-contrast text-sm font-medium text-center">Settings</div>-->
 <!--        </div>-->
