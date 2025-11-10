@@ -14,6 +14,7 @@ const errorMsg = ref('');
 const checked = ref(false);
 const csrfToken = ref(null);
 const isProd = ref(import.meta.env.PROD);
+const appName = ref(import.meta.env.VITE_APP_NAME);
 // const logoUrl = computed(() => {
 //     return `${contextPath}layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
 // });
@@ -61,13 +62,12 @@ function  swithPage(event) {
 </script>
 
 <template>
-    <div
-        class="px-6 py-20 md:px-20 lg:px-80 flex items-center justify-center backdrop-blur-3xl bg-cover! bg-center! bg-no-repeat!"
-        style="background-image: url('https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/block.images/blocks/signin/signin-glass.jpg')"
-    >
+  <div class="bg-surface-50 dark:bg-surface-950 px-6 py-20 md:px-20 lg:px-80">
+    <div class="bg-surface-0 dark:bg-surface-900 p-8 md:p-12 shadow-sm rounded-2xl w-full max-w-[48rem] mx-auto flex flex-col gap-8">
         <LoginProd  v-if="isProd"></LoginProd>
         <LoginDev v-else></LoginDev>
     </div>
+  </div>
 </template>
 
 <!--<script>-->

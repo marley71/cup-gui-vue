@@ -55,6 +55,16 @@ export default [
                 name: 'error',
                 component: () => import('@/application/pages/auth/Error.vue')
             },
+            {
+                path: '/auth/forgot-password',
+                name: 'forgot-password',
+                component: () => import('@/application/pages/auth/ForgotPassword.vue')
+            },
+            {
+                path: '/auth/reset-password/:token',
+                name: 'reset-password',
+                component: () => import('@/application/pages/auth/ResetPassword.vue')
+            },
         ]
     },
     {
