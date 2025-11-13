@@ -19,7 +19,6 @@ class CupGuiVueServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        Log::info('ciccio');
         $this->commands($this->commands);
         $this->publishes([
             __DIR__.'/../../config/cup-gui-vue.php' => config_path('cup-gui-vue.php'),
