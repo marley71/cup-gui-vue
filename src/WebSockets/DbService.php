@@ -203,12 +203,12 @@ class DbService extends ServiceInterface
 
 
     public function getTables() {
-        $tableList =  Schema::getAllTables();
+        $tableList =  Schema::getTables(env('DB_DATABASE')); //       Schema::getAllTables();
         $tables = [];
         foreach ($tableList as $table) {
-            $tableName = $table->{'Tables_in_' . env('DB_DATABASE')};
+            //$tableName = $table->{'Tables_in_' . env('DB_DATABASE')};
             $tables[] = [
-              'name' =>  $tableName
+              'name' =>  $table['name'] //$tableName
             ];
         }
         return $tables;
