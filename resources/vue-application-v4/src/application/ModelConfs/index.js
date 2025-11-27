@@ -4,9 +4,15 @@
 **/
 
 import cs from 'cupparis-primevue';
-import ModelUser from './ModelUser.js';
-import ModelUser4 from './ModelUser4.js';
 
+//IMPORT START
+import ModelCupparisEntity from './ModelCupparisEntity.js';
+import ModelUser from './ModelUser.js';
+//IMPORT END
+
+
+//INSTALL START
+cs.CrudVars.modelConfs.ModelCupparisEntity = ModelCupparisEntity;
 cs.CrudVars.modelConfs.ModelUser = ModelUser;
-cs.CrudVars.modelConfs.ModelUser4 = ModelUser4;
+//INSTALL END
 
