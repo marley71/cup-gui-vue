@@ -30,8 +30,61 @@ export default {
             'action-delete-selected',
             'action-migrate',
             'action-rollback',
+            'action-import',
         ],
         actionsConfig: {
+            'action-import': {
+                actionType: 'collection',
+                title: 'Import',
+                buttonClass: 'p-button-outlined p-button-success',
+                icon: 'fa fa-upload',
+                text: 'Import',
+                json: null,
+                autoreloadView: true,
+                execute(event) {
+                    let tA = this;
+                    return new Promise(function (resolve, reject) {
+                        tA._import(function (esito) {
+                            console.log('import Event', event, esito);
+                            if (esito) {
+                                resolve();
+                            } else {
+                                reject();
+                            }
+
+                        })
+                    })
+
+                },
+
+                _import(callback) {
+                    var that = this;
+                    var r = that.createRoute('foormaction_record');
+                    r.setValues({
+                        modelName: that.viewInstance.modelName,
+                        actionName: 'import',
+                    });
+
+                    r.setParams({
+
+                    });
+
+                    // console.log("ROUTE MIG",r,that.modelData.cosa_migrare,that.viewInstance.getValue()[that.index].cosa_migrare)//that.viewInstance.getRowDataByKey(that.index))
+                    that.waitStart()
+                    Server.route(r, function (json) {
+                        that.waitEnd();
+                        that.json = json;
+                        if (json.error) {
+                            that.errorDialog(json.msg);
+                            return;
+                        }
+                        CrudCore.alertSuccess("Import eseguito con successo")
+                        that.viewInstance.reload();
+                    })
+                }
+
+            },
+
             'action-migrate': {
                 actionType: 'record',
                 title: 'Migrate',
