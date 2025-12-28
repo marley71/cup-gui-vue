@@ -21,7 +21,7 @@ export default () => {
                 "action-delete-selected",
             ],
             "actionsConfig": {
-                
+
             },
             "fields": ["name","email","mainrole","banned"],
             "fieldsConfig": {
