@@ -1,5 +1,7 @@
 <template>
-   <DialogsPage></DialogsPage>
+    <div class="grid grid-cols-1">
+        <DialogsPage></DialogsPage>
+    </div>
 </template>
 
 <script>

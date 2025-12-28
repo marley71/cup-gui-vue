@@ -34,14 +34,19 @@ export default {
 
                 console.log('appLang', appLang);
 
-                window.app = app;
+                //window.app = app;
                 window.$ = jQuery;
                 window.jQuery = jQuery;
-                if (!import.meta.env.VITE_APP_DINAMIC_CONF) {
+                if (!import.meta.env.VITE_APP_DYNAMIC_ENV) {
+                    console.log('no dynamic env');
                     return resolve('ok');
                 }
-                axios.get(import.meta.env.VITE_APP_DINAMIC_CONF,{}).then((response) => {
+                axios.get(import.meta.env.VITE_APP_DYNAMIC_ENV,{}).then((response) => {
                     console.log('response', response);
+                    if (response.data.error) {
+                        console.log('error', response.data.msg);
+                        return resolve('Stuff worked!');
+                    }
                     that.setEnv(response.data.result);
                     resolve("Stuff worked!");
                 }).catch((error) => {

@@ -12,18 +12,30 @@
                 <div class="flex justify-content-end">
 
                 </div>
-                <TabView v-model:activeIndex="activeService">
-                    <TabPanel v-for="(service,index) in services" :key="service">
-                        <template #header>
-                            <div class="text-xl">{{service }}</div>
-                            <span>&nbsp;&nbsp;</span>
-                            <i class="fa fa-question-circle cursor-pointer" @click="toggleHelp" v-if="index==activeService"></i>
-                        </template>
-                        <DbService ref="db" v-if="service==='db'"  :data="serviceResponse['db']"  @call-action="callService"></DbService>
-                        <SystemService ref="ss" v-if="service==='system'"  :data="serviceResponse['system']"  @call-action="callService"></SystemService>
-                        <RolesService ref="rs" v-if="service==='roles'"  :data="serviceResponse['roles']"  @call-action="callService"></RolesService>
-                    </TabPanel>
-                </TabView>
+                <Tabs v-model:value="activeService">
+                    <TabList>
+                        <Tab v-for="(service,index) in services" :key="service" :value="index">
+                            {{service }}
+                        </Tab>
+                    </TabList>
+                    <TabPanels>
+                        <TabPanel v-for="(service,index) in services" :key="service" :value="index">
+                            <div v-if="parseInt(activeService)===0" >
+                                <i class="fa fa-question-circle cursor-pointer" @click="toggleHelp"></i>
+                                <SystemService ref="ss" v-if="service==='system'"  :data="serviceResponse['system']"  @call-action="callService"></SystemService>
+                            </div>
+                            <div v-if="parseInt(activeService)===1" >
+                                <i class="fa fa-question-circle cursor-pointer" @click="toggleHelp"></i>
+                                <DbService ref="db"  :data="serviceResponse['db']"  @call-action="callService"></DbService>
+                            </div>
+
+                            <div v-if="parseInt(activeService)===2"  >
+                                <i class="fa fa-question-circle cursor-pointer" @click="toggleHelp"></i>
+                                <RolesService ref="rs" v-if="service==='roles'"  :data="serviceResponse['roles']"  @call-action="callService"></RolesService>
+                            </div>
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
             </template>
         </Card>
         <div v-else>
@@ -60,7 +72,7 @@ export default {
         return {
             services : services,
             connected : false,
-            activeService : 0,
+            activeService : '0',
             serviceResponse : {
                 'db' : null,
                 'system' : null,

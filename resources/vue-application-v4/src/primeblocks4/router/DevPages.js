@@ -5,11 +5,7 @@ export default [
         path: '/',
         component: ApplicationLayout,
         children: [
-            {
-                path: '/pages/notfound',
-                name: 'notfound',
-                component: () => import('@/application/pages/NotFound.vue')
-            },
+        
             // {
             //     path: '/test2-manage-constraint/:created_by',
             //     name: 'test2-manage-constraint',

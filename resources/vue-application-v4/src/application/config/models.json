@@ -1,4 +1,5 @@
 {
     "ModelUser": "ModelUser.js",
-    "ModelUser4": "ModelUser4.js"
+    "ModelUser4": "ModelUser4.js",
+    "ModelRoles": "ModelRoles.js"
 }

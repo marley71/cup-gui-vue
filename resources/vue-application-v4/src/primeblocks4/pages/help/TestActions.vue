@@ -1,5 +1,7 @@
 <template>
-    <ActionsPage></ActionsPage>
+    <div class="grid grid-cols-1">
+        <ActionsPage></ActionsPage>
+    </div>
 </template>
 
 <script>

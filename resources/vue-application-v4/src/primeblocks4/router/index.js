@@ -65,4 +65,11 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+
+cs.CrudCore.event().on('route-error',(event) => {
+    console.debug('route-error ',event);
+    //router.next({name : 'error',params : {msg : event.msg}});
+    router.push({name : 'notfound',params : {msg : event.msg}});
+});
+
 export default router;

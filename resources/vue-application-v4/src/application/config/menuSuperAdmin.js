@@ -50,5 +50,11 @@ export default {
                 },
             ]
         },
+        {
+            'label': 'Help Doc',
+            'icon': 'fa fa-gear',
+            'href': '/htmlhelp/index.html',
+            'target': '_blank'
+        },
     ]
 }

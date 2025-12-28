@@ -27,6 +27,12 @@
                                         <span class="font-medium text-base leading-tight">{{child.label}}</span>
                                     </router-link>
                                 </template>
+                                <template v-else-if="child.href">
+                                    <a  :href="child.href" :target="child.target" class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">
+                                        <i class="pi pi-home text-base! leading-none! text-primary-contrast" />
+                                        <span class="font-medium text-base leading-tight">{{child.label}}</span>
+                                    </a>
+                                </template>
                                 <template v-else>
                                     <div
                                         @click="changeMenuStatus(child.mId,$event)"
@@ -111,17 +117,17 @@ export default {
         dt.menu = menu;
         dt.user = userApp().getUserInfo();
         dt.menuStatus = SidebarGroupedStatus();
-        console.debug('CONFIG Menu',dt)
-        for (let i in dt.menuStatus.opened) {
-            console.debug('key ',i,dt.menuStatus.opened[i]);
-        }
+        //console.debug('CONFIG Menu',dt)
+        // for (let i in dt.menuStatus.opened) {
+        //     console.debug('key ',i,dt.menuStatus.opened[i]);
+        // }
         return dt;
 
     },
     mounted() {
         let path = this.$router.currentRoute.value.path;
         setTimeout(function () {
-            console.debug('path',path,);
+            //console.debug('path',path,);
             const container = document.getElementById('menu-sidebar');
             const elemento = document.querySelector('a[name="' + path +'"]');
             if (!container || !elemento) return;
@@ -140,11 +146,11 @@ export default {
     methods : {
         changeMenuStatus(menuId,event) {
             event.preventDefault();
-            console.debug('changeMenuStatus',event);
+            //console.debug('changeMenuStatus',event);
             let that = this;
             setTimeout(function () {
                 that.menuStatus.setOpen(menuId,!that.menuStatus.opened[menuId])
-                console.debug('sitauazione',that.menuStatus.opened[menuId],document.getElementById(menuId));
+                //console.debug('sitauazione',that.menuStatus.opened[menuId],document.getElementById(menuId));
                 if (document.getElementById(menuId)) {
                     document.getElementById(menuId).style['max-height'] = '1000px';
                 }

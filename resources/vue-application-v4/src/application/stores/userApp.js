@@ -22,6 +22,12 @@ export const userApp = defineStore('userApp', {
             return new Promise((resolve,reject) => {
                 if (!this.loaded) {
                     cs.Server.get('/api/me',{},(json) => {
+                        console.debug('/api/me json',json);
+                        if (json.error) {
+                            this.reset();
+                            reject(json.msg);
+                            return;
+                        }
                         this.setUserInfo(json);
                         this.loaded = true;
                         resolve()
@@ -44,6 +50,12 @@ export const userApp = defineStore('userApp', {
                 return true;
             }
             return false;
+        },
+        reset() {
+            this.userInfo = {};
+            this.axiosControllers = {};
+            this.keycloak = null;
+            this.loaded = false;
         }
     },
     persist : true,

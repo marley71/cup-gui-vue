@@ -12,7 +12,6 @@ export default {
         customComponents.install(app);
         let viewConfs = this.setDefaultModelConfs(cs.CrudVars.viewConfs);
         cs.CrudVars.viewConfs = viewConfs;
-        cs.CrudVars.viewConfs.listView.recordActionsPosition = 'start';
         //throw "errore";
         callback();
     },

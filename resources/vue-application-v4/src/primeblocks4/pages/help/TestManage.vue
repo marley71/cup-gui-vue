@@ -1,8 +1,6 @@
 <template>
-    <div class="grid">
-        <div class="col-12">
-            <ManagePage></ManagePage>
-        </div>
+    <div class="grid grid-cols-1">
+        <ManagePage></ManagePage>
     </div>
 </template>
 

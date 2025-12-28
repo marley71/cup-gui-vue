@@ -1,24 +1,12 @@
 <template>
-<!--    <div class="col-12">-->
-<!--        <wQuillEditor :conf="editorConf"></wQuillEditor>-->
-<!--    </div>-->
-<!--        <div class="col-12">-->
-<!--            <wSummerNoteEditor :conf="editorConf"></wSummerNoteEditor>-->
-<!--        </div>-->
-<!--    <div class="col-12">-->
-<!--        <wPrimeEditor :conf="editorConf"></wPrimeEditor>-->
-<!--    </div>-->
-    <div class="grid">
-        <div class="col-12">
-            <WidgetsPage></WidgetsPage>
-        </div>
+    <div class="grid grid-cols-1">
+        <WidgetsPage></WidgetsPage>
     </div>
 </template>
 
 <script>
 
 import cupparisPrimevue from 'cupparis-primevue';
-//import {QuillEditor} from "@vueup/vue-quill";
 import wPrimeEditor from '@/primeblocks4/components/widgets/wPrimeEditor.vue';
 
 const WidgetsPage = cupparisPrimevue.WidgetsPage;

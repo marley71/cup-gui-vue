@@ -2,18 +2,23 @@
   <div class="resize-container-2 min-h-screen flex relative lg:static bg-background
 ">
 <!--    dark:bg-linear-to-br from-surface-900 to-surface-500-->
-    <div id="app-sidebar-colored" class="w-[280px] bg-primary dark:bg-background  h-screen hidden lg:block shrink-0 absolute lg:static left-0 top-0 z-10 select-none">
+    <div id="app-sidebar-colored" class="w-[231px] bg-primary dark:bg-background  h-screen hidden lg:block shrink-0 absolute lg:static left-0 top-0 z-10 select-none">
       <div class="flex flex-col h-full">
         <div class="p-4 flex items-center gap-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none" class="w-10 h-10">
+          <img src="/assets/images/logo.svg" alt="Logo" class="w-10 h-10" />
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none" class="w-10 h-10">
             <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M21.5 42.0498C33.098 42.0498 42.5 32.6477 42.5 21.0498C42.5 9.45183 33.098 0.0498047 21.5 0.0498047C9.902 0.0498047 0.5 9.45183 0.5 21.0498C0.5 32.6477 9.902 42.0498 21.5 42.0498ZM28.0513 9.83248C28.3702 8.69975 27.2709 8.02994 26.267 8.74516L12.2528 18.7288C11.164 19.5045 11.3353 21.0498 12.51 21.0498H16.2003V21.0212H23.3926L17.5323 23.089L14.9487 32.2671C14.6299 33.3999 15.729 34.0697 16.733 33.3544L30.7472 23.3708C31.836 22.5951 31.6646 21.0498 30.49 21.0498H24.8937L28.0513 9.83248Z"
                 class="fill-primary-contrast"
             />
-          </svg>
-          <span class="text-lg font-semibold leading-tight text-primary-contrast ">ZenTrail</span>
+          </svg> -->
+          <div class="flex flex-col">
+            <div class="text-lg font-semibold leading-tight text-primary-contrast ">RLST</div>
+            <div stye="font-size: .5em !important;" class="text-sm font-semibold leading-tight text-primary-contrast ">{{ getEnte() }}</div>
+            <div stye="font-size: .5em !important;" class="text-sm font-semibold leading-tight text-primary-contrast ">Ver. {{ getVersion() }}</div>
+          </div>
         </div>
         <SidebarGroupedMenu></SidebarGroupedMenu>
         <div v-if="templateConfig.layoutsConf.SidebarGroupedLayout2.profileMenu==='sidebar'"
@@ -60,7 +65,7 @@
       </div>
     </div>
     <div class="min-h-screen flex flex-col relative flex-auto">
-      <div class="flex justify-between items-center py-4 px-8 bg-surface-0 dark:bg-surface-900 border-b border-surface-200 dark:border-surface-700 relative lg:static">
+      <div class="flex justify-between items-center py-4 px-8 bg-surface-0 dark:bg-surface-900 border-b border-yellow-200 dark:border-surface-700 border-b-3 relative lg:static">
         <div class="flex items-center">
           <a
               v-styleclass="{
@@ -77,6 +82,10 @@
           >
             <i class="fa fa-bars text-xl!" />
           </a>
+            <div class="flex flex-col">
+               <span>{{ userInfo.name }}</span>
+                <span class="text-sm italic">{{getRoleName()}}</span>
+            </div>
         </div>
         <div class="py-2 mt-auto border-primary-400 dark:border-primary-300">
           <ul class="list-none p-2 px-4 m-0 hidden animate-duration-150 bg-white overflow-hidden absolute right-0 top-[65px] z-50 border-b border-l border-primary-700">
@@ -114,12 +123,13 @@
           >
             <i class="fa fa-user text-xl!"/>
           </a>
-          <a
-              class="cursor-pointer block-inline text-surface-700 dark:text-surface-100 mr-4"
-              @click="CrudHelpers.toggleDarkMode()"
-          >
-            <i class="fa text-xl!" :class="CrudHelpers.hasDarkMode() ? 'fa-sun' : 'fa-moon'" id="dark-mode-icon"/>
-          </a>
+
+<!--          <a-->
+<!--              class="cursor-pointer block-inline text-surface-700 dark:text-surface-100 mr-4"-->
+<!--              @click="CrudHelpers.toggleDarkMode()"-->
+<!--          >-->
+<!--            <i class="fa text-xl!" :class="CrudHelpers.hasDarkMode() ? 'fa-sun' : 'fa-moon'" id="dark-mode-icon"/>-->
+<!--          </a>-->
         </div>
         <div v-if="templateConfig.layoutsConf.SidebarGroupedLayout.profileMenu==='top'"
              class="flex items-center gap-1 cursor-pointer" @click="toggle" :title="userName">
@@ -208,6 +218,15 @@ function getImg() {
 
 }
 
+function getVersion() {
+  return import.meta.env.VITE_VERSION;
+}
+
+function getEnte() {
+  
+  return cs.CrudVars.env.ente;
+}
+
 function getLetter() {
   let l = userName.value.split(' ');
   let label = ''
@@ -220,6 +239,13 @@ function getLetter() {
 const toggle = (event) => {
   menu.value.toggle(event);
 };
+
+function getRoleName() {
+    if (userInfo.value && userInfo.value.role) {
+        return userInfo.value.role.name
+    }
+    return '';
+}
 </script>
 
 <style>
@@ -229,7 +255,7 @@ const toggle = (event) => {
   width: 100vw;
 
   @media (min-width: 1024px) {
-    width: calc(100vw - 280px);
+    width: calc(100vw - 231px);
 
     max-width: 1600px;
   }

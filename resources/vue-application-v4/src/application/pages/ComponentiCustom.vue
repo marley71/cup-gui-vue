@@ -18,7 +18,7 @@ export default {
     <div>
         Pagina di esempio come inserire componenti custom sia nativi vue sia estendendo componenti di cupparis-primevue.
     </div>
-    <component-example class="m-3 p-3 border-red-500 border"></component-example>
+    <component-example class="m-3 p-3 border-red-500 border-1"></component-example>
 </template>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen flex relative lg:static bg-surface-50 dark:bg-surface-950">
-    <div id="app-sidebar-colored" class="w-[280px] bg-primary h-screen hidden lg:block shrink-0 absolute lg:static left-0 top-0 z-10 select-none">
+    <div id="app-sidebar-colored" class="w-[231px] bg-primary h-screen hidden lg:block shrink-0 absolute lg:static left-0 top-0 z-10 select-none">
         <div class="flex flex-col h-full">
             <div class="p-4 flex items-center gap-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none" class="w-10 h-10">
@@ -11,7 +11,7 @@
                         class="fill-primary-contrast"
                     />
                 </svg>
-                <span class="text-lg font-semibold leading-tight text-primary-contrast">ZenTrail</span>
+                <span class="text-lg font-semibold leading-tight text-primary-contrast">RLST</span>
             </div>
             <SidebarGroupedMenu></SidebarGroupedMenu>
             <div v-if="templateConfig.layoutsConf.SidebarGroupedLayout.profileMenu==='sidebar'"  class="py-2 mt-auto has-[ul.hidden]:border-t border-primary-400 dark:border-primary-300">
@@ -54,7 +54,7 @@
             </div>
         </div>
     </div>
-    <div class="bottom-0 min-h-screen flex flex-col relative max-w-screen" style="width:calc(100% - 280px)">
+    <div class="bottom-0 min-h-screen flex flex-col relative max-w-screen" style="width:calc(100% - 231px)">
         <div class="flex justify-between items-center py-4 px-8 bg-surface-0 dark:bg-surface-900 border-b border-surface-200 dark:border-surface-700 relative lg:static">
             <div class="flex items-center">
                 <ul class="list-none p-2 m-0 hidden origin-bottom animate-duration-150 border-t border-primary-400 dark:border-primary-300">

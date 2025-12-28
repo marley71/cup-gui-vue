@@ -1,5 +1,7 @@
 <template>
-    <EsperimentiPage></EsperimentiPage>
+    <div class="grid grid-cols-1">
+        <EsperimentiPage></EsperimentiPage>
+    </div>
 </template>
 
 <script>

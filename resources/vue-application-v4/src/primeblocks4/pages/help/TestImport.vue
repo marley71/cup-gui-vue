@@ -1,5 +1,7 @@
 <template>
-    <ImportPage></ImportPage>
+    <div class="grid grid-cols-1">
+        <ImportPage></ImportPage>
+    </div>
 </template>
 
 <script>

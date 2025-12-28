@@ -1,22 +1,20 @@
 <template>
-    <div class="grid">
-        <div class="col-12">
-            <div class="card">
-                <h5>Esempio di Manage con constraint che filtra la lista utenti per created_by</h5>
-                <SelectButton v-model="selectedManage" :options="manages" optionLabel="name" />
-                <hr>
-                <div v-if="selectedManage.code == 'simple'">
-                    <h6>Manage con configurazione di default</h6>
-                    <c-manage  :conf="m1()"></c-manage>
-                </div>
-                <div v-if="selectedManage.code == 'edit_insert'">
-                    <h6>Manage con insert e edit custom</h6>
-                    <c-manage  :conf="m2()"></c-manage>
-                </div>
-                <div v-if="selectedManage.code == 'list'">
-                    <h6>Manage con lista custom</h6>
-                    <c-manage  :conf="m3()"></c-manage>
-                </div>
+    <div class="grid grid-cols-1">
+        <div class="card">
+            <h5>Esempio di Manage con constraint che filtra la lista utenti per created_by</h5>
+            <SelectButton v-model="selectedManage" :options="manages" optionLabel="name" />
+            <hr>
+            <div v-if="selectedManage.code == 'simple'">
+                <h6>Manage con configurazione di default</h6>
+                <c-manage  :conf="m1()"></c-manage>
+            </div>
+            <div v-if="selectedManage.code == 'edit_insert'">
+                <h6>Manage con insert e edit custom</h6>
+                <c-manage  :conf="m2()"></c-manage>
+            </div>
+            <div v-if="selectedManage.code == 'list'">
+                <h6>Manage con lista custom</h6>
+                <c-manage  :conf="m3()"></c-manage>
             </div>
         </div>
     </div>

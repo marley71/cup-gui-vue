@@ -9,6 +9,7 @@ import AvatarGroup from "primevue/avatargroup";
 import Badge from "primevue/badge";
 import Breadcrumb from "primevue/breadcrumb";
 import Button from "primevue/button";
+import ButtonGroup from "primevue/buttongroup";
 import Card from "primevue/card";
 import Chart from "primevue/chart";
 import Carousel from "primevue/carousel";
@@ -130,6 +131,7 @@ function _setupComponents() {
         //'BlockUI' : BlockUI,
         'Breadcrumb' : Breadcrumb,
         'Button' : Button,
+        'ButtonGroup' : ButtonGroup,
         'Card' : Card,
         'Chart' : Chart,
         'Carousel' : Carousel,

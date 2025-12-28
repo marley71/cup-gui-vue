@@ -1,7 +1,5 @@
-// import { createApp } from 'vue'
+
 import './primeblocks4/style.css'
-//
-// createApp(App).mount('#app')
 import { createApp } from 'vue';
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
@@ -43,6 +41,7 @@ function mountApp(error) {
         //router.push('/');
     }
 }
+
 const appStatusInstance = appStatus();
 appStatusInstance.clear();
 CrudInit.install(app).then(function () {
