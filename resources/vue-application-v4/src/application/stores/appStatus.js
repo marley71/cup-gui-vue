@@ -7,6 +7,9 @@ export const appStatus = defineStore('appStatus', {
             error : 0,
             errorMessage : '',
             errorIssue : '',
+            advancedSearchActive : {
+                //'cup_anag_anagrafica' : false,
+            }
         }
     },
     actions : {
@@ -19,6 +22,7 @@ export const appStatus = defineStore('appStatus', {
             this.errorMessage = '';
             this.errorIssue = ''
             this.error = 0;
+            this.advancedSearchActive = {}
         }
     },
     persist : true,

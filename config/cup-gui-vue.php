@@ -29,7 +29,7 @@ return [
             "APP_CERT_PATH" => env('VUEAPP_CERT_FOLDER',null),
             "VITE_PUBLISH_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4') . '/src/application/assets/html-template/'),
             "VITE_HELP_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4'))  . '/cupparis-primevue/',
-
+            "VITE_VERSION" => env('VUEAPP_VERSION','1.0.0'),
         ],
         'production' => [ // crea il file env per vite .env.production
             "VITE_APP_USE_API"=>1,
@@ -39,7 +39,10 @@ return [
             "VITE_MODE"=>"prod",
             "VITE_APP_DEV_MENU"=>0,
             "VITE_RESOURCES_PATH" => base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4')), // path dove ci saranno le risorse dell'applicazione
-            "VITE_PUBLISH_DIR" => "/roma-vue/data/html-template/"
+            "VITE_PUBLISH_DIR" => "/roma-vue/data/html-template/",
+            // url di ritorno dopo il login
+            "VITE_RETURN_URL_LOGIN" => '/dashboard',
+            "VITE_VERSION" => env('VUEAPP_VERSION','1.0.0'),
         ]
     ],
     "app_folder" =>  base_path(env('VUEAPP_FOLDER','resources')),

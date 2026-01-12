@@ -190,7 +190,7 @@ class GenerateImplementationCommand extends Command
         $import_model_confs = '';
         $model_confs_assign = '';
         foreach ($models as $model => $filename) {
-            $import_model_confs .= "import $model from './$filename';\n";
+            $import_model_confs .= "import $model from '$filename';\n";
             $model_confs_assign .= "cs.CrudVars.modelConfs.$model = $model;\n";
         }
         $outputPath = config('cup-gui-vue.application_path') . '/ModelConfs/index.js';

@@ -18,7 +18,7 @@ export default [
                 path: '/admin/deploy',
                 name: 'deploy',
                 component: () => import('../pages/superadmin/DeployPage.vue'),
-            }
+            },
             // {
             //     path: '/manage/ModelCupparisEntity',
             //     name: 'manage_entity',

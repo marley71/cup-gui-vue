@@ -4,3 +4,5 @@ cupparis-primevue
 dist
 .env.local
 .env.production
+public/htmlhelp
+public/htmlhelp/*

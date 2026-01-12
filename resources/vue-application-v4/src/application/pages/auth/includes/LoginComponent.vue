@@ -10,12 +10,18 @@ const email = ref('');
 const password = ref('');
 const error = ref(false);
 const errorMsg = ref('');
+const props = defineProps({
+    loginUrl : {
+        type: String,
+        default: '/api/login'
+    }
+});
 
 function login() {
     error.value = false;
     console.log('login',email.value,password.value)
     userApp().reset();
-    cs.Server.post('/api/login',{
+    cs.Server.post(props.loginUrl,{
         email : email.value,
         password : password.value,
     },function(json) {
@@ -31,6 +37,11 @@ function login() {
             CrudInit.loadMenu().then(() => {
                 router.push('/');
             })
+        }
+        if (json.loggato_web) {
+            console.log('loggato_web');
+            userApp().setUserInfo(json);
+            window.location.href = '/';
         }
     })
 }
@@ -53,10 +64,6 @@ function login() {
             </svg>
             <div class="flex flex-col gap-2 w-full">
                 <div class="text-center text-3xl font-medium text-black leading-tight">Benvenuto su RLST</div>
-<!--                <div class="text-center">-->
-<!--                    <span class="text-black/80">Don't have an account? </span>-->
-<!--                    <a class="text-black/80 cursor-pointer hover:text-black/90 underline">Sign up</a>-->
-<!--                </div>-->
             </div>
         </div>
         <div class="flex flex-col items-center gap-8 w-full">

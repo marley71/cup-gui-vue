@@ -12,6 +12,7 @@ import application from "./application";
 import cs from "cupparis-primevue";
 import CrudInit from './primeblocks4/crud/CrudInit.js';
 import themeColors from "./application/themeColors";
+import './application/assets/styles.scss';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -22,6 +23,8 @@ app.use(router);
 console.debug('colors',themeColors.getTheme());
 
 app.use(PrimeVue, {
+    ripple: true,
+    inputStyle: 'outlined',
     theme: {
         //preset: MyPreset
         preset: themeColors.getTheme(),

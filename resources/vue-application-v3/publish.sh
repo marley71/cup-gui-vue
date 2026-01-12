@@ -41,4 +41,4 @@ mkdir -p dist/data/html-template
 cp ./src/application/assets/html-template/*.html dist/data/html-template
 
 echo "------------  sincronize public application ------------"
-rsync -zvrah dist/* ../../public/roma-vue/
+rsync -zvrah --delete dist/* ../../public/roma-vue/

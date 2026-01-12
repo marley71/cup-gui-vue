@@ -8,12 +8,15 @@ use Marley71\CupGuiVue\Console\Commands\GenerateImplementationCommand;
 use Marley71\CupGuiVue\Console\Commands\InstallGui;
 use Marley71\CupGuiVue\Console\Commands\SocketServer;
 use Marley71\CupGuiVue\Console\Commands\Test;
+use Marley71\CupGuiVue\Console\Commands\LinkHelp;
+
 class CupGuiVueServiceProvider extends ServiceProvider {
     protected $commands = [
         SocketServer::class,
         InstallGui::class,
         AnalyzeComposerPackages::class,
         GenerateImplementationCommand::class,
+        LinkHelp::class,
         Test::class,
     ];
 

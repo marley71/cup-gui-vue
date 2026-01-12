@@ -4,7 +4,9 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
 
 class InstallGui extends Command {
-    protected $signature = 'cup:install-gui {--update-cupparis : aggiorna solo il git della libreria cupparis-primevue al branch}';
+    protected $signature = 'cup:install-gui 
+                    {--update-cupparis : aggiorna solo il git della libreria cupparis-primevue al branch}
+                    {--install-cupparis : installa solo la libreria cupparis-primevue}';
 
     protected $name = 'InstallGui';
 
@@ -18,7 +20,14 @@ class InstallGui extends Command {
         $this->cupparisEnv['CUPPARIS_BRANCH'] =   config('cup-gui-vue.cupparis-primevue-branch');
 
         if ($this->option('update-cupparis') ) {
+            $this->comment('eseguo aggiornamento della libreria cupparis-primevue');
             $this->updateCupparis();
+            return ;
+        }
+
+        if ($this->option('install-cupparis') ) {
+            $this->comment('eseguo installazione della libreria cupparis-primevue');
+            $this->gitCupparis();
             return ;
         }
 
