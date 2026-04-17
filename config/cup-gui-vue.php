@@ -29,7 +29,9 @@ return [
             "APP_CERT_PATH" => env('VUEAPP_CERT_FOLDER',null),
             "VITE_PUBLISH_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4') . '/src/application/assets/html-template/'),
             "VITE_HELP_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4'))  . '/cupparis-primevue/',
+            "VITE_RETURN_URL_LOGIN" => '/dashboard',
             "VITE_VERSION" => env('VUEAPP_VERSION','1.0.0'),
+
         ],
         'production' => [ // crea il file env per vite .env.production
             "VITE_APP_USE_API"=>1,
@@ -43,14 +45,31 @@ return [
             // url di ritorno dopo il login
             "VITE_RETURN_URL_LOGIN" => '/dashboard',
             "VITE_VERSION" => env('VUEAPP_VERSION','1.0.0'),
+        ],
+        'mobile_local' => [ 
+            "VITE_APP_USE_API"=>1,
+            "VITE_APP_DYNAMIC_ENV"=>"/data/dynamic-conf.json",
+            "VITE_APP_DEV_MENU"=>1,
+            "VITE_API_MENU"=>"/api/app-menu",
+            "VITE_WEBSOCKET_SERVER"=>"ws://" .  env('VUEAPP_DOMAIN','localhost') . ':' . env('VUEAPP_WEBSOCKET_PORT',7071),
+            "VITE_WEB_SOCKET_SERVICES"=>"system,db,roles",   // servizi da utilizzare un sottoinsieme dei services definiti sopra
+        ],
+        'mobile_production' => [ 
+            "VITE_APP_USE_API"=>1,
+            "VITE_APP_DYNAMIC_ENV"=>"/data/dynamic-conf.json",
+            "VITE_APP_DEV_MENU"=>0,
+            "VITE_API_MENU"=>"/api/app-menu",
+            "VITE_WEBSOCKET_SERVER"=>"ws://" .  env('VUEAPP_DOMAIN','localhost') . ':' . env('VUEAPP_WEBSOCKET_PORT',7071),
+            "VITE_WEB_SOCKET_SERVICES"=>"system,db,roles",   // servizi da utilizzare un sottoinsieme dei services definiti sopra
         ]
     ],
     "app_folder" =>  base_path(env('VUEAPP_FOLDER','resources')),
     "application_path" => base_path(env('VUEAPP_FOLDER','resources') . '/vue-application-v4'),
+    "application_path_mobile" => base_path(env('VUEAPP_FOLDER','resources') . '/mobile-v4'),
     "roma_path" => base_path(env('VUEAPP_FOLDER','resources') . '/roma-vue-4.0.0'),
     "cupparis_primevue_path" => base_path(env('VUEAPP_FOLDER','resources') . '/cupparis-primevue'),
     "php_bin" => env('PHP_BIN','php'),
-    // menu applicazione se visibile non e' settato la voce viene vista da tutti
+    // menu applicazione se la proprietà visibile non e' settato la voce viene vista da tutti
     "menu" =>  [
         [
             "label" =>'Dashboard', "icon"=>'fa fa-tachometer-alt', "to"=>'/',

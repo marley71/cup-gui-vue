@@ -1,6 +1,0 @@
-node_modules
-package-lock.json
-cupparis-primevue
-dist
-.env.local
-.env.production
