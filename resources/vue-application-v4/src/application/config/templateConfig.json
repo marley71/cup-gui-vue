@@ -1,10 +1,11 @@
 {
-    "layout": "SidebarGroupedLayout2",
+    "layout": "DesktopLayout",
     "layouts": {
         "SidebarLayout": "Layout con menu a icone",
         "SidebarGroupedLayout": "Layout con menu a cascata",
         "SidebarGroupedLayout2": "Layout con menu a cascata 2",
-        "TopbarLayout": "Layout con menu top"
+        "TopbarLayout": "Layout con menu top",
+        "DesktopLayout": "Layout desktop"
     },
     "layoutsConf": {
         "SidebarLayout": [],
@@ -22,7 +23,7 @@
         "Nora": "Nora",
         "Material": "Material"
     },
-    "themeColor": "blueColor",
+    "themeColor": "orangeColor",
     "themeColors": {
         "defaultColor": "Colori di default (indigo)",
         "orangeColor": "Arancio",
