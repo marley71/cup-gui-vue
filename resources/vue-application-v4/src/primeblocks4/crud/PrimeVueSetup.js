@@ -88,6 +88,7 @@ import Timeline from "primevue/timeline";
 import Toast from "primevue/toast";
 import Toolbar from "primevue/toolbar";
 import ToggleButton from "primevue/togglebutton";
+import ToggleSwitch from "primevue/toggleswitch";
 import Tree from "primevue/tree";
 import TreeSelect from "primevue/treeselect";
 import TreeTable from "primevue/treetable";
@@ -216,6 +217,7 @@ function _setupComponents() {
         'Toast' : Toast,
         'Toolbar' : Toolbar,
         'ToggleButton' : ToggleButton,
+        'ToggleSwitch' : ToggleSwitch,
         'Tree' : Tree,
         'TreeSelect' : TreeSelect,
         'TreeTable' : TreeTable,

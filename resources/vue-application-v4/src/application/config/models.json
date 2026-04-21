@@ -1,5 +1,6 @@
 {
-    "ModelUser": "ModelUser.js",
-    "ModelUser4": "ModelUser4.js",
-    "ModelRoles": "ModelRoles.js"
+    "ModelUser": "./ModelUser.js",
+    "ModelUser4": "./ModelUser4.js",
+    "ModelRoles": "./ModelRoles.js",
+    "ModelQueue": "./ModelQueue.js"
 }

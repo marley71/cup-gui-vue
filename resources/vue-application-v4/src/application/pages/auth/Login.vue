@@ -5,7 +5,7 @@ import LoginComponent from "./includes/LoginComponent.vue";
 const loginProdUrl = ref('/login-web');
 const loginDevUrl = ref('/api/login');
 const loginUrl = ref(null);
-
+const returnUrl = ref(null);
 const csrfToken = ref(null);
 const isProd = ref(import.meta.env.PROD);
 
@@ -16,6 +16,7 @@ onMounted (() => {
     loginUrl.value = loginDevUrl.value;
   } else {
     loginUrl.value = loginProdUrl.value;
+    returnUrl.value = import.meta.env.VITE_RETURN_URL_LOGIN;
   }
 });
 </script>
@@ -23,7 +24,7 @@ onMounted (() => {
 <template>
   <div class="bg-surface-50 dark:bg-surface-950 px-6 py-20 md:px-20 lg:px-80">
     <div class="bg-surface-0 dark:bg-surface-900 p-8 md:p-12 shadow-sm rounded-2xl w-full max-w-[48rem] mx-auto flex flex-col gap-8">
-        <LoginComponent :loginUrl="loginUrl" />
+        <LoginComponent :loginUrl="loginUrl" :returnUrl="returnUrl" />
     </div>
   </div>
 </template>

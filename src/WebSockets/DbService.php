@@ -57,6 +57,11 @@ class DbService extends ServiceInterface
                     'type' => 'string'
                 ],
             ],
+            [
+                'command' => 'rigenera-index-js',
+                'description' => 'rigenera l\'index.js dei modelli',
+                'params' => [],
+            ],
 
 //            [
 //                'command' => 'save-config',
@@ -190,6 +195,14 @@ class DbService extends ServiceInterface
                 }
 
                 break;
+            case 'rigenera-index-js':
+                $response = [
+                    'msg' => $this->rigeneraIndexJs(),
+                    'error' => 0,
+                    'type' => 'out',
+                    'command' => $action,
+                ];
+                $this->send($response);
             default:
                 throw new \Exception( 'mysql service action non gestita ' . Arr::get($data,'action'));
         }
@@ -300,6 +313,12 @@ class DbService extends ServiceInterface
         $callParams['modelConf'] = $params['modelConf'];
         $gi = new GenerateImplementation($callParams);
         $gi->generate();
+        return join("\n",$gi->logs);
+    }
+
+    public function rigeneraIndexJs() {
+        $gi = new GenerateImplementation([]);
+        $gi->rigeneraIndexJs();
         return join("\n",$gi->logs);
     }
 

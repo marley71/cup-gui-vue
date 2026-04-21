@@ -5,7 +5,7 @@
     <div id="app-sidebar-colored" class="w-[231px] bg-primary dark:bg-background  h-screen hidden lg:block shrink-0 absolute lg:static left-0 top-0 z-10 select-none">
       <div class="flex flex-col h-full">
         <div class="p-4 flex items-center gap-4">
-          <img src="/assets/images/logo.svg" alt="Logo" class="w-10 h-10" />
+          <img src="/assets/images/logo-cupparis.png" alt="Logo" class="h-10" />
           <!-- <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none" class="w-10 h-10">
             <path
                 fill-rule="evenodd"
@@ -15,7 +15,7 @@
             />
           </svg> -->
           <div class="flex flex-col">
-            <div class="text-lg font-semibold leading-tight text-primary-contrast ">RLST</div>
+            <div class="text-lg font-semibold leading-tight text-primary-contrast ">CUPPARIS</div>
             <div stye="font-size: .5em !important;" class="text-sm font-semibold leading-tight text-primary-contrast ">{{ getEnte() }}</div>
             <div stye="font-size: .5em !important;" class="text-sm font-semibold leading-tight text-primary-contrast ">Ver. {{ getVersion() }}</div>
           </div>

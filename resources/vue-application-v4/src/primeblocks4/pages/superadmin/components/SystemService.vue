@@ -24,6 +24,7 @@ export default {
             serverStatus : '',
             commandWorking : false,
             commandOutput : [],
+            commandAccordion : '1',
             bufferOut : [],
             //bufferErr : '',
             selectedCategories : [],
@@ -157,22 +158,27 @@ export default {
             this.commandWorking = true;
         },
         publish() {
+            this.commandAccordion = '0';
             this.reset('publish');
             this.$emit('call-action',{
                 service : 'system',
                 action : 'publish',
                 params : []
             });
+            this.commandAccordion = '0';
         },
         translate() {
+            this.commandAccordion = '0';
             this.reset('translate');
             this.$emit('call-action',{
                 service : 'system',
                 action : 'translate',
                 params : []
             });
+            this.commandAccordion = '0';
         },
         templates() {
+            this.commandAccordion = '0';
             this.reset('templates');
             this.$emit('call-action',{
                 service : 'system',
@@ -181,6 +187,7 @@ export default {
             });
         },
         saveConfig() {
+            this.commandAccordion = '0';
             this.saveCurrentConfig();
             this.reset('save-config');
 
@@ -232,7 +239,7 @@ export default {
 <!--                <Button label="Compilazione Templates" @click="templates"></Button>-->
                 <Button label="Salva configurazione" @click="saveConfig"></Button>
             </div>
-            <Accordion value="1">
+            <Accordion :value="commandAccordion">
                 <AccordionPanel value="0">
                     <AccordionHeader>command output</AccordionHeader>
                     <AccordionContent>

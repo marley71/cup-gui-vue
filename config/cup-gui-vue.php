@@ -84,6 +84,10 @@ return [
                     //"visible" => ['Admin','Operatore'],  // mi aspetto il ruolo per il quale e' visibile
                 ],
                 [
+                    "label"  =>'Code', "icon" =>'fa fa-user', "to"=>'/manage/ModelQueue',
+                    //"visible" => ['Admin','Operatore'],  // mi aspetto il ruolo per il quale e' visibile
+                ],
+                [
                     "label"  =>'Pagina Linkata', "icon" =>'fa-regular fa-file', "to"=>'/pagina-linkata'
                 ],
             ],

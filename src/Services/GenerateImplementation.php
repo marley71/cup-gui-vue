@@ -181,12 +181,45 @@ class GenerateImplementation
             $models[$modelClass] = $modelClass . '.js';
             file_put_contents(config('cup-gui-vue.application_path') . '/src/application/config/models.json',json_encode($models,JSON_PRETTY_PRINT));
         }
-
+        $this->_rigeneraIndexJs($models);
+/*
         // sovrascrivo il file index.js di modelconfs per importare i modelli corretti.
         $import_model_confs = '';
         $model_confs_assign = '';
         foreach ($models as $model => $filename) {
-            $import_model_confs .= "import $model from './$filename';\n";
+            $import_model_confs .= "import $model from '$filename';\n";
+            $model_confs_assign .= "cs.CrudVars.modelConfs.$model = $model;\n";
+        }
+        $outputPath = config('cup-gui-vue.application_path') . '/src/application/ModelConfs/index.js';
+        $generator = new CodeGenerator(
+            dirname(__FILE__) . '/../../resources/stubs/model-index.stub',
+            [
+                '$import_model_confs' => $import_model_confs,
+                '$model_confs_assign' => $model_confs_assign,
+            ],
+            $outputPath
+        );
+
+        if ($generator->generate()) {
+            $this->logs[] = "Model Client configuration {$modelClass} generated successfully!";
+        } else {
+            $this->logs[] = "Failed to generate Model Client configuration {$modelClass}.";
+        }
+            */
+    }
+
+    public function rigeneraIndexJs() {
+        $models = json_decode(file_get_contents(config('cup-gui-vue.application_path') . '/src/application/config/models.json'),true);
+        $this->_rigeneraIndexJs($models);
+    }
+
+    protected function _rigeneraIndexJs($models) {
+        
+        // sovrascrivo il file index.js di modelconfs per importare i modelli corretti.
+        $import_model_confs = '';
+        $model_confs_assign = '';
+        foreach ($models as $model => $filename) {
+            $import_model_confs .= "import $model from '$filename';\n";
             $model_confs_assign .= "cs.CrudVars.modelConfs.$model = $model;\n";
         }
         $outputPath = config('cup-gui-vue.application_path') . '/src/application/ModelConfs/index.js';

@@ -72,7 +72,7 @@ export default {
         return {
             services : services,
             connected : false,
-            activeService : '0',
+            activeService : 0,
             serviceResponse : {
                 'db' : null,
                 'system' : null,
@@ -126,6 +126,7 @@ export default {
                 }
                 connection.onmessage = function (event) {
                     let json = JSON.parse(event.data);
+                    console.debug('ricevuto data',json);
                     if (json.command == 'info') {
                         that.info = json.msg;
                     } else {

@@ -12,8 +12,10 @@ export default {
        })
     },
     data() {
-        let conf = cs.CrudCore.clone(cs.CrudVars.modelConfs.ModelUser);
+        let conf = cs.CrudVars.modelConfs.ModelUser();
+        conf.autoUpdateHash = false;
         conf.list.fields = ['id','username','email'];
+        conf.list.updateHash = false;
         return {
             confView : conf.list,
             htmlDinamico : '',

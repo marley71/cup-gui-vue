@@ -61,6 +61,8 @@ export default {
             });
         },
         getFields() {
+            this.model = this.tableSelected.name;
+            this.checkResult = null;
             this.$emit('call-action',{
                 service : 'db',
                 action : 'list-fields',
@@ -182,7 +184,13 @@ export default {
                 }
             })
         },
-
+        rigeneraIndexJs() {
+            this.$emit('call-action',{
+                service : 'db',
+                action : 'rigenera-index-js',
+                params : {}
+            });
+        },
     },
 }
 </script>
@@ -193,10 +201,13 @@ export default {
     </div>
     <Toolbar>
         <template #start>
+            <Button icon="fa-solid fa-folder-tree" class="mr-2" severity="primary" @click="rigeneraIndexJs" label="Rigenera index.js dei modelli" />
+        <!--
             <Button icon="fa-solid fa-folder-tree" class="mr-2" severity="secondary" @click="mode='structure'"/>
             <Button icon="fa-brands fa-js" class="mr-2" severity="secondary" @click="mode='codejs'" />
             <Button icon="fa-brands fa-php" class="mr-2" severity="secondary" @click="mode='codephp'" />
             <Button icon="fa fa-save" severity="secondary"  @click="saveCode" />
+            -->
         </template>
 
         <template #center>
@@ -218,7 +229,7 @@ export default {
 
         <template #end>
             <div class="flex flex-column gap-2">
-                <div title="clicca su check per sapere l'implementazione di questo modello/table"><Button @click="check" label="Check" :disabled="!model || !tableSelected"> </Button></div>
+                <div title="esegue il check per sapere l'implementazione di questo modello/table"><Button @click="check" label="Check" :disabled="!model || !tableSelected"> </Button></div>
             </div>
 <!--            <SplitButton label="Save" :model="items"></SplitButton>-->
         </template>

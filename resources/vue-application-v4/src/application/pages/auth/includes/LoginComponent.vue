@@ -14,6 +14,10 @@ const props = defineProps({
     loginUrl : {
         type: String,
         default: '/api/login'
+    },
+    returnUrl : {
+        type: String,
+        default: '/'
     }
 });
 
@@ -35,13 +39,13 @@ function login() {
             window.localStorage.setItem('token',json.access_token);
             userApp().setUserInfo(json);
             CrudInit.loadMenu().then(() => {
-                router.push('/');
+                router.push(props.returnUrl);
             })
         }
         if (json.loggato_web) {
             console.log('loggato_web');
             userApp().setUserInfo(json);
-            window.location.href = '/';
+            window.location.href = props.returnUrl;
         }
     })
 }
