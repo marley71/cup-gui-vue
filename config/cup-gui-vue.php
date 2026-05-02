@@ -26,7 +26,7 @@ return [
             "APP_PORT"=> env('VUEAPP_PORT','8001'),  // porta in ascolto del server npm vite
             "APP_RESOURCES_PATH" => base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4')), // path dove ci saranno le risorse dell'applicazione
             "APP_CUPPARIS_PRIMEVUE" => base_path(env('VUEAPP_FOLDER','resources'))  . '/cupparis-primevue', // path dove si trova la libreria cupparis-primevue
-            "APP_CERT_PATH" => env('VUEAPP_CERT_FOLDER',null),
+            "APP_CERT_PATH" => env('VUEAPP_CERT_FOLDER',null),  // path dove si trovano i certificati per il websocket secure i nomi che cercherà vite sono key.pem e cert.pem
             "VITE_PUBLISH_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4') . '/src/application/assets/html-template/'),
             "VITE_HELP_DIR" => '/@fs/' . base_path(env('VUEAPP_APPLICATION_PATH','resources/vue-application-v4'))  . '/cupparis-primevue/',
             "VITE_RETURN_URL_LOGIN" => '/dashboard',

@@ -7,10 +7,26 @@ use Marley71\CupGuiVue\WebSockets\WebSocketServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
+use React\EventLoop\Factory;
+use React\EventLoop\Loop;
+use React\Socket\SocketServer as ReactSocketServer;
+
+// // Il tuo handler WebSocket
+// class WebSocketServer implements Ratchet\MessageComponentInterface {
+//     public function onOpen(Ratchet\ConnectionInterface $conn) {}
+//     public function onMessage(Ratchet\ConnectionInterface $from, $msg) {
+//         $from->send("Echo: $msg");
+//     }
+//     public function onClose(Ratchet\ConnectionInterface $conn) {}
+//     public function onError(Ratchet\ConnectionInterface $conn, \Exception $e) {
+//         $conn->close();
+//     }
+// }
+
 
 
 class SocketServer extends Command {
-    protected $signature = 'cup:wss-server {--mobile}';
+    protected $signature = 'cup:wss-server {--mobile} {--secure}';
 
     protected $name = 'wss';
 
@@ -62,6 +78,64 @@ class SocketServer extends Command {
         $this->comment('started');
         $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
         $this->comment("start websocket...");
+        if ($this->option('secure')) {
+            $server = $this->getSecureServer();
+            $server->run();
+        } else {
+            $server = $this->getHttpServer();
+            $server->run();
+        }
+                
+    }
+
+    protected function getSecureServer() {
+        $host = '0.0.0.0';
+        $port = (int) env('VUEAPP_WEBSOCKET_PORT', 7071);
+        $certFolder = env('VUEAPP_CERT_FOLDER');
+
+        if (empty($certFolder) || ! is_dir($certFolder)) {
+            throw new \RuntimeException(
+                'Modalità --secure: imposta VUEAPP_CERT_FOLDER nel .env con il percorso alla cartella che contiene cert.pem e key.pem.'
+            );
+        }
+
+        $certFolder = rtrim($certFolder, '/\\');
+        $cert = $certFolder . '/cert.pem';
+        $key = $certFolder . '/key.pem';
+
+        foreach (['cert.pem' => $cert, 'key.pem' => $key] as $label => $path) {
+            if (! is_readable($path)) {
+                throw new \RuntimeException("File TLS non leggibile ({$label}): {$path}");
+            }
+        }
+
+        $loop = class_exists(Loop::class) ? Loop::get() : Factory::create();
+
+        // SocketServer con schema tls:// applica SecureServer su TcpServer (react/socket)
+        $socket = new ReactSocketServer(
+            'tls://' . $host . ':' . $port,
+            [
+                'tls' => [
+                    'local_cert' => $cert,
+                    'local_pk' => $key,
+                ],
+            ],
+            $loop
+        );
+
+        $httpServer = new HttpServer(
+            new WsServer(new WebSocketServer())
+        );
+
+        $server = new IoServer($httpServer, $socket, $loop);
+
+        $domain = env('VUEAPP_DOMAIN', 'localhost');
+        $this->comment('Websocket (TLS) in ascolto su wss://' . $domain . ':' . $port);
+
+        return $server;
+    }
+
+    protected function getHttpServer() {
         $httpServer = new HttpServer(
             new WsServer(
                 new WebSocketServer()
@@ -70,7 +144,7 @@ class SocketServer extends Command {
             env('VUEAPP_WEBSOCKET_PORT',7071) // Assicurati che questa sia la porta corretta
         );
         $this->comment('Websocket awaiting connection on ws://' . env('VUEAPP_DOMAIN','localhost') . ':' . env('VUEAPP_WEBSOCKET_PORT'));
-        $server->run();
+        return $server;
     }
 
     protected function startGui() {
@@ -152,3 +226,9 @@ class SocketServer extends Command {
         }
     }
 }
+
+
+
+
+
+
