@@ -26,7 +26,7 @@ use React\Socket\SocketServer as ReactSocketServer;
 
 
 class SocketServer extends Command {
-    protected $signature = 'cup:wss-server {--mobile} {--secure}';
+    protected $signature = 'cup:wss-server {--mobile} {--secure} {--wss-only : Avvia solo il loop WebSocket (processo figlio)}';
 
     protected $name = 'wss';
 
@@ -42,10 +42,18 @@ class SocketServer extends Command {
     }
 
     public function handle() {
+        if ($this->option('wss-only')) {
+            if ($this->option('mobile')) {
+                $this->runWssLoopMobile();
+            } else {
+                $this->runWssLoop($this->option('secure'));
+            }
+            return;
+        }
         if ($this->option('mobile')) {
             $this->runServerMobile();
-            return ;
-        } 
+            return;
+        }
         $this->runServer();
     }
 
@@ -53,39 +61,87 @@ class SocketServer extends Command {
         $this->comment('coping env...');
         $this->copyEnvMobile();
         $this->comment('copied');
-        $this->comment("start gui...");
-        $this->startMobileGui();
+        $this->comment('start gui...');
+        $guiResult = $this->startMobileGui();
+        $this->comment('start websocket...');
+        $wssResult = $this->startWebSocketServer(true);
         $this->comment('started');
-        $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT_MOBILE',8001));
-        $this->comment("start websocket...");
-        $httpServer = new HttpServer(
-            new WsServer(
-                new WebSocketServer()
-            ));
-        $server = IoServer::factory($httpServer,
-            env('VUEAPP_WEBSOCKET_PORT_MOBILE',7071) // Assicurati che questa sia la porta corretta
-        );
-        $this->comment('Websocket awaiting connection on ws://' . env('VUEAPP_DOMAIN','localhost') . ':' . env('VUEAPP_WEBSOCKET_PORT_MOBILE'));
-        $server->run();
+        $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT_MOBILE', 8001));
+        $this->waitForProcesses($guiResult, $wssResult);
+        $this->comment('mobile script terminated');
     }
 
     protected function runServer() {
         $this->comment('coping env...');
         $this->copyEnv();
         $this->comment('copied');
-        $this->comment("start gui...");
-        $this->startGui();
+        $this->comment('start gui...');
+        $guiResult = $this->startGui();
+        $this->comment('start websocket...');
+        $wssResult = $this->startWebSocketServer(false);
         $this->comment('started');
-        $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT',8001));
-        $this->comment("start websocket...");
-        if ($this->option('secure')) {
+        $this->comment('Gui vue on ' . env('APP_URL') . ':' . env('VUEAPP_PORT', 8001));
+        $this->waitForProcesses($guiResult, $wssResult);
+        $this->comment('gui script terminated');
+    }
+
+    protected function runWssLoop(bool $secure = false) {
+        if ($secure) {
             $server = $this->getSecureServer();
-            $server->run();
         } else {
             $server = $this->getHttpServer();
-            $server->run();
         }
-                
+        $server->run();
+    }
+
+    protected function runWssLoopMobile() {
+        $httpServer = new HttpServer(
+            new WsServer(
+                new WebSocketServer()
+            )
+        );
+        $server = IoServer::factory(
+            $httpServer,
+            env('VUEAPP_WEBSOCKET_PORT_MOBILE', 7071)
+        );
+        $this->comment(
+            'Websocket awaiting connection on ws://'
+            . env('VUEAPP_DOMAIN', 'localhost')
+            . ':'
+            . env('VUEAPP_WEBSOCKET_PORT_MOBILE')
+        );
+        $server->run();
+    }
+
+    /**
+     * @param  \Illuminate\Process\InvokedProcess|null  $guiResult
+     * @param  \Illuminate\Process\InvokedProcess|null  $wssResult
+     */
+    protected function waitForProcesses($guiResult, $wssResult): void {
+        while (($guiResult && $guiResult->running()) || ($wssResult && $wssResult->running())) {
+            usleep(100_000);
+        }
+    }
+
+    protected function startWebSocketServer(bool $mobile) {
+        $artisan = base_path('artisan');
+        $command = sprintf(
+            '%s %s cup:wss-server --wss-only%s',
+            PHP_BINARY,
+            escapeshellarg($artisan),
+            $mobile ? ' --mobile' : ($this->option('secure') ? ' --secure' : '')
+        );
+
+        return Process::forever()
+            ->path(base_path())
+            ->start($command, $this->processOutputCallback());
+    }
+
+    protected function processOutputCallback(): callable {
+        return function (string $type, string $output) {
+            echo "$type $output";
+            flush();
+        };
     }
 
     protected function getSecureServer() {
@@ -155,16 +211,8 @@ class SocketServer extends Command {
                 //echo $attr['dirname'] . "\n";
                 $shell_command =$attr['dirname'] . '/shell_commands/gui_start.sh';
                 $result = Process::forever()->env(ServiceInterface::getEnvVars())
-                    ->start('bash ' . "$shell_command", function (string $type, string $output) {
-                        echo "$type $output";
-                        flush();
-
-//                        if ($type != 'out') {
-//                            throw new \Exception($output);
-//                        } else {
-//                            echo $output;
-//                        }
-                    });
+                    ->start('bash ' . "$shell_command", $this->processOutputCallback());
+                return $result;
             }
         } catch (\Exception $e) {
             throw $e;
@@ -215,11 +263,10 @@ class SocketServer extends Command {
             if ($attr) {
                 //echo $attr['dirname'] . "\n";
                 $shell_command =$attr['dirname'] . '/shell_commands/mobile_start.sh';
+                $env = ServiceInterface::getEnvVarsMobile();
                 $result = Process::forever()->env(ServiceInterface::getEnvVarsMobile())
-                    ->start('bash ' . "$shell_command", function (string $type, string $output) {
-                        echo "$type $output";
-                        flush();
-                    });
+                    ->start('bash ' . "$shell_command", $this->processOutputCallback());
+                return $result;
             }
         } catch (\Exception $e) {
             throw $e;

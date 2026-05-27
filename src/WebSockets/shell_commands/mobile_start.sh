@@ -7,5 +7,5 @@
 if [ -z "${CLIENT_DIR+x}" ]; then echo "CLIENT_DIR is unset"; exit; else echo "var is set to '$CLIENT_DIR'"; fi
 echo "start gui in $CLIENT_DIR ...."
 cd $CLIENT_DIR
-#ionic serve --host 0.0.0.0
+#ionic serve --host 0.0.0.0 --port $APP_PORT
 npm run dev
