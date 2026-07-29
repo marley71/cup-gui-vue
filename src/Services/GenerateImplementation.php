@@ -178,7 +178,7 @@ class GenerateImplementation
         }
         // aggiorno il file json per tenere traccia dei modelli da importare.
         if (!$found) {
-            $models[$modelClass] = $modelClass . '.js';
+            $models[$modelClass] = './' . $modelClass . '.js';
             file_put_contents(config('cup-gui-vue.application_path') . '/src/application/config/models.json',json_encode($models,JSON_PRETTY_PRINT));
         }
         $this->_rigeneraIndexJs($models);
