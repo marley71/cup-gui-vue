@@ -5,6 +5,10 @@ import "./ModelConfs";
 import customComponents from "./components";
 import viewsConfs from './config/index'
 
+const translationModules = import.meta.glob('./assets/*-translations.json', { eager: true, import: 'default' });
+const lang = import.meta.env.VITE_LANG || 'it';
+const appLang = translationModules[`./assets/${lang}-translations.json`] || translationModules['./assets/it-translations.json'];
+
 export default {
     install(app, callback) {
         console.debug('CrudVars',cs.CrudVars)

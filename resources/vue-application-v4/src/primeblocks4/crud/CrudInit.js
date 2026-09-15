@@ -1,17 +1,15 @@
 import axios from "axios";
-//import mitt from 'mitt'
 import VueAxios from 'vue-axios'
 import jQuery from 'jquery'
-//import ModelConfs from "../ModelConfs";
-//import ModelConfs from '@/data/modelsConfs/app/'
-import appLang from './it-translations.json';
 import cupparisPrimevue from 'cupparis-primevue';
-//import router from "../router";
-//import '@/styles.scss';
-//import '../assets/styles.scss';
+
 
 import RoutesConfs from "./RoutesConfs";
 import PrimeVueSetup from "./PrimeVueSetup";
+
+const translationModules = import.meta.glob('./*-translations.json', { eager: true, import: 'default' });
+const lang = import.meta.env.VITE_LANG || 'it';
+const appLang = translationModules[`./${lang}-translations.json`] || translationModules['./it-translations.json'];
 
 export default {
     install(app) {
