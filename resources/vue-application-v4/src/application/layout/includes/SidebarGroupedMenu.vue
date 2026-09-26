@@ -3,7 +3,7 @@
         <template v-for="mainItem in menu" >
 
                 <ul class="list-none m-0 flex flex-col gap-1">
-                    <li v-if="mainItem.items">
+                    <li v-if="mainItem && mainItem.items">
                         <div
                             @click="changeMenuStatus(mainItem.mId,$event)"
                             v-styleclass="{
@@ -64,7 +64,7 @@
 
                         </ul>
                     </li>
-                    <li v-else>
+                    <li v-else-if="mainItem">
 <!--                        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg text-primary-contrast hover:bg-primary-emphasis transition-colors duration-150">-->
 <!--                            <i class="pi pi-home text-base! leading-none! text-primary-contrast" />-->
 <!--                            <span class="font-medium text-base leading-tight">{{mainItem.label}}</span>-->
@@ -102,10 +102,12 @@ export default {
         // assegno un id per problemi di ref nei menu di terzo livello
         let mId = 0;
         for (let i in menu) {
-            menu[i].mId = mId++;
-            let items = menu[i].items?menu[i].items:[];
-            for (let j in items) {
-                menu[i].items[j].mId = mId++;
+            if (menu[i]) {
+                menu[i].mId = mId++;
+                let items = menu[i].items?menu[i].items:[];
+                for (let j in items) {
+                    menu[i].items[j].mId = mId++;
+                }
             }
         }
 

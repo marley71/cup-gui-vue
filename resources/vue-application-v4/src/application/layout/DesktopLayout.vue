@@ -327,7 +327,7 @@ watch(
                                     class="desktop-item"
                                     :class="{ 'desktop-item-active': currentPath === leaf.to }"
                                 >
-                                    <i class="fa fa-file-text-o desktop-icon file-icon" />
+                                    <i class="far fa-file desktop-icon file-icon" />
                                     <span class="desktop-label">{{ leaf.label }}</span>
                                     <span class="desktop-sub-label">{{ leaf.pathLabel }}</span>
                                 </router-link>
@@ -351,7 +351,7 @@ watch(
                                 class="desktop-item"
                                 :class="{ 'desktop-item-active': currentPath === node.to }"
                             >
-                                <i class="fa fa-file-text-o desktop-icon file-icon" />
+                                <i class="far fa-file desktop-icon file-icon" />
                                 <span class="desktop-label">{{ node.label }}</span>
                             </router-link>
 

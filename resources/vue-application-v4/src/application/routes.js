@@ -1,4 +1,5 @@
 import ApplicationLayout from "./layout/ApplicationLayout.vue";
+import SingleComponentLayout from "./layout/SingleComponentLayout.vue";
 export default [
     {
         path: '/',
@@ -30,4 +31,15 @@ export default [
             },
         ]
     },
+    {
+        path: '/',
+        component : SingleComponentLayout,
+        children: [
+            {
+                path: '/single-component/:component',
+                name: 'single-component',
+                component: () => import(`./pages/single-component/SingleComponent.vue`),
+            }
+        ]
+    }
 ]

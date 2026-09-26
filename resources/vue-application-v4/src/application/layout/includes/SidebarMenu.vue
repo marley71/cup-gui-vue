@@ -3,7 +3,7 @@
 <template>
     <div class="grid grid-cols-2 gap-3">
             <template v-for="mainItem in menu" >
-                    <template v-if="mainItem.items">
+                    <template v-if="mainItem && mainItem.items">
                         <div v-for="child in mainItem.items" class="flex flex-col items-center">
                             <template v-if="child.to">
                                 <router-link :to="child.to"
@@ -34,7 +34,7 @@
                             </template>
                         </div>
                     </template>
-                    <div v-else class="flex flex-col items-center">
+                    <div v-else-if="mainItem" class="flex flex-col items-center">
                         <router-link :to="mainItem.to"
                                      class="p-4 px-5 rounded-lg border border-primary-400 dark:border-primary-300 inline-flex items-center justify-center hover:bg-primary-emphasis text-primary-contrast transition-colors duration-150 shrink-0 cursor-pointer"
                         >
@@ -118,10 +118,12 @@ export default {
         // assegno un id per problemi di ref nei menu di terzo livello
         let mId = 0;
         for (let i in menu) {
-            menu[i].mId = mId++;
-            let items = menu[i].items?menu[i].items:[];
-            for (let j in items) {
-                menu[i].items[j].mId = mId++;
+            if (menu[i]) {
+                menu[i].mId = mId++;
+                let items = menu[i].items?menu[i].items:[];
+                for (let j in items) {
+                    menu[i].items[j].mId = mId++;
+                }
             }
         }
 

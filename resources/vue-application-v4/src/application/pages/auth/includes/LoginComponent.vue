@@ -67,7 +67,7 @@ function login() {
                 />
             </svg>
             <div class="flex flex-col gap-2 w-full">
-                <div class="text-center text-3xl font-medium text-black leading-tight">Benvenuto su RLST</div>
+                <div class="text-center text-3xl font-medium text-black leading-tight">Benvenuto su {{ cs.CrudVars.windowParams.app_name }}</div>
             </div>
         </div>
         <div class="flex flex-col items-center gap-8 w-full">

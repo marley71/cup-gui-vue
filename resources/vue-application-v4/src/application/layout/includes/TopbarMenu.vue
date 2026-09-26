@@ -75,32 +75,34 @@ function setMenu() {
 // assegno un id per problemi di ref nei menu di terzo livello
     let mId = 0;
     for (let i in navs.value) {
-        navs.value[i].mId = mId++;
-        if (navs.value[i].to) {
-            navs.value[i].command = () => {
-                router.push(navs.value[i].to);
-                menuPath.value = [navs.value[i].label];
-                TopbarStatus().setMenuPath(menuPath.value)
-            }
-        }
-
-        let items = navs.value[i].items?navs.value[i].items:[];
-        for (let j in items) {
-            navs.value[i].items[j].mId = mId++;
-            if (navs.value[i].items[j].to) {
-                navs.value[i].items[j].command = () => {
-                    router.push(navs.value[i].items[j].to);
-                    menuPath.value = [navs.value[i].label,navs.value[i].items[j].label];
+        if (navs.value[i]) {    
+            navs.value[i].mId = mId++;
+            if (navs.value[i].to) {
+                navs.value[i].command = () => {
+                    router.push(navs.value[i].to);
+                    menuPath.value = [navs.value[i].label];
                     TopbarStatus().setMenuPath(menuPath.value)
                 }
             }
-            if (navs.value[i].items[j].items) {
-                let subItems = navs.value[i].items[j].items;
-                for (let k in subItems) {
-                    subItems[k].command = () => {
-                        router.push(subItems[k].to);
-                        menuPath.value = [navs.value[i].label, navs.value[i].items[j].label, subItems[k].label];
+
+            let items = navs.value[i].items?navs.value[i].items:[];
+            for (let j in items) {
+                navs.value[i].items[j].mId = mId++;
+                if (navs.value[i].items[j].to) {
+                    navs.value[i].items[j].command = () => {
+                        router.push(navs.value[i].items[j].to);
+                        menuPath.value = [navs.value[i].label,navs.value[i].items[j].label];
                         TopbarStatus().setMenuPath(menuPath.value)
+                    }
+                }
+                if (navs.value[i].items[j].items) {
+                    let subItems = navs.value[i].items[j].items;
+                    for (let k in subItems) {
+                        subItems[k].command = () => {
+                            router.push(subItems[k].to);
+                            menuPath.value = [navs.value[i].label, navs.value[i].items[j].label, subItems[k].label];
+                            TopbarStatus().setMenuPath(menuPath.value)
+                        }
                     }
                 }
             }

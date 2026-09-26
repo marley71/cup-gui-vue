@@ -25,6 +25,7 @@ export default () => {
                     showInPanel : true,
                     fields : ['job_id','start','end','error','job_type',"input_data","output_data"],
                     bind_all_data : true,
+                    popoverClass : 'w-[40%] overflow-hidden',
                     getFieldValue : function(field) {
                         if (field == 'input_data' || field == 'output_data') {
                             return JSON.stringify(this.value[field],"\t",2);

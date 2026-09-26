@@ -56,6 +56,7 @@ export default {
 
     async connectToServer() {
         console.debug('connect to websocket ',import.meta.env.VITE_WEBSOCKET_SERVER)
+        
         const ws = new WebSocket(import.meta.env.VITE_WEBSOCKET_SERVER);
 
         return new Promise((resolve, reject) => {

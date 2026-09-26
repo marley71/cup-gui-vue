@@ -1,5 +1,5 @@
 {
-    "layout": "DesktopLayout",
+    "layout": "SidebarGroupedLayout2",
     "layouts": {
         "SidebarLayout": "Layout con menu a icone",
         "SidebarGroupedLayout": "Layout con menu a cascata",
